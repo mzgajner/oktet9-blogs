@@ -1,6 +1,6 @@
 ---
 title: "Spectacle in Georges Island ter jastog"
-date: "2011-08-19"
+date: "2011-08-19T00:00"
 categories:
   - "dnevno-dogajanje"
 ---
