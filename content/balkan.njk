@@ -1,0 +1,10 @@
+---js
+const eleventyNavigation = {
+	key: "Balkan",
+	order: 3
+};
+---
+<h1>Oktet 9 na Balkanu</h1>
+
+{% set postslist = collections.balkan %}
+{% include "postslist.njk" %}
