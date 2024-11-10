@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Iz Clevelanda v Indianapolis</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="iz-clevelanda-v-indianapolis">Iz Clevelanda v Indianapolis</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-27">27. 8. 2011</time></li>
+</ul>
+
+<p>Danes je bil na vrsti vnovičen veliki premik, tokrat <a href="http://maps.google.com/maps?saddr=Cleveland,+OH&amp;daddr=Indianapolis,+IN&amp;hl=en&amp;sll=40.588928,-83.924561&amp;sspn=3.403805,7.064209&amp;geocode=FWc7eQIdT20h-ykta2jjLu8wiDFCGGL3VcsE7Q%3BFTjRXgIdJlXd-ikDanmn_1BriDF86rlA9p2O1g&amp;vpsrc=0&amp;mra=ltm&amp;z=7">v smeri jugozahoda, proti Indianapolisu</a>.</p>
+<p><a href="/images/amerika/dsc9726.jpg"><img src="/images/amerika/dsc9726.jpg" alt="_DSC9726" title="_DSC9726"></a></p>
+<p>Dolge vožnje so pri nas vedno enake. Nekateri dremajo, kak prelista knjigo, potem se igramo <em>ugani osebo</em>, gremo tankat, lulat, kaj pojest in spet vse od začetka.</p>
+<p><a href="/images/amerika/img_9246.jpg"><img src="/images/amerika/img_9246.jpg" alt="IMG_9246" title="IMG_9246"></a></p>
+<p><a href="/images/amerika/img_9252.jpg"><img src="/images/amerika/img_9252.jpg" alt="IMG_9252" title="IMG_9252"></a></p>
+<p>Če povprečnega Slovenca vprašate o Indianapolisu, bo najverjetneje povedal le, da je tam formula. No, tudi mi nismo segli bistveno dlje od povprečja, zato smo se še pred prihodom v hotel namenili na sloviti <a href="http://en.wikipedia.org/wiki/Indianapolis_Motor_Speedway">Indianapolis Motor Speedway</a>. Ravno ta vikend se tukaj odvijajo dirke motorističnega svetovnega prvenstva MotoGP, tako da smo lahko gledali Valentina Rossija in kompanijo na petkovem pripravljalnem treningu.</p>
+<p>Bolj kot samo dirkanje, ki se ga itak splača gledati edino po televiziji, ker na dirkališču ne vidiš nič, nas je navdušil sam objekt oz. kompleks. Na satelitskih posnetkih na Google Maps reč izgleda kot par kvadratnih kilometrov veliko letališče. V živo je vse skupaj še bolj impozantno, sami smo parkirali ob enem od vhodov in nato še 15 minut pešačili, preden nam je uspelo priti do tribune, s katere se je kaj videlo. Navsezadnje gre za največji športni objekt na svetu, katerega maksimalna kapaciteta je 400.000 sedišč.</p>
+<p>Med bradatimi navdušenci nad motošportom s prevelikimi pivi smo turistično izstopali.</p>
+<p><a href="/images/amerika/img_9266.jpg"><img src="/images/amerika/img_9266.jpg" alt="IMG_9266" title="IMG_9266"></a></p>
+<p><a href="/images/amerika/dsc9743.jpg"><img src="/images/amerika/dsc9743.jpg" alt="_DSC9743" title="_DSC9743"></a></p>
+<p><a href="/images/amerika/dsc9744.jpg"><img src="/images/amerika/dsc9744.jpg" alt="_DSC9744" title="_DSC9744"></a></p>
+<p><a href="/images/amerika/img_9272.jpg"><img src="/images/amerika/img_9272.jpg" alt="IMG_9272" title="IMG_9272"></a></p>
+<p><a href="/images/amerika/dsc9757.jpg"><img src="/images/amerika/dsc9757.jpg" alt="_DSC9757" title="_DSC9757"></a></p>
+<p><a href="/images/amerika/img_9277.jpg"><img src="/images/amerika/img_9277.jpg" alt="IMG_9277" title="IMG_9277"></a></p>
+<p>Večer smo nameravali tudi zaključiti v dirkaškem stilu, z obiskom proge za karting, a smo ob prihodu tja ugotovili, da nudijo storitve na nivoju ljubljanskega BTC-ja po oderuških cenah, zato smo se raje odločili za bližnje minigolf igrišče. Kljub temu, da so bili putterji bistveno prelahki, so izkušnje prevladale in večinoma smo si znižali handicap.</p>
+<p><a href="/images/amerika/img_9290.jpg"><img src="/images/amerika/img_9290.jpg" alt="IMG_9290" title="IMG_9290"></a></p>
+<p><a href="/images/amerika/img_9291.jpg"><img src="/images/amerika/img_9291.jpg" alt="IMG_9291" title="IMG_9291"></a></p>
+<p><a href="/images/amerika/img_9294.jpg"><img src="/images/amerika/img_9294.jpg" alt="IMG_9294" title="IMG_9294"></a></p>
+<p>V romantični svetlobi sončnega zahoda smo se pripeljali do naše namestitve, ki je še ena v nizu tipičnih. Po resortih na Floridi, njujorškem seinfeldovskem stanovanju, bostonski predmestni hiši ter koči ob jezeru Ontario smo zdaj pristali v avtentičnem motelu. Pohištvo in tapete so poceni in kičaste, soba neizmerno smrdi po cigaretnem dimu in WC je zamašen. Bazen sicer imajo, a kopalce iz drugega nadstropja izza zavese opazuje tovornjakarica-voajerka, zato se skrivamo. Lahko noč.</p>
+<p><a href="/images/amerika/dsc9785.jpg"><img src="/images/amerika/dsc9785.jpg" alt="_DSC9785" title="_DSC9785"></a></p>
+<p><a href="/images/amerika/img_9310.jpg"><img src="/images/amerika/img_9310.jpg" alt="IMG_9310" title="IMG_9310"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-26-zivalski-vrt-in-e-ene-stojece-ovacije/">Živalski vrt in še ene stoječe ovacije</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-28-bluzenje-v-st-louisu/">Bluzenje v St. Louisu</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-27-iz-clevelanda-v-indianapolis/` was built on 2024-11-10T15:45:02.464Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

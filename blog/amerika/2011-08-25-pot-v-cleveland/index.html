@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pot v Cleveland</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="pot-v-cleveland">Pot v Cleveland</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-25">25. 8. 2011</time></li>
+</ul>
+
+<p>Hoteli človeka razvadijo. Medtem, ko se potikaš po mestu, ti nekdo skrivaj pospravi posteljo, brisačo vržeš na tla in naenkrat je sveža, za zajtrk pa lahko ješ sto različnih stvari. V hiši ali apartmaju je treba biti kanček skrbnejši, a po drugi strani imaš svoj lasten hladilnik. No, mi smo se danes selili iz sanjske hiške v Olcottu v hotel v Clevelandu in opevani hladilnik smo morali izprazniti. Pozajtrkovali smo vse, kar smo lahko, ostanke smo spremenili v sendviče ter jih skupaj s kovčki natlačili v prtljažnika avtomobilov. Vozili smo se celo dopoldne, do kosila in še dlje, medtem nabavili rožnato sopotnico ter se čudili ameriškim vinogradom.</p>
+<p><a href="/images/amerika/img_8830.jpg"><img src="/images/amerika/img_8830.jpg" alt="IMG_8830" title="IMG_8830"></a></p>
+<p><a href="/images/amerika/dsc9254.jpg"><img src="/images/amerika/dsc9254.jpg" alt="_DSC9254" title="_DSC9254"></a></p>
+<p><a href="/images/amerika/img_8850.jpg"><img src="/images/amerika/img_8850.jpg" alt="IMG_8850" title="IMG_8850"></a></p>
+<p>Nekaj deset milj pred Clevelandom smo načrtovali prvi turistični postanek v mestecu <a href="http://en.wikipedia.org/wiki/Euclid,_Ohio">Euclid</a>, natančneje v <a href="http://en.wikipedia.org/wiki/National_Cleveland-Style_Polka_Hall_of_Fame">Polka Hall of Fame</a>. Cleveland je namreč zelo znan po specifični različici polke, ki ima svoje korenine v Sloveniji, nanjo pa so vplivali še country, jazz in druge ameriške zvrsti. V obiskanem muzejčku so brez zadržkov odzdravili našemu “Dober dan!” ter nas hitro posedli pred televizor in nam predvajali kratek dokumentarec o razvoju clevelandske polke. Po policah so bili razstavljeni albumi, inštrumenti in podobni spominki, na stenah pa so visele slike mnogoterih glasbenikov s klenimi ameriškimi imeni ter slovensko zvenečimi priimki. Še bolj domače je bilo v prodajalni pri izhodu, kjer se je dalo kupiti albume večine bolj znanih narodno-zabavnih izvajalcev iz Slovenije.</p>
+<p><a href="/images/amerika/img_8877.jpg"><img src="/images/amerika/img_8877.jpg" alt="IMG_8877" title="IMG_8877"></a></p>
+<p><a href="/images/amerika/dsc9274.jpg"><img src="/images/amerika/dsc9274.jpg" alt="_DSC9274" title="_DSC9274"></a></p>
+<p><a href="/images/amerika/img_8884.jpg"><img src="/images/amerika/img_8884.jpg" alt="IMG_8884" title="IMG_8884"></a></p>
+<p><a href="/images/amerika/dsc9283.jpg"><img src="/images/amerika/dsc9283.jpg" alt="_DSC9283" title="_DSC9283"></a></p>
+<p><a href="/images/amerika/img_8887.jpg"><img src="/images/amerika/img_8887.jpg" alt="IMG_8887" title="IMG_8887"></a></p>
+<p><a href="/images/amerika/img_8889.jpg"><img src="/images/amerika/img_8889.jpg" alt="IMG_8889" title="IMG_8889"></a></p>
+<p><a href="/images/amerika/dsc9288.jpg"><img src="/images/amerika/dsc9288.jpg" alt="_DSC9288" title="_DSC9288"></a></p>
+<p><a href="/images/amerika/img_8892.jpg"><img src="/images/amerika/img_8892.jpg" alt="IMG_8892" title="IMG_8892"></a></p>
+<p><a href="/images/amerika/img_8897.jpg"><img src="/images/amerika/img_8897.jpg" alt="IMG_8897" title="IMG_8897"></a></p>
+<p><a href="/images/amerika/dsc9294.jpg"><img src="/images/amerika/dsc9294.jpg" alt="_DSC9294" title="_DSC9294"></a></p>
+<p><a href="/images/amerika/dsc9298.jpg"><img src="/images/amerika/dsc9298.jpg" alt="_DSC9298" title="_DSC9298"></a></p>
+<p><a href="/images/amerika/img_8902.jpg"><img src="/images/amerika/img_8902.jpg" alt="IMG_8902" title="IMG_8902"></a></p>
+<p><a href="/images/amerika/img_8909.jpg"><img src="/images/amerika/img_8909.jpg" alt="IMG_8909" title="IMG_8909"></a></p>
+<p><a href="/images/amerika/dsc9302.jpg"><img src="/images/amerika/dsc9302.jpg" alt="_DSC9302" title="_DSC9302"></a></p>
+<p><a href="/images/amerika/dsc9303.jpg"><img src="/images/amerika/dsc9303.jpg" alt="_DSC9303" title="_DSC9303"></a></p>
+<p>Ob odhodu se je oglasil še lokalni polka muzičar, s katerim smo izmenjali CD-je, tako da smo imeli na voljo nekaj svežega poslušanja do Clevelanda. Naj povemo, strašno znane skladbe zvenijo obupno smešne z ameriško izgovorjavo (Kou boš pwrišeu, uedno pwrinesi mi rowže).</p>
+<p>Ura je bila že kakih pet popoldne, ko smo prevzeli sobe v hotelu v clevelandskem downtownu. Po hitrem razpakiranju smo se podali še na sprehod po okolici, a smo hitro ugotovili, da ta del mesta ob večerih izgleda precej dolgočasno. Na hitro smo skočili do famozne <a href="http://rockhall.com/">Rock and Roll Hall of Fame</a>, si pogledali še stadion za ameriški nogomet v bližini ter ob vračanju domov naleteli še na strašljivo realistično popotresno sceno, za katero pa se je izkazalo, da je zgolj pripravljena za snemanje filma.</p>
+<p><a href="/images/amerika/img_8910.jpg"><img src="/images/amerika/img_8910.jpg" alt="IMG_8910" title="IMG_8910"></a></p>
+<p><a href="/images/amerika/img_8911.jpg"><img src="/images/amerika/img_8911.jpg" alt="IMG_8911" title="IMG_8911"></a></p>
+<p><a href="/images/amerika/img_8925.jpg"><img src="/images/amerika/img_8925.jpg" alt="IMG_8925" title="IMG_8925"></a></p>
+<p><a href="/images/amerika/dsc9321.jpg"><img src="/images/amerika/dsc9321.jpg" alt="_DSC9321" title="_DSC9321"></a></p>
+<p><a href="/images/amerika/dsc9323.jpg"><img src="/images/amerika/dsc9323.jpg" alt="_DSC9323" title="_DSC9323"></a></p>
+<p><a href="/images/amerika/img_8937.jpg"><img src="/images/amerika/img_8937.jpg" alt="IMG_8937" title="IMG_8937"></a></p>
+<p><a href="/images/amerika/img_8939.jpg"><img src="/images/amerika/img_8939.jpg" alt="IMG_8939" title="IMG_8939"></a></p>
+<p><a href="/images/amerika/img_8943.jpg"><img src="/images/amerika/img_8943.jpg" alt="IMG_8943" title="IMG_8943"></a></p>
+<p><a href="/images/amerika/img_8946.jpg"><img src="/images/amerika/img_8946.jpg" alt="IMG_8946" title="IMG_8946"></a></p>
+<p><a href="/images/amerika/dsc9417.jpg"><img src="/images/amerika/dsc9417.jpg" alt="_DSC9417" title="_DSC9417"></a></p>
+<p><a href="/images/amerika/img_8976.jpg"><img src="/images/amerika/img_8976.jpg" alt="IMG_8976" title="IMG_8976"></a></p>
+<p><a href="/images/amerika/img_8977.jpg"><img src="/images/amerika/img_8977.jpg" alt="IMG_8977" title="IMG_8977"></a></p>
+<p>K sreči je mrtvilo prerezala uličica v neposredni bližini našega hotela, ki je kazala nekatere znake življenja. Sestradani po celodnevni vožnji smo uspeli najti bar z ugodnimi cenami in okusnimi burgerji, nato pa se raje kar vrnili v hotel. Danes ne bomo tvegali, smo rekli, in se pred <a href="http://www.hurricanezone.net/#09l">Ireno</a> skrili pod odejo.</p>
+<p><a href="/images/amerika/dsc9426.jpg"><img src="/images/amerika/dsc9426.jpg" alt="_DSC9426" title="_DSC9426"></a></p>
+<p><a href="/images/amerika/img_8995.jpg"><img src="/images/amerika/img_8995.jpg" alt="IMG_8995" title="IMG_8995"></a></p>
+<p><a href="/images/amerika/img_8996.jpg"><img src="/images/amerika/img_8996.jpg" alt="IMG_8996" title="IMG_8996"></a></p>
+<p><a href="/images/amerika/img_8999.jpg"><img src="/images/amerika/img_8999.jpg" alt="IMG_8999" title="IMG_8999"></a></p>
+<p><a href="/images/amerika/dsc9429.jpg"><img src="/images/amerika/dsc9429.jpg" alt="_DSC9429" title="_DSC9429"></a></p>
+<p><a href="/images/amerika/img_9008.jpg"><img src="/images/amerika/img_9008.jpg" alt="IMG_9008" title="IMG_9008"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-23-wilson-tuscarora-state-park-in-e-ena-rotiljada/">Wilson-Tuscarora state park in še ena roštiljada</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-25-crtica-o-kavi/">Črtica o kavi</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-25-pot-v-cleveland/` was built on 2024-11-10T15:45:02.464Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

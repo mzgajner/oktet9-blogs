@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Triglavski narodni park</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="triglavski-narodni-park">Triglavski narodni park</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-09-01">1. 9. 2011</time></li>
+</ul>
+
+<p>Ja, kar v Združenih državah Amerike! Ampak začnimo na začetku.</p>
+<p><a href="/images/amerika/img_0023.jpg"><img src="/images/amerika/img_0023.jpg" alt="IMG_0023" title="IMG_0023"></a></p>
+<p>V Kops’ house na Daisy Lane so še vsi spali, le najpridnejši član zasedbe je bil pokonci ob nadvse zgodnji uri in se odpravil na jutranji sprehod po soseski. Nič hudega sluteč je se je razgledoval, iskal bližnje jezero in fotografiral ekstravagantne hiše, ko se mu je na pot naenkrat postavil pogumni varovalec privatne lastnine ter mu pod nos pomolil značko <em>Nadzor soseske</em>. Kršitelj je bil obveščen o neugodnosti svojega početja ter prejel strogo navodilo, naj z njim preneha. K sreči je bil ta dogodek edini danes, kjer so nas zasačili pri odklonskem vedenju.</p>
+<p>Po jutranjem nakupovanju in zajtrku smo pridno odšli proti centru Milwaukeeja s fiksnim ciljem v mislih in navigacijski napravi. Šlo je za mestno galerijo umetnosti, ki smo jo izbrali na predlog našega arhitekta Žareta. Za resne oglede razstav nismo imeli časa, ker smo v parkirno uro zmetali premalo četrtdolarskih kovancev, ampak nič ne de. Že slinjenje nad futuristično arhitekturo stavbe, ki je zgrajena tako, da razpre (ja, r-a-z-p-r-e, kar tako) streho v obliki kril, je bilo preveč zabavno.</p>
+<p><a href="/images/amerika/img_0057.jpg"><img src="/images/amerika/img_0057.jpg" alt="IMG_0057" title="IMG_0057"></a></p>
+<p><a href="/images/amerika/dsc0337.jpg"><img src="/images/amerika/dsc0337.jpg" alt="_DSC0337" title="_DSC0337"></a></p>
+<p><a href="/images/amerika/dsc0339.jpg"><img src="/images/amerika/dsc0339.jpg" alt="_DSC0339" title="_DSC0339"></a></p>
+<p><a href="/images/amerika/dsc0347.jpg"><img src="/images/amerika/dsc0347.jpg" alt="_DSC0347" title="_DSC0347"></a></p>
+<p><a href="/images/amerika/dsc0357.jpg"><img src="/images/amerika/dsc0357.jpg" alt="_DSC0357" title="_DSC0357"></a></p>
+<p><a href="/images/amerika/img_0081.jpg"><img src="/images/amerika/img_0081.jpg" alt="IMG_0081" title="IMG_0081"></a></p>
+<p><a href="/images/amerika/img_0082.jpg"><img src="/images/amerika/img_0082.jpg" alt="IMG_0082" title="IMG_0082"></a></p>
+<p><a href="/images/amerika/img_0093.jpg"><img src="/images/amerika/img_0093.jpg" alt="IMG_0093" title="IMG_0093"></a></p>
+<p>Od tam smo šli na kratek obhod po mestu, spili ledeni čaj v kavarni ob rečnem kanalu, vrgli nekaj žabic v jezero Michigan. Ob pogledu na uro smo pomislili – o šit! Zamujamo. Tako na parkirno uro kot v Triglavski park.</p>
+<p><a href="/images/amerika/dsc0381.jpg"><img src="/images/amerika/dsc0381.jpg" alt="_DSC0381" title="_DSC0381"></a></p>
+<p><a href="/images/amerika/dsc0417.jpg"><img src="/images/amerika/dsc0417.jpg" alt="_DSC0417" title="_DSC0417"></a></p>
+<p><a href="/images/amerika/img_0106.jpg"><img src="/images/amerika/img_0106.jpg" alt="IMG_0106" title="IMG_0106"></a></p>
+<p><a href="/images/amerika/dsc0399.jpg"><img src="/images/amerika/dsc0399.jpg" alt="_DSC0399" title="_DSC0399"></a></p>
+<p>In smo nazaj na izhodiščni točki današnjega prispevka. Da vas ne bomo predolgo držali v negotovosti, na tem mestu izdajamo skrivnost. Park Triglav je izjemno lična zaplata zemlje ob mičkenem jezeru, ki so jo milwaukeejski zdomci kolektivno kupili pred petdesitimi leti. Na njej so počasi rasle simpatične miniaturne koče, kjer so lastniki preživljali vikende v naravi, nas pa so po včerajšnjih koncertih tja povabili na roštiljanje.</p>
+<p><a href="/images/amerika/img_0173.jpg"><img src="/images/amerika/img_0173.jpg" alt="IMG_0173" title="IMG_0173"></a></p>
+<p>V omenjenih petdesetih letih je park Triglav doživel nešteto posodobitev. Zdaj imajo tam pomole, nekaj čolnov in kajakov, skakalnico v vodo, veliko centralno stavbo za skupne zabave, pa tudi vinograd, lične cvetlične gredice in še marsikaj. Posebno omembo si zasluži miniaturna kapelica, ki so jo milwaukeejski Slovenci sprva nameravali postaviti na še manjši otoček, da bi jih spominjala na Bled. Projekt ni dočakal zaključka, ker so ugotovili, da ob močnejših padavinah otok izgine pod vodo, pa tudi njegov lastnik ni bil preveč navdušen nad nadebudnimi gradbeniki, zato so cerkvico postavili kar ob obalo.</p>
+<p><a href="/images/amerika/img_0187.jpg"><img src="/images/amerika/img_0187.jpg" alt="IMG_0187" title="IMG_0187"></a></p>
+<p>Gostitelji so nam ob narodnozabavnih vižah, ki so odzvanjale na bližnjem ozvočenju, vse naštete kapacitete prijazno razkazali in veliko smo jih z veseljem izkoristili. Postregli so nam Laško pivo, mi pa smo skakali v jezero, veslali naokrog in se preizkušali v parih igrah in športih. Tudi dve najbolj pričakovani točki programa nista manjkali – kup hrane (z restanim krompirjem na čelu) in šopek pesmi.</p>
+<p><a href="/images/amerika/img_0176.jpg"><img src="/images/amerika/img_0176.jpg" alt="IMG_0176" title="IMG_0176"></a></p>
+<p><a href="/images/amerika/img_0192.jpg"><img src="/images/amerika/img_0192.jpg" alt="IMG_0192" title="IMG_0192"></a></p>
+<p><a href="/images/amerika/dsc0494.jpg"><img src="/images/amerika/dsc0494.jpg" alt="_DSC0494" title="_DSC0494"></a></p>
+<p><a href="/images/amerika/dsc0518.jpg"><img src="/images/amerika/dsc0518.jpg" alt="_DSC0518" title="_DSC0518"></a></p>
+<p><a href="/images/amerika/img_0206.jpg"><img src="/images/amerika/img_0206.jpg" alt="IMG_0206" title="IMG_0206"></a></p>
+<p><a href="/images/amerika/img_0211.jpg"><img src="/images/amerika/img_0211.jpg" alt="IMG_0211" title="IMG_0211"></a></p>
+<p><a href="/images/amerika/img_0219.jpg"><img src="/images/amerika/img_0219.jpg" alt="IMG_0219" title="IMG_0219"></a></p>
+<p><a href="/images/amerika/dsc0531.jpg"><img src="/images/amerika/dsc0531.jpg" alt="_DSC0531" title="_DSC0531"></a></p>
+<p><a href="/images/amerika/img_0223.jpg"><img src="/images/amerika/img_0223.jpg" alt="IMG_0223" title="IMG_0223"></a></p>
+<p>Pogovarjali smo se podolgem in počez, slišali kup smešnih anekdot, ki jih bomo nedvomno prodajali naprej, ko se vrnemo domov. Komentirali smo vse, od piva do politike, ugibali starosti prisotnih in premlevali tako prijetne izlete v Slovenijo kot neprijetne vojne. Na tem mestu pošiljamo poseben pozdrav gospodu Alu, ki se nas je dotaknil na poseben način. Še ko smo bili z eno nogo že v avtomobilih, smo skozi odprta okna diskutirali, ampak enkrat je bilo treba iti. Ura je bila že devet in komarji so nas popikali do kosti.</p>
+<p><a href="/images/amerika/dsc0477.jpg"><img src="/images/amerika/dsc0477.jpg" alt="_DSC0477" title="_DSC0477"></a></p>
+<p><a href="/images/amerika/dsc0484.jpg"><img src="/images/amerika/dsc0484.jpg" alt="_DSC0484" title="_DSC0484"></a></p>
+<p><a href="/images/amerika/dsc0511.jpg"><img src="/images/amerika/dsc0511.jpg" alt="_DSC0511" title="_DSC0511"></a></p>
+<p>Sedaj sedimo zelo mirno in čakamo rakune ter polnoč. Prve bomo posneli, drugo pa proslavili – Žarko ima namreč (že v Olcottu na zob dan) rojstni dan.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-31-pozrtija-v-milwaukeeju/">Požrtija v Milwaukeeju</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-09-02-sweet-home-chicago/">Sweet home Chicago</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-09-01-triglavski-narodni-park/` was built on 2024-11-10T15:45:02.465Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Prvi dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="prvi-dan">Prvi dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-04">4. 8. 2009</time></li>
+</ul>
+
+<p>Kot veste, smo se v nedeljo (uporaba izraza predvčerajšnjim bi znala biti zaradi časovnih razlik neugodna) zjutraj podali na dolgo pričakovano potovanje v Avstralijo. Ob prihodu na brniško letališče smo z našo standardno prekomerno dobro voljo premagali sitnobo zlobne tete na checkinu, nabavili tobačne izdelke za tiste od nas, ki se radi predajajo tovrstnim užitkom in dva rogljička kasneje varno pristali na Dunaju, kljub temu, da je stevardesa z glasom verižne kadilke napovedala, da letimo v Minhen.</p>
+<p><a href="/images/avstralija/dsc_7339.jpg"><img src="/images/avstralija/dsc_7339.jpg" alt="Adijo, mami" title="DSC_7339"></a></p>
+<p><a href="/images/avstralija/dsc_7355.jpg"><img src="/images/avstralija/dsc_7355.jpg" alt="Posedanje na Dunaju" title="DSC_7355"></a></p>
+<p><a href="/images/avstralija/dsc_7379.jpg"><img src="/images/avstralija/dsc_7379.jpg" alt="Follow me!" title="DSC_7379"></a></p>
+<p>Od tu dalje so šle stvari povsem predvideno rahlo navzdol. Dvanajst ur na letalu zna biti duhamorno, še posebno, če se letalska družba odloči, da bo igranje Super Maria namenila samo potnikom v poslovnem razredu. Presenetljivo pa so navadnim smrtnikom dopustili gledanje novega Star Treka, pa tudi hrana je bila odlična, četudi letala ponavadi sodijo v isto kulinarično kategorijo kot bolnišnice in študentska stanovanja. Kitajske stevardese so nam namenile še nekaj pločevink piva in na Tajvan smo skorajda klišejsko prispeli prav ob sončnem vzhodu. Utrujenost smo premagali s piščančjim curryjem, se politično nekorektno nasmejali iz kitajskih restavracij znani angleščini in azijskemu publikumu na terminalu namenili nekaj mednarodnih komadov.</p>
+<p><a href="/images/avstralija/dsc_7428.jpg"><img src="/images/avstralija/dsc_7428.jpg" alt="Ni ravno Laško, pa ajde..." title="DSC_7428"></a></p>
+<p><a href="/images/avstralija/dsc_7483.jpg"><img src="/images/avstralija/dsc_7483.jpg" alt="Run, Forrest, run!" title="DSC_7483"></a></p>
+<p><a href="/images/avstralija/dsc_7485.jpg"><img src="/images/avstralija/dsc_7485.jpg" alt="Chan-kwa?" title="DSC_7485"></a></p>
+<p><a href="/images/avstralija/dsc_7496.jpg"><img src="/images/avstralija/dsc_7496.jpg" alt="Peče, peče" title="DSC_7496"></a></p>
+<p><a href="/images/avstralija/dsc_7548.jpg"><img src="/images/avstralija/dsc_7548.jpg" alt="Pogled iz letala" title="DSC_7548"></a></p>
+<p>Sledil je še zadnji kos poti, za katerega smo potrebovali 9 ur (trajanja potovanj navajam v dejanskih časovnih enotah, vsemu skupaj pa je potrebno prišteti še 8 ur časovne razlike). Ob pristanku v Sydneyu smo bili že precej uničeni, kar s prašičjo gripo okupiranih uslužbencev na mejnem prehodu ni zanimalo (ne, v zadnjih 30 dneh nisem obiskoval kmetijskih površin v južni Afriki), a dejstvo, da smo na cilju, nas je držalo pokonci.</p>
+<p><a href="/images/avstralija/dsc_7556.jpg"><img src="/images/avstralija/dsc_7556.jpg" alt="Še malo..." title="DSC_7556"></a></p>
+<p><a href="/images/avstralija/dsc_7593.jpg"><img src="/images/avstralija/dsc_7593.jpg" alt="Navdušeni nad novim prevoznim sredstvom" title="DSC_7593"></a></p>
+<p>Po rutinskih pregledih smo dobili ključe za avtomobile in zabava se je pričela. Prijazni gostitelj Luka je vodil našo kolono, tako da s prižiganjem brisalcev namesto smerokazov in preverjanjem napačnega ogledala nismo že prvi dan povzročili prometne nesreče. Čez dobre pol ure smo prispeli v parkirno hišo našega hotela, kljub pozni uri nabavili hrano in celo pijačo (minister majski hrošč tukaj nima jurisdikcije) ter kramljali do polnoči, nato pa kot mrtvi popadali v postelje.</p>
+<p><a href="/images/avstralija/img_0327.jpg"><img src="/images/avstralija/img_0327.jpg" alt="Najbolj strasten kadilec" title="IMG_0327"></a></p>
+<p><a href="/images/avstralija/dsc_7618.jpg"><img src="/images/avstralija/dsc_7618.jpg" alt="Še eno rundo?" title="DSC_7618"></a></p>
+<p>Prvi dan je bil zaradi privajanja na jetlag zmernejši, po obilnem zajtrku smo se pod Lukovim vodstvom sprehodili po centru Sydneya. Ogledali smo si nekaj tipičnih turističnih znamenitosti, od katerih je še najbolj izstopal Sydney Tower, najvišja točka mesta, ki s svojimi 305 metri višine ponuja odličen razgled. Za kosilo v vrteči se restavraciji nismo imeli časa, smo pa ob najvišjem delujočem nabiralniku na južni polobli popili kavico in se podali nazaj na trdna tla.</p>
+<p><a href="/images/avstralija/img_0328.jpg"><img src="/images/avstralija/img_0328.jpg" alt="Ray Ban klub pred ogledom mesta" title="IMG_0328"></a></p>
+<p><a href="/images/avstralija/dsc_7675.jpg"><img src="/images/avstralija/dsc_7675.jpg" alt="Petje v Sydney Towerju" title="DSC_7675"></a></p>
+<p><a href="/images/avstralija/dsc_7693.jpg"><img src="/images/avstralija/dsc_7693.jpg" alt="Mora biti nekje tukaj" title="DSC_7693"></a></p>
+<p><a href="/images/avstralija/dsc_7697.jpg"><img src="/images/avstralija/dsc_7697.jpg" alt="Ljubezen na prvi pogled" title="DSC_7697"></a></p>
+<p><a href="/images/avstralija/dsc_7721.jpg"><img src="/images/avstralija/dsc_7721.jpg" alt="Aboridžini že vedo" title="DSC_7721"></a></p>
+<p><a href="/images/avstralija/img_0348.jpg"><img src="/images/avstralija/img_0348.jpg" alt="Pogled na naš hotel z najvišje točke Sydneya" title="IMG_0348"></a></p>
+<p><a href="/images/avstralija/dsc_7764.jpg"><img src="/images/avstralija/dsc_7764.jpg" alt="A se lahko slikam z vami?" title="DSC_7764"></a></p>
+<p><a href="/images/avstralija/img_0352.jpg"><img src="/images/avstralija/img_0352.jpg" alt="Skupinska slika na Sydney Towerju" title="IMG_0352"></a></p>
+<p>Kasneje smo prehodili še Darling harbour bridge, v Starbucksu popili tako zelo individualno kavico in brez uspeha iskali brezžično povezavo z internetom ter se z monorailom, tukajšnjo obliko javnega prevoza, vrnili v apartmaje. Po odlični kočerji so se nekateri odpravili k bazenu, drugi pa se s svojimi publicističnimi in fotografskimi sposobnostmi nesebično trudimo držati obljubo in vas kljub pregrešno dragemu internetu obveščamo o dogajanju.</p>
+<p><a href="/images/avstralija/dsc_7765.jpg"><img src="/images/avstralija/dsc_7765.jpg" alt="Kdo gre komu na živce?" title="DSC_7765"></a></p>
+<p><a href="/images/avstralija/dsc_7793.jpg"><img src="/images/avstralija/dsc_7793.jpg" alt="Lokalni pomorski muzej" title="DSC_7793"></a></p>
+<p><a href="/images/avstralija/dsc_7775.jpg"><img src="/images/avstralija/dsc_7775.jpg" alt="Najbolj disciplinirana člana" title="DSC_7775"></a></p>
+<p><a href="/images/avstralija/dsc_78351.jpg"><img src="/images/avstralija/dsc_78351.jpg" alt="Skyline z balkona naše sobe" title="DSC_7835"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-01-odhod/">Odhod</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-05-drugi-dan/">Drugi dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-04-prvi-dan/` was built on 2024-11-10T15:45:02.466Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

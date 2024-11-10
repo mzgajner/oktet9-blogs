@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>The Land Of The Free?</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="the-land-of-the-free">The Land Of The Free?</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-09-05">5. 9. 2011</time></li>
+</ul>
+
+<p>Kako bi definirali svobodo? Po kratkem razmisleku najbrž tako, da je svoboda zmožnost samostojnega odločanja, zmožnost delati tisto, kar si želimo. Še krajši premislek pa je potreben za ugotovitev, da nihče ne more biti popolnoma svoboden, ker se nam, resnici na ljubo, po glavi plete preveč ... Torej lahko govorimo le o stopnjah svobode in ravno te so izhodišče razmišljanju v sledeči črtici …</p>
+<p>Že od malih nog je name vplivala ameriška kultura. Začelo se je s Tom &amp; Jerryjem,Transformerji in Power rangersi. Z mojo generacijo so prihajale prve igralne konzole, kot na primer legendarni Nintendo64. Ves svet računalniških iger in filmov je prihajal iz hollywoodske Amerike in ko smo prerasli Romano Kranjčan ter Čuke, je tudi svet glasbe začel govoriti večinoma angleško... Dobro se spomnim, kako smo kot otroci oponašali besedilo Eminema, ne da bi razumeli posamezne besede, kaj šele njihov pomen!</p>
+<p>Tako si hočeš nočeš začneš ustvarjati mit o Združenih državah Amerike, o deželi, kjer je vse mogoče in kjer se cedita med in mleko. Indijakoromadija - tista najbolj svobodna in močna dežela na tem svetu. S prijatelji smo vedno sanjali o tem, da bi odpotovali preko luže, tja, kjer živijo naši idoli. In priložnost je prišla!</p>
+<p>Po pristanku v Chicagu, ko smo prvič stopili na ameriško zemljo, so nam najprej vzeli prstne odtise in slikali roženico. Nekateri kovčki so bili odprti - če ne zlepa, pa zgrda; v takojšnji opomin temu, koliko je vredna posameznikova zasebnost; nič, saj je varnost Amerike na prvem mestu. Dovolite kratek medklic: mislim, da bi varnost letalskega prometa lahko izboljšali tako, da bi del sredstev, ki jih porablja „vsemogočni“ varnostni sistem, namenili za vzdrževanje letal! A pustimo paranojo na letališčih, kajti človek, ki s prijatelji prileti na novo celino, je poln pozitivne energije. Opazuješ nov, neodkrit svet, ga ocenjuješ in primerjaš. Ko se tista začetna evforija malo poleže, ko ne obnemiš več za pol minute ob pogledu na neskončne ulice nebotičnikov in bleščečih stolpnic, takrat pa opaziš tudi slabe strani ... Če mi pogosto živimo prepotratno, mnogokrat zaradi nepazljivosti in nepreračunljivosti, potem Američani živijo kot otrok, ki ne ve, da bo jutri še vedno na istem planetu. Vse je za enkratno uporabo. Če niste ravno v razkošni restavraciji, vam bodo postregli na plastičnih krožnikih, prav takšnih kozarcih in priboru. Le zakaj bi pomivali?! Tudi tamkajšnje hiše so, za Slovenca vajenega domače zidane utrdbe, zgolj za enkratno uporabo. Velika večina, razen tistih v mestnih središčih, ima krhko leseno konstrukcijo, slabe temelje, streho pa bolj prelepljeno kot pokrito. Nič čudnega, da jim tornadi, orkani in hurikani odnašajo cela naselja. Avtomobili praviloma porabijo preko 10 l / 100 km, na televiziji pa se jezijo, da ljudje izganjajo iz avtomobilov, če dvigujejo cene bencina. Dejansko je nakup potratnega avtomobila mnogo cenejši od varčnega, saj veste, to je ta pravica do razsipne porabe bencina. Potem imajo pravico do neumnih pravil. Na primer … S prijatelji si ne smeš podajati frizbija na plaži, ker? Ko se ustaviš ob avtocesti in se ob parkirišču usedeš na ograjo, se že najde uradna oseba, ki te spodi iz nje. Resnično nedoumljivo, da nekdo sploh ustvarja takšna pravila. Še bolj zgovoren primer: v Michiganu ne smeš imeti piknika na istem mestu v naravi, če ni bilo vmes vsaj 30 dni razlike. Kdo, me zanima, ima čas in domišljijo, da ustvari takšen zakon?! Jezera, velika za „naše“ Jadransko morje, imajo plaže z obratovalnim časom, kjer se lahko kopaš le znotraj majhne zone, v majhnem časovnem okviru. V Chicagu nas je policaja pregnala s plaže, ker smo se na njej mudili po 11h zvečer. Pri tem pa so prijazno poudarili, da nam zgolj s svarilom popuščajo, ker domačini bi dobili kazen! Bili smo šokirani.</p>
+<p>Blišč Amerike, ki ga vidimo preko ekranov, je njen lepši del, logično ... Da vas potolažim glede urbanistične neurejenosti Balkana. Določeni predeli mest ZDA izgledajo in delujejo slabše kot povojna Bosna. V najhujših primerih trinajstletniki nosijo pištole. Strelno orožje lahko kupiš preden smeš piti alkohol. Neverjetno! Na poti smo videli tovarniške komplekse nekajkrat večje od celjske Cinkarne, ki so bili popolnoma zapuščeni, v razsulu. Prav tako smo na avtocesti, natančneje na voznem pasu, obvozili nešteto scefranih pnevmatik, dele pločevine in za nagrado še cel izpušni sistem. Verjetno za to, ker čiščenje cest pač ni profitna dejavnost in se nikakor ne morejo dogovoriti ali je to odgovornost države, zveznih del, okrajev ali mest. Nekateri avtomobili so dejansko razpadel kos zarjavele pločevine, kar pa ne predstavlja večje ovire za uspešno opravljen tehnični pregled, saj je pomembno zgolj to, da lahko lastnik plača registracijo. Vse te stvari imajo eno jasno skupno točko – in to je – profit! Kar ne prinaša profita je nepomembno in ni vredno obstoja. Obamo obtožujejo da je PROTI Ameriki, ker želi razširiti zdravstveno varstvo na celotno populacijo. Očitno je zelo ameriško, da revni pač nimajo oskrbe in so predani usodi. To je nedojemljivo! Torej je pravica do zdravja, ki je osnova življenja, omejena na bogate. Drugi temelj dobrega življenja je kvalitetna hrana. V ZDA je najceneje jesti hitro hrano. V velikih mestih je mnogo ugodneje jesti v fast food restavracijah, kot pa si kupiti osnovna živila v trgovini. Torej je kvalitetna hrana, prvi temelj dobrega zdravja, prav tako pravica bogatih ljudi. Nasilja je neprimerno več kot pri nas, sploh v „slabših“ delih mesta. Tako je tudi varnost je pravica bogatih ljudi. Udobje je pravica bogatih ljudi. Najbolj neverjetno pa je to, da so kljub vsemu naštetemu vsi prepričani, da je Amerika dežela svobodnih ljudi. O tem sploh ni debate. Tako je! Šli so celo korak naprej - Amerika je skoraj ves pomembni del sveta. Ob zaključku NBA, NFL, NHL in vseh športnih lig, razglasijo zmagovalno ekipo za svetovne prvake. Pogovorna oddaja na enem bolj liberalnih kanalov razpravlja o tem, zakaj so ZDA sploh del Združenih narodov, saj jih ostali člani ZN samo omejujejo. Njihova samozadostnost nam je nedojemljiva. Prav tako prepričanost, da imajo pravico napasti katero koli državo na svetu. Njihovo geografsko znanje je porazno. Neka natakarica nam je zabrusila, da pač ve kje je Slovenija – preko oceana. Še preko katerega oceana ni povedala. Znanje tujih jezikov in splošna izven-ameriška razgledanost je mnogo nižja kot naša. Da pa ne govorim samo o slabih straneh ljudi moram poudariti, da so mnogo bolj odprti in prostodušni, pa tudi pohvale jim ne gredo prav težko z jezika. Bivati morajo z vsemi rasami sveta, kar ni mačji kašelj, če pomislite koliko problemov si v Sloveniji ustvarjamo samo z Romi. Spoštujem del ameriškega ponosa, saj je po mojem mnenju zdravo, da ljudje verjamejo v svojo državo. Tudi mi bi morali bolj verjeti v Slovenijo in se aktivno truditi za napredek na vseh področjih, predvsem pa za kvalitetno demokracijo.</p>
+<p>Preziram dejstvo, da je kapitalizem, in z njim potrošništvo, nova religija. To ni pretiravanje, saj žal ta nova vera določa moralo in ideale ter z njimi veliko plasti naših življenj. Kapitalizmu onkraj luže je tako uspelo združiti demokracijo in državljanski ponos v enovito zahodno filozofijo pod imenom Združene države Amerike. Tako, kot je v srednjem veku katoliška cerkev lomastila po deželah Evrope v imenu širjenja vere, in kot je kasneje Evropa storila takisto v čezmorskem svetu, tako v sedanjosti Zahodni svet, predvsem ZDA, pustošijo po tujih deželah v imenu širjenja demokracije, kapitalizma in svobode. So Iračani bolj svobodni, kot pred vojno? Ne. Mi pa pridno srkamo vase vplive globalizacije, ki je do neke mere globalno razlitje Amerike.</p>
+<p>Dragi sovrstniki in vsi ostali zvesti bralci bloga. Amerika je bila ena lepših izkušenj mojega življenja. Užil sem jo neizmerno, vsak dan znova … Ampak to ni obljubljena dežela svobodnih in pogumnih ljudi. Tam svoboda stopa v koraku s premoženjem, premoženje pa s trdim delom, ki jemlje čas, energijo in posledično svobodo. Tako da lahko s ponosom zapišem, da smo v Sloveniji dosti bolj svobodni, nam pa žal manjka samozavesti, zdravega ponosa in prepričanja, da je naša domača kultura zakon. Slovenci imamo za sabo tisoče let zgodovine, milijone zgodb, ki jih je pisala naša skupna usoda. Toliko tradicije si Američani še predstavljati ne morejo in ravno zaradi tega, moramo našo kulturo toliko bolj spoštovati in gojiti, kajti nihče drug je ne bo ohranil, kot mi sami. Res je žalostno, da mladi tako močno padamo pod vplive ameriške kulture, četudi se najbrž vsi prav dobro zavedamo, da oni naše ne poznajo niti toliko, da bi nas lahko umestili po geografskih kriterijih. Njihova kultura je plitka, deluje po načelu iskanja vedno novega, hitro mineva in je zgolj za enkratno uporabo. Skratka popolno nasprotje tistega, kar definira našo kulturno identiteto.</p>
+<p>Če bi me pred potovanjem vprašali ali bi se preselil v Ameriko, bi vam najbrž odgovoril z da, sedaj, po tej bogati izkušnji, pa bi brez daljšega premisleka rekel odločni ne, hvala! Grem raje v Avstralijo! Šala, šala :D Resnično govorim iz srca, ko rečem, da je življenje v naši domovini bolj svobodno in mirno ter da je Slovenija dežela svobodnih in pogumnih ljudi! No, skoraj svobodnih ...</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-09-04-slovo-v-slogu/">Slovo v slogu</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-09-06-povratek/">Povratek</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-09-05-the-land-of-the-free/` was built on 2024-11-10T15:45:02.465Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

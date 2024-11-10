@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Broadway in Harlem</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="broadway-in-harlem">Broadway in Harlem</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-15">15. 8. 2011</time></li>
+</ul>
+
+<p><a href="http://youtu.be/12Y55ezJVVk">Miran Ališič</a> je poleg deževnikov eno redkih bitij, ki se veselijo dežja. Mi smo bili danes v tisti drugi, precej večji skupini. Ko smo vstali, je namreč lilo kot iz škafa in to je naredilo naše turistično pohajkovanje po mestu neprijetno. Namenili smo se namreč na Broadway.</p>
+<p>Ker je umetnost mjuzikla v veliki meri skoncentrirana na New York in London, lokalne znamenitosti nismo hoteli zamuditi in se odpravili gledat trenutno zelo vroči Book of Mormon. Zaradi nevihte smo zamudili pred vhod, vrsta za vstopnice se je vila kot jara kača in vsi so vpili, da je predstava tako ali tako razprodana.</p>
+<p>S povešenimi nosovi smo žalostno stopicali nazaj na Times Square, a tam ugotovili, da je dež bistveno skrajšal vrste pred na prostem stoječimi kioski, ki tik pred pričetki predstav prodajajo vstopnice po nizkih cenah. Tako smo iz sreče v nesreči dobili ugodne sedeže za staro in preizkušeno <a href="http://en.wikipedia.org/wiki/Avenue_Q">Avenijo Q</a>.</p>
+<p><a href="/images/amerika/img_6959.jpg"><img src="/images/amerika/img_6959.jpg" alt="IMG_6959" title="IMG_6959"></a></p>
+<p><a href="/images/amerika/img_6961.jpg"><img src="/images/amerika/img_6961.jpg" alt="IMG_6961" title="IMG_6961"></a></p>
+<p><a href="/images/amerika/img_6977.jpg"><img src="/images/amerika/img_6977.jpg" alt="IMG_6977" title="IMG_6977"></a></p>
+<p>Navdušeni nad predstavo in utrujeni od pretepa z modnimi agenti, ki so nam hoteli ukrasti našega talentiranega Žareta, smo šli nazaj na premočeno ulico in v dežju na hitro obiskali Lincoln center, kjer domujejo največje glavne kulturne ustanove mesta New York.</p>
+<p><a href="/images/amerika/img_6982.jpg"><img src="/images/amerika/img_6982.jpg" alt="IMG_6982" title="IMG_6982"></a></p>
+<p><a href="/images/amerika/img_6984.jpg"><img src="/images/amerika/img_6984.jpg" alt="IMG_6984" title="IMG_6984"></a></p>
+<p><a href="/images/amerika/img_6985.jpg"><img src="/images/amerika/img_6985.jpg" alt="IMG_6985" title="IMG_6985"></a></p>
+<p>Zatem smo dognali, da so naši želodci že od zajtrka prazni. Pobrskali smo po čudnem turističnem vodniku iz devetdesetih, našli restavracijo s soul foodom, imenovano Sylvia’s, ter na podzemni sedli na linijo za Harlem. Takoj po prihodu smo zaključili, da že sam obstoj gostilne skoraj 20 let po pisanju vodnika pomeni kvaliteto. Naročili smo (bojda) slavna rebrca na žaru in bili prevzeti od okusa. Ojoj, še ravnokar, ob pisanju, se spominjamo praženega krompirja s česnom…</p>
+<p><a href="/images/amerika/img_6988.jpg"><img src="/images/amerika/img_6988.jpg" alt="IMG_6988" title="IMG_6988"></a></p>
+<p><a href="/images/amerika/img_7002.jpg"><img src="/images/amerika/img_7002.jpg" alt="IMG_7002" title="IMG_7002"></a></p>
+<p><a href="/images/amerika/img_7005.jpg"><img src="/images/amerika/img_7005.jpg" alt="IMG_7005" title="IMG_7005"></a></p>
+<p><a href="/images/amerika/img_7006.jpg"><img src="/images/amerika/img_7006.jpg" alt="IMG_7006" title="IMG_7006"></a></p>
+<p>Božanska svinjina je bila že drugi trenutek v dnevu, ko se nam je sreča nasmehnila povsem po naključju, kar je z nas obrisalo vso slabo voljo, s katero nas je polival dež. “In ko smo že v Harlemu,” smo dejali, “poiščimo še kak jazz bar.” Vratar gostilne je s prstom pokazal po aveniji navzdol. “Kaki dve ulici stran, na levi. V zadnji sobi imajo živo glasbo, placu se reče <a href="http://www.lenoxlounge.com/">Lenox Lounge</a>.”</p>
+<p>In res je bila živa glasba. Klavir je igral kar <a href="http://lafayetteharrisjr.com">Lafayette Harris</a>, sicer pa je šlo za open mic večer. Žare je s svojo reinterpretacijo <a href="http://www.youtube.com/watch?v=PPHtQn1t1n4">Davisove verzije</a> Autumn Leaves navdušil prisotne, poleg njega so peli še vsi živi lokalni ljubitelji glasbe, od upokojenih tetic s pevskimi jajci do <a href="http://www.theartistryofjazzhorn.com/picture-gallery.php">brhkih mladih vokalistk</a>. Prej omenjeni pianist, ki je povezoval večer, nas je zapazil in dobil informacijo, da smo vokalna skupina, nakar smo seveda morali zapeti eno. Nato je eden od naključnih prisotnih po imenu Joe povedal, da so bili njegovi stari starši iz Slovenije in nam suvereno zapel <em>Jaz pa ti pa židana marela</em>.</p>
+<p><a href="/images/amerika/img_7013.jpg"><img src="/images/amerika/img_7013.jpg" alt="IMG_7013" title="IMG_7013"></a></p>
+<p><a href="/images/amerika/img_7026.jpg"><img src="/images/amerika/img_7026.jpg" alt="IMG_7026" title="IMG_7026"></a></p>
+<p><a href="/images/amerika/img_7048.jpg"><img src="/images/amerika/img_7048.jpg" alt="IMG_7048" title="IMG_7048"></a></p>
+<p><a href="/images/amerika/img_7058.jpg"><img src="/images/amerika/img_7058.jpg" alt="IMG_7058" title="IMG_7058"></a></p>
+<p>Blaženo zadovoljni smo se poslovili nekaj čez deseto, ujeli avtobus in podzemno in spet avtobus do doma, še prej pa poslikali legendarni Apollo Theater. Srečen dan.</p>
+<p><a href="/images/amerika/img_7063.jpg"><img src="/images/amerika/img_7063.jpg" alt="IMG_7063" title="IMG_7063"></a></p>
+<p>Mimogrede, številnim obiskovalcem se iz vsega srca zahvaljujemo, prav tako gre zahvala novinarjem, ki pišejo o nas - včeraj <a href="http://www.rtvslo.si/kultura/glasba/gimnazija-celje-prepeva-po-svetu/264003">nacionalka</a>, pa <a href="/images/amerika/nedelo0ktet9page140811.pdf">Delo</a>, <a href="http://web.vecer.com/portali/vecer/v1/default.asp?kaj=3&amp;id=2011081305673172">Večer</a> in mnogi drugi (nismo si mislili, da lahko človek brez vpletenosti v umor s hladnim orožjem pristane v <a href="http://www.slovenskenovice.si/bulvar/glasba/oktet-9-na-ameriski-turneji.html">Novicah</a>). Upamo, da vas branje zabava toliko, kot nas potovanje.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-14-new-york-drugi-dan/">New York, drugi dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-16-len-dan-v-central-parku/">Len dan v Central parku</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-15-broadway-in-harlem/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

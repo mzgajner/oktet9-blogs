@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pot v Rock Island</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="pot-v-rock-island">Pot v Rock Island</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-30">30. 8. 2011</time></li>
+</ul>
+
+<p>Ob polosmih zjutraj se je težko pripraviti do tega, da popiješ pivo. Ampak morali smo, zdravica je bila namenjena slovesu od St. Louisa in tukajšnje največje pivovarne v ZDA, <a href="http://en.wikipedia.org/wiki/Anheuser-Busch">Anheuser-Busch</a>, ki slovi po pivih, kot sta Budweiser in Busch. Zapeljali smo na obnovljeni odsek legendarne <a href="http://wikitravel.org/en/Route_66">Route 66</a>, na našem digitalnem vzvratnem ogledalu s kompasom se je izpisala črka N. Sever!</p>
+<p>Vozili smo vzporedno z Mississippijem in prvo postojanko dneva našli v mestecu Hannibal. Najbrž bi šlo za še eno od boga pozabljeno luknjo, če ne bi lokalci nekoč pogruntali, da je v njihovem kraju odraščal Mark Twain. Priložnost so zgrabili za roge in kraj obogatili s številnimi turističnimi atrakcijami, kakopak vsemi na temo pisatelja. Na enem koncu je muzej Twainovega otroštva in trgovinica s Twainovo robo, ob reki čaka lažni parnik, ki vozi na mini enourna Twainovska križarjenja, potem je tu še spomenik Toma Sawyerja in Huckleberryja Finna ter Twainov spominski svetilnik, prvič prižgan ob stoti obletnici pisateljevega rojstva.</p>
+<p><a href="/images/amerika/img_9655.jpg"><img src="/images/amerika/img_9655.jpg" alt="IMG_9655" title="IMG_9655"></a></p>
+<p><a href="/images/amerika/img_9657.jpg"><img src="/images/amerika/img_9657.jpg" alt="IMG_9657" title="IMG_9657"></a></p>
+<p><a href="/images/amerika/img_9667.jpg"><img src="/images/amerika/img_9667.jpg" alt="IMG_9667" title="IMG_9667"></a></p>
+<p><a href="/images/amerika/dsc0126.jpg"><img src="/images/amerika/dsc0126.jpg" alt="_DSC0126" title="_DSC0126"></a></p>
+<p><a href="/images/amerika/img_9671.jpg"><img src="/images/amerika/img_9671.jpg" alt="IMG_9671" title="IMG_9671"></a></p>
+<p><a href="/images/amerika/img_9672.jpg"><img src="/images/amerika/img_9672.jpg" alt="IMG_9672" title="IMG_9672"></a></p>
+<p><a href="/images/amerika/img_9677.jpg"><img src="/images/amerika/img_9677.jpg" alt="IMG_9677" title="IMG_9677"></a></p>
+<p>Cene vstopnic v muzej so bile rahlo zasoljene, preostala nam je alternativa – sprehod do svetilnika na hribu preko 240 stopnic po največji vročini. Na vrhu smo ugotovili, da je zaklenjen in ga od jeze, kot vsi ostali obiskovalci dosedaj, zvandalizirali s podpisi na zadnjo stran. Gospoda Lecterja ni bilo doma, tako da v Hannibalu nismo imeli več kaj dosti iskati.</p>
+<p>Ker smo imeli predvčerajšnjim zelo toplo izkušnjo s postankom v mestecu Flora, je tudi tokrat padel predlog, da se čisto po naključju ustavimo v kakem zakotnem mestu ob poti, morda pokramljamo z naključnim mimoidočim in predvsem použijemo pristen obed, ki ni pripravljen v kateri od hitroprehrambenih multinacionalk. Najprej smo ciljali na La Grange, ne na tistega <a href="http://www.youtube.com/watch?v=Vppbdf-qtGU">popularnega</a> v Texasu, temveč kar enega tukaj. Izkazalo se je, da gre le za nekaj hiš ob poti, brez pravega centra naselja, kamoli restavracije. Peljali smo se še malo naprej in pristali v Cantonu. Gospa Navigatorica je predlagala Billy Bob’s Steakhouse, kar je zvenelo slastno, a po nekaj krogih vožnje krčme nismo našli. Povprašali smo na črpalki, kamor je nekdo ravno parkiral kočijo, in gospodična nas je obvestila o preimenovanju lokala. Z njeno pomočjo ga nato ni bilo težko najti.</p>
+<p>Ob vstopu so nam namenili nekaj čudnih pogledov, še bolj so se zabavali ob našem medsebojnem pogovoru v nekem neznanem jeziku. Natakarica nas je brez oklevanja pobarala o našem geografskem izvoru, a povsem po pričakovanjuh za Slovenijo še ni slišala. Ob nadaljni razlagi je prišla do zaključka, da gotovo zato, ker v času našega odcepa od Jugoslavije pač ni več hodila v šolo. Potem je nekdo klical v gostilno, iščoč svoje vojaške prijatelje, in mi smo morali v zagovor jasno povedati, da nikakor nismo del inženirskega korpusa. Končno smo pokazali na nekaj hamburgerjev in zrezkov na ugodnem jedilnem listu ter si privezali prtičke okrog vratu.</p>
+<p><a href="/images/amerika/img_9699.jpg"><img src="/images/amerika/img_9699.jpg" alt="IMG_9699" title="IMG_9699"></a></p>
+<p><a href="/images/amerika/dsc0142.jpg"><img src="/images/amerika/dsc0142.jpg" alt="_DSC0142" title="_DSC0142"></a></p>
+<p><a href="/images/amerika/img_9707.jpg"><img src="/images/amerika/img_9707.jpg" alt="IMG_9707" title="IMG_9707"></a></p>
+<p><a href="/images/amerika/img_9711.jpg"><img src="/images/amerika/img_9711.jpg" alt="IMG_9711" title="IMG_9711"></a></p>
+<p><a href="/images/amerika/img_9712.jpg"><img src="/images/amerika/img_9712.jpg" alt="IMG_9712" title="IMG_9712"></a></p>
+<p><a href="/images/amerika/img_9714.jpg"><img src="/images/amerika/img_9714.jpg" alt="IMG_9714" title="IMG_9714"></a></p>
+<p><a href="/images/amerika/img_9716.jpg"><img src="/images/amerika/img_9716.jpg" alt="IMG_9716" title="IMG_9716"></a></p>
+<p>Nadaljevanje dialoga je potekalo v mednarodnem jeziku polnih krožnikov, s pomočjo katerega smo se izognili vsakršnemu konfliktu. Skrivno pogajalsko orožje v obliki Janezove motoristične brade smo tako prihranili za naslednji spopad in oštarijo zapustili z zglajenimi odnosi. Beli Chevrolet Malibu je zapeljal nazaj na avtocesto.</p>
+<p>Pred ciljem dneva nas je čakal še en turistični postanek, tokrat v Fort Madisonu. Kraj je menda zgodovinsko pomemben zaradi istoimenske trdnjave, ampak vsi vemo, koliko vojn so imeli Američani in kaj je posledično zanje velika reč. Ležerno smo se sprehodili okrog lesene barake, ki je bila povrhu vsega tudi zaklenjena, in se čez 10 minut nenavdušeni vrnili na cesto.</p>
+<p><a href="/images/amerika/dsc0150.jpg"><img src="/images/amerika/dsc0150.jpg" alt="_DSC0150" title="_DSC0150"></a></p>
+<p><a href="/images/amerika/dsc0156.jpg"><img src="/images/amerika/dsc0156.jpg" alt="_DSC0156" title="_DSC0156"></a></p>
+<p><a href="/images/amerika/img_9721.jpg"><img src="/images/amerika/img_9721.jpg" alt="IMG_9721" title="IMG_9721"></a></p>
+<p><a href="/images/amerika/img_9733.jpg"><img src="/images/amerika/img_9733.jpg" alt="IMG_9733" title="IMG_9733"></a></p>
+<p>Prevladalo je enotno mnenje, da se bo treba končno peljati do konca predvidene poti, a pri tem je ostalo le nekaj minut, nakar so se vmešali jezni mehurji. Po nekaj miljah smo počakali na bencinski črpalki, odtočili odpadne tekočine, pri pultu pa kupili par nadomestnih. Tako se nam je povsem po naključju zgodil še en filmski trenutek. Pločevinko piva ameriških dimenzij (skoraj 950 ml) so nam zapakirali v rjav škrnicelj in dodali vzgojno opozorilo, naj pijače v javnosti ne slačimo iz papirnate srajčke, saj bomo s tem kršili zakon. Edina korist vsega naštetega je bila, da smo se ob podajanju pijače na parkirišču počutili najstniško poredne.</p>
+<p><a href="/images/amerika/img_9756.jpg"><img src="/images/amerika/img_9756.jpg" alt="IMG_9756" title="IMG_9756"></a></p>
+<p><a href="/images/amerika/img_9762.jpg"><img src="/images/amerika/img_9762.jpg" alt="IMG_9762" title="IMG_9762"></a></p>
+<p><a href="/images/amerika/dsc0177.jpg"><img src="/images/amerika/dsc0177.jpg" alt="_DSC0177" title="_DSC0177"></a></p>
+<p>Krepčilo nam je dalo dovolj moči, da smo ob petih popoldne končno prispeli v <a href="http://en.wikipedia.org/wiki/Rock_Island,_Illinois">Rock Island</a>, otoško mesto med rokavi reke Mississippi. Večer smo preživeli mirno, ker je tukaj ob ponedeljkih vse zaprto. Nekaj časa je šlo za dosedaj najzabavnejši hotelski bazen s košarkarskimi koši in ostalo otroško ponudbo. Sledil je sprehod po mestu med sončnim zahodom, kratka vaja na klopi v parku in večerja v naključni gostilni, kjer so po naključju imeli hamburgerje za 2 dolarja in – glej no glej – točeno pivo za pol običajne cene. Pijano druščino pri sosednji mizi smo še poučili o Sloveniji, slavljenki zapeli Vse najboljše in odpeketali nazaj v hotel.</p>
+<p><a href="/images/amerika/img_9791.jpg"><img src="/images/amerika/img_9791.jpg" alt="IMG_9791" title="IMG_9791"></a></p>
+<p><a href="/images/amerika/dsc0198.jpg"><img src="/images/amerika/dsc0198.jpg" alt="_DSC0198" title="_DSC0198"></a></p>
+<p><a href="/images/amerika/dsc0204.jpg"><img src="/images/amerika/dsc0204.jpg" alt="_DSC0204" title="_DSC0204"></a></p>
+<p><a href="/images/amerika/dsc0207.jpg"><img src="/images/amerika/dsc0207.jpg" alt="_DSC0207" title="_DSC0207"></a></p>
+<p><a href="/images/amerika/dsc0223.jpg"><img src="/images/amerika/dsc0223.jpg" alt="_DSC0223" title="_DSC0223"></a></p>
+<p><a href="/images/amerika/img_9844.jpg"><img src="/images/amerika/img_9844.jpg" alt="IMG_9844" title="IMG_9844"></a></p>
+<p><a href="/images/amerika/dsc0234.jpg"><img src="/images/amerika/dsc0234.jpg" alt="_DSC0234" title="_DSC0234"></a></p>
+<p><a href="/images/amerika/img_9855.jpg"><img src="/images/amerika/img_9855.jpg" alt="IMG_9855" title="IMG_9855"></a></p>
+<p><a href="/images/amerika/dsc0253.jpg"><img src="/images/amerika/dsc0253.jpg" alt="_DSC0253" title="_DSC0253"></a></p>
+<p><a href="/images/amerika/img_9856.jpg"><img src="/images/amerika/img_9856.jpg" alt="IMG_9856" title="IMG_9856"></a></p>
+<p><a href="/images/amerika/img_9859.jpg"><img src="/images/amerika/img_9859.jpg" alt="IMG_9859" title="IMG_9859"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-29-nastop-v-st-louisu/">Nastop v St. Louisu</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-31-pozrtija-v-milwaukeeju/">Požrtija v Milwaukeeju</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-30-pot-v-rock-island/` was built on 2024-11-10T15:45:02.465Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Deveti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="deveti-dan">Deveti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-12">12. 8. 2009</time></li>
+</ul>
+
+<p>V toplem sredinem jutru smo si peli <a href="http://www.youtube.com/watch?v=cSICoacOT60">On the Road Again</a>, ker nas je čakal nov pretežno potovalen dan. Prebiti smo se morali z našega malega raja na Fraser Islandu do Byron Baya, predvidenega prenočišča do nadaljevanja potovanja.</p>
+<p><a href="/images/avstralija/dsc_9869.jpg"><img src="/images/avstralija/dsc_9869.jpg" alt="Na vlakcu pred hotelom, pripravljeni za odhod." title="DSC_9869"></a></p>
+<p><a href="/images/avstralija/dsc_9870.jpg"><img src="/images/avstralija/dsc_9870.jpg" alt="Nasvidenje, plaža, ki te najbrž ne bom več videl!" title="DSC_9870"></a></p>
+<p>Na otoku smo za zajtrk pojedli zadnje zaloge hrane, se počasi sprehodili do hotelskega kompleksa, zapeli nekaj pesmi za prisotne goste, ki so se kot mi vračali na celino in so nas poznali z včerajšnjega koncerta, potem pa nas je vlakec odpeljal do pomola. Prestopili smo na katamaran in slabe pol urice pluli do pristanišča na drugem koncu, kjer so nas zvesto čakali naši avtomobili.</p>
+<p><a href="/images/avstralija/dsc_9898.jpg"><img src="/images/avstralija/dsc_9898.jpg" alt="Desni pas, to je špas." title="DSC_9898"></a></p>
+<p><a href="/images/avstralija/dsc_9908.jpg"><img src="/images/avstralija/dsc_9908.jpg" alt="Lep razgled z mosta v Brisbaneu, po katerem bi se, če bi Claire v GPS-u znala navigirati, sploh ne smeli peljati." title="DSC_9908"></a></p>
+<p>Pot je potekala brez večjih težav, našo karavano so tu in tam ločili le neusklajeni semaforji. Tu in tam smo se ustavili, izpraznili mehurje, izropali bližnjo restavracijo s hitro hrano, nato pa se vrnili k poslušanju glasbe, ugibanju oseb in kinkanju v jeklenih konjičkih (slednji aktivnosti k sreči ni podlegel noben od voznikov).</p>
+<p><a href="/images/avstralija/dsc_9922.jpg"><img src="/images/avstralija/dsc_9922.jpg" alt="Pozerski ptič na počivališču." title="DSC_9922"></a></p>
+<p>Kot vedno panoramska vožnja se je (presenetljivo) brez orientacijskih težav končala ob šestih popoldne s prihodom v Byron Bay. Recepcija naših apartmajev je bila že zaprta in ključi so nas čakali v sefu pred vhodom. Po razgledovanju smo naleteli na manjše težave, v eni izmed sob smo zalotili poredno čistilko, v drugo pa je naš Žare po pomoti zaklenil ključe, zato je morala gospa z recepcije kljub temu, da se je že veselila zgodnjega spanca, priti nazaj do apartmajev.</p>
+<p><a href="/images/avstralija/dsc_9926.jpg"><img src="/images/avstralija/dsc_9926.jpg" alt="Zmedeno gledamo naokrog, ker nam ni jasno, da smo zaklenjeni ven." title="DSC_9926"></a></p>
+<p><a href="/images/avstralija/dsc_9937.jpg"><img src="/images/avstralija/dsc_9937.jpg" alt="Janez testira didgeridoo." title="DSC_9937"></a></p>
+<p><a href="/images/avstralija/dsc_9941.jpg"><img src="/images/avstralija/dsc_9941.jpg" alt="Kupec dneva se fotografira s prodajalcema." title="DSC_9941"></a></p>
+<p>Med vso kolobocijo se je izgubil in spet našel prijatelj Miha Hliš, a k sreči smo do dvajsete ure uspeli rešiti vse težave. V 500 metrov oddaljenem Woolworthsu smo na povsem neintuitivni samopostrežni blagajni nakupili nekaj pripravnih prehrambenih proizvodov in večerjo užili na terasi ob bazenu. Siti in spokojni smo odpeli krajši koncert, nad katerim so bili gosti kompleksa navdušeni, uprava pa je z veseljem spregledala blažjo kršitev nočnega miru.</p>
+<p><a href="/images/avstralija/dsc_9949.jpg"><img src="/images/avstralija/dsc_9949.jpg" alt="Tudi naključni mimoidoči gledalci so bili pozitivno presenečeni." title="DSC_9949"></a></p>
+<p>Za zamudo z objavo se opravičujemo, internet je bil kot vedno problematičen.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-11-osmi-dan/">Osmi dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-13-deseti-dan/">Deseti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-12-deveti-dan/` was built on 2024-11-10T15:45:02.467Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Koncert v cerkvi svetega Cirila in balkanski večer</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="koncert-v-cerkvi-svetega-cirila-in-balkanski-vecer">Koncert v cerkvi svetega Cirila in balkanski večer</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-17">17. 8. 2011</time></li>
+</ul>
+
+<p>Zadnji dan v New Yorku se je pričel lenobno. Najzgodnejše ptičice so si Central park ogledale znova, v lepšem vremenu, in uživale v predstavitvi korejske kulture. Nekateri so šli kupovat oblačila, drugi klavir, spet tretji so ležali doma. Potem so se skupine premešale in destinacije so se zamenjale, eni so iskali Brooklyn, drugi pa rdečo Adidas jopico. Pri tem je prišlo do odkritja, da en od članov okteta prikriva veliko skrivnost – lastno trgovino v New Yorku.</p>
+<p><a href="/images/amerika/img_7199.jpg"><img src="/images/amerika/img_7199.jpg" alt="IMG_7199" title="IMG_7199"></a></p>
+<p><a href="/images/amerika/img_7192.jpg"><img src="/images/amerika/img_7192.jpg" alt="IMG_7192" title="IMG_7192"></a></p>
+<p><a href="/images/amerika/img_7177.jpg"><img src="/images/amerika/img_7177.jpg" alt="IMG_7177" title="IMG_7177"></a></p>
+<p><a href="/images/amerika/dsc8005.jpg"><img src="/images/amerika/dsc8005.jpg" alt="_DSC8005" title="_DSC8005"></a></p>
+<p>V celoto smo se povezali šele ob šestih popoldne na alternativno izgledajoči ulici, imenovani St Mark’s place. Tam se namreč nahaja cerkev svetega Cirila, v kateri smo imeli večerni koncert za Njujorčane. Pater Krizolog (prikladno ime za nekoga, ki se mora ukvarjati z nami) nas je spustil naprej in na generalki smo preizkusili akustiko prostora.</p>
+<p><a href="/images/amerika/img_7233.jpg"><img src="/images/amerika/img_7233.jpg" alt="IMG_7233" title="IMG_7233"></a></p>
+<p><a href="/images/amerika/img_7278.jpg"><img src="/images/amerika/img_7278.jpg" alt="IMG_7278" title="IMG_7278"></a></p>
+<p><a href="/images/amerika/img_7236.jpg"><img src="/images/amerika/img_7236.jpg" alt="IMG_7236" title="IMG_7236"></a></p>
+<p><a href="/images/amerika/img_7238.jpg"><img src="/images/amerika/img_7238.jpg" alt="IMG_7238" title="IMG_7238"></a></p>
+<p>Odziv na koncert je bil morda manjši kot v Washingtonu D. C., a je bilo tokrat v publiki več Slovencev. Po koncertu smo se zaklepetali v dvorani v kletnih prostorih, popili nekaj kozarčkov slovenskega vina, nakar je naš gostitelj, prej omenjeni pater, priskrbel pice, ki jih menda že leta izvrstno pečeta dva črnogorska albanca z gostinskim obratom v bližini.</p>
+<p><a href="/images/amerika/img_7244.jpg"><img src="/images/amerika/img_7244.jpg" alt="IMG_7244" title="IMG_7244"></a></p>
+<p>Spustil se je mrak, ulica je zaživela in mi je nismo hoteli zapustiti. Domačini so nam priporočali nekaj lokalov, a je bila v vseh gneča. Dokler nismo prišli do malo preveč znanega napisa v cirilici. Kafana.</p>
+<p><a href="/images/amerika/dsc8023.jpg"><img src="/images/amerika/dsc8023.jpg" alt="_DSC8023" title="_DSC8023"></a></p>
+<p><a href="/images/amerika/dsc8024.jpg"><img src="/images/amerika/dsc8024.jpg" alt="_DSC8024" title="_DSC8024"></a></p>
+<p>Tam je bilo vse znano. Zadebatirali smo se, popili kakšno rakijo in kakšno Nikšičko, se z bivšimi in sedanjimi sonarodnjaki pogovarjali o tem, ali je boljše tu ali tam, kaj je v Ameriki drago in kaj pogrešajo. Starejši gospodje so pripovedovali življenjske zgodbe, mlajši so pokomentirali nekaj kratkih let, odkar so v ZDA. Eden od obiskovalcev koncerta je nato še povedal, da če vzameš 5 Slovencev, dobiš 3 pevske zbore, če pa vzameš 5 Srbov, pa 4 politične stranke.</p>
+<p>Navdušil nas je simpatično dekoriran WC v Kafani, malce manj pa pomanjkanje pregovorne gostoljubnosti kolegov Srbov, ki so kljub našem veselem prepevanju drago zaračunali prav vse do zadnje popite kapljice. Ampak tako pač je, če si v Ameriki.</p>
+<p><a href="/images/amerika/dsc8027.jpg"><img src="/images/amerika/dsc8027.jpg" alt="_DSC8027" title="_DSC8027"></a></p>
+<p><a href="/images/amerika/dsc8029.jpg"><img src="/images/amerika/dsc8029.jpg" alt="_DSC8029" title="_DSC8029"></a></p>
+<p><a href="/images/amerika/img_7256.jpg"><img src="/images/amerika/img_7256.jpg" alt="IMG_7256" title="IMG_7256"></a></p>
+<p><a href="/images/amerika/img_7259.jpg"><img src="/images/amerika/img_7259.jpg" alt="IMG_7259" title="IMG_7259"></a></p>
+<p><a href="/images/amerika/img_7269.jpg"><img src="/images/amerika/img_7269.jpg" alt="IMG_7269" title="IMG_7269"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-16-len-dan-v-central-parku/">Len dan v Central parku</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-18-prvi-dan-bostona/">Prvi dan Bostona</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-17-koncert-v-cerkvi-svetega-cirila-in-balkanski-vecer/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

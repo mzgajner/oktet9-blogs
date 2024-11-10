@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Washington D. C.</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="washington-d-c">Washington D. C.</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-11">11. 8. 2011</time></li>
+</ul>
+
+<p>Današnje jutro se je pričelo stresno. Po noči v Miamiju kar nismo hoteli vstati, s težavo smo našli mesto za vračilo najetih avtomobilov na letališču in za polnjenje bencinskega rezervoarja pred oddajo naredili nekaj grdih cestnih prekrškov. Šlo je na tesno, ampak v končni fazi smo se vendarle vsi znašli na letalu za Washington D. C.</p>
+<p>Po pristanku je bila prva stvar, ki smo jo zapazili, človeško vreme. Relativna vlaga ni stoodstotna, temperature so nižje od trideset stopinj Celzija - juhej, juhej! Po nas je prišel kombi in nas odpeljal do lepega hotela, kjer so najbolj utrujeni popadali v postelje, naspani pa smo se podali na ogled mesta. Za začetek smo prigriznili lokalni sendvič in v Starbucksu poiskali internete, da bi si izbrali lokacije za obisk.</p>
+<p><a href="/images/amerika/dsc7224.jpg"><img src="/images/amerika/dsc7224.jpg" alt="_DSC7224" title="_DSC7224"></a></p>
+<p><a href="/images/amerika/dsc7229.jpg"><img src="/images/amerika/dsc7229.jpg" alt="_DSC7229" title="_DSC7229"></a></p>
+<p>Odločili smo se za najbolj tipično turistično varianto. Za začetek smo se sprehodili do Bele hiše in naprej do največjega penisa v ZDA, bolje znanega kot Washington monument. Od tam smo krenili vzhodno, proti praktično vsem muzejem, ki jih človek lahko vidi tukaj. V Hirshhorn museumu smo pogledali par razstav sodobne fotografije, nekaj video inštalacij in skulpture okrog cele muzejske zgradbe. V National Air and Space Museumu smo še enkrat izvedeli vse o superiornosti NASE (četudi so še streljali šimpanze v orbito, ko je Gagarin že gavaril iz kozmosa), vozili strašansko nategunski letalski simulator za osem dolarjev in gledali pilotske kabine potniških avionov.</p>
+<p><a href="/images/amerika/dsc7244.jpg"><img src="/images/amerika/dsc7244.jpg" alt="_DSC7244" title="_DSC7244"></a></p>
+<p><a href="/images/amerika/dsc7247.jpg"><img src="/images/amerika/dsc7247.jpg" alt="_DSC7247" title="_DSC7247"></a></p>
+<p><a href="/images/amerika/dsc7257.jpg"><img src="/images/amerika/dsc7257.jpg" alt="_DSC7257" title="_DSC7257"></a></p>
+<p><a href="/images/amerika/dsc7284.jpg"><img src="/images/amerika/dsc7284.jpg" alt="_DSC7284" title="_DSC7284"></a></p>
+<p><a href="/images/amerika/dsc7312.jpg"><img src="/images/amerika/dsc7312.jpg" alt="_DSC7312" title="_DSC7312"></a></p>
+<p><a href="/images/amerika/dsc7313.jpg"><img src="/images/amerika/dsc7313.jpg" alt="_DSC7313" title="_DSC7313"></a></p>
+<p><a href="/images/amerika/dsc7323.jpg"><img src="/images/amerika/dsc7323.jpg" alt="_DSC7323" title="_DSC7323"></a></p>
+<p>Potem smo, izmikajoč se igralcem softballa, krenili v nasprotno smer, proti zahajajočemu soncu in vsem spomenikom Washingtona, od že omenjenega faličnega, pa do Lincolnovega in tistega za veterane Korejske vojne. Napol fascinantno in epskih razsežnosti, napol utrujajoče zaradi nadležnega kompleksa superiornosti in odnosa ne-može-nam-niko-ništa. Za povedati bolj malo, več se vidi s fotografij.</p>
+<p><a href="/images/amerika/dsc7332.jpg"><img src="/images/amerika/dsc7332.jpg" alt="_DSC7332" title="_DSC7332"></a></p>
+<p><a href="/images/amerika/dsc7342.jpg"><img src="/images/amerika/dsc7342.jpg" alt="_DSC7342" title="_DSC7342"></a></p>
+<p><a href="/images/amerika/dsc7351.jpg"><img src="/images/amerika/dsc7351.jpg" alt="_DSC7351" title="_DSC7351"></a></p>
+<p><a href="/images/amerika/dsc7360.jpg"><img src="/images/amerika/dsc7360.jpg" alt="_DSC7360" title="_DSC7360"></a></p>
+<p><a href="/images/amerika/dsc7386.jpg"><img src="/images/amerika/dsc7386.jpg" alt="_DSC7386" title="_DSC7386"></a></p>
+<p><a href="/images/amerika/dsc7388.jpg"><img src="/images/amerika/dsc7388.jpg" alt="_DSC7388" title="_DSC7388"></a></p>
+<p><a href="/images/amerika/dsc7396.jpg"><img src="/images/amerika/dsc7396.jpg" alt="_DSC7396" title="_DSC7396"></a></p>
+<p><a href="/images/amerika/dsc7417.jpg"><img src="/images/amerika/dsc7417.jpg" alt="_DSC7417" title="_DSC7417"></a></p>
+<p><a href="/images/amerika/dsc7432.jpg"><img src="/images/amerika/dsc7432.jpg" alt="_DSC7432" title="_DSC7432"></a></p>
+<p><a href="/images/amerika/dsc7451.jpg"><img src="/images/amerika/dsc7451.jpg" alt="_DSC7451" title="_DSC7451"></a></p>
+<p><a href="/images/amerika/dsc7469.jpg"><img src="/images/amerika/dsc7469.jpg" alt="_DSC7469" title="_DSC7469"></a></p>
+<p>Prehojena kilometrina je seveda terjala davek. Stopala so bila izmučena in želodci so nejevoljno pokruljevali. Sledili smo nosovom in poskušali poiskati dopoldne na internetu najdeno restavracijo, nato pa po slučaju našli po mnenju mnogih gastrokritikov nesramno dobre hamburgerje in domač pomfri. Njam.</p>
+<p><a href="/images/amerika/dsc7483.jpg"><img src="/images/amerika/dsc7483.jpg" alt="_DSC7483" title="_DSC7483"></a></p>
+<p><a href="/images/amerika/dsc7485.jpg"><img src="/images/amerika/dsc7485.jpg" alt="_DSC7485" title="_DSC7485"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-10-miami/">Miami</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-12-pevski-dan-v-washingtonu-d-c/">Pevski dan v Washingtonu D. C.</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-11-washington-d-c/` was built on 2024-11-10T15:45:02.462Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

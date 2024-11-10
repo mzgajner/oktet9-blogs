@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Iz inata</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="iz-inata">Iz inata</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2012-07-25">25. 7. 2012</time></li>
+</ul>
+
+<p><a href="/images/balkan/1-img_5852.jpg"><img src="/images/balkan/1-img_5852.jpg" alt="" title="1-IMG_5852"></a></p>
+<p>Danes smo lahko spančkali malce dlje, a vseeno ne predolgo, ker smo se (kar je bilo že omenjeno) oni dan s tukajšnjim slovenskim ambasadorjem dogovorili za obisk. Od našega apartmaja na Baščaršiji smo pot do ambasade prehodili v desetih minutkah in gospod Andrej Graselli nas je že pozdravljal pri vratih. Posedli smo se za mizo, popili kavico in malce poklepetali o aktualnem dogajanju. Včerajšnje nogometne izgrede so občutili tudi na predstavništvu Republike Slovenije; lokalne oblasti so jim poslale dodatne policijske sile za zaščito objekta. Izvedeli smo nekaj zanimivih podrobnosti o ureditvi države, birokratskih problemih z razdrobljenostjo politične ureditve po kantonih ter nasprotujočih si interesih posameznih manjšin v državi. Ambasadorju smo predali darilo in se slikali, nato pa nas je moral odsloviti, bojda zaradi prihajajočega obiska Ban Ki Muna - generalni sekretar ZN je trenutno (tako kot mi) na turneji po Balkanu.</p>
+<p><a href="/images/balkan/2-img_5872.jpg"><img src="/images/balkan/2-img_5872.jpg" alt=""></a>
+<a href="/images/balkan/3-img_5875.jpg"><img src="/images/balkan/3-img_5875.jpg" alt=""></a>
+<a href="/images/balkan/4-img_5878.jpg"><img src="/images/balkan/4-img_5878.jpg" alt=""></a></p>
+<p><em>Inat</em> je beseda, ki je v slovarju slovenskega knjižnega jezika sicer ni, je pa prav gotovo integralni del karakterja vsakega od oktetovcev (ciljamo predvsem na <em>inatljiv</em> oz. <em>trmoglav</em>). Ampak naš današnji inat je bil nekaj drugega - del imena priljubljene restavracije <em>Inat kuča</em>, ki se nahaja le par 100 metrov stran od slovenske ambasade, na nasprotnem bregu Miljacke. V oštariji, kjer so cene zaradi lokacije in ugleda sicer malce bolj evropske, strežejo pristno bosansko hrano, česar smo se neizmerno veselili. Nekaj minut po naročilu so pred vsakega od nas postavili krožnik z mešanico polnjene paprike, dveh sort sarm (ena v zeljnem, druga v trtinem listu), polnjenih čebulic, šiš čevapov in se parih reči, katerih imen si nismo zapomnili. Po 200 čevapčičih je bilo ekstremno blagodejno pomočiti domač kruh v nekaj malce bolj zelenjavnega (mamice bodo ponosne), ob tem pa smo segali še v glineno posodo z bosanskim loncem. Poslastica je prešibka beseda za opis takšne izkušnje.</p>
+<p><a href="/images/balkan/6-img_5934.jpg"><img src="/images/balkan/6-img_5934.jpg" alt="" title="6-IMG_5934"></a></p>
+<p>S polnimi želodci smo se le stežka premaknili do prodajalne bakrenih džezvic in se opremili za pripravo pristne turške kave, potem pa se vrnili domov, na počitek.</p>
+<p><a href="/images/balkan/5-img_5897.jpg"><img src="/images/balkan/5-img_5897.jpg" alt="" title="5-img_5897"></a></p>
+<p>Poslednji dan v Sarajevu je gastronomsko-uživaško naravnan, zgodnjo večerjo smo opravili v kultni čevabđinici Željo, kjer je bil obrok, presenetljivo, malce bolj industrijski kot v prej preizkušenih, malce bolj podtalnih ustanovah, ampak še vedno zelo zadovoljiv. Obilno kosilo je malce ustavilo apetite, tako da tokrat na števec čevap števec dodajamo samo 30 komadov. Pohod smo nadaljevali v slaščičarni Sarajbosna, na nekaj različnih vrstah baklave, zdaj pa v mraku sedimo razporejeni okrog dveh šiš in srkamo bezgov sok. Res lepo slovo od Sarajeva; jutri zjutraj namreč krenemo v smeri Neuma.</p>
+<p><a href="/images/balkan/7-img_5942.jpg"><img src="/images/balkan/7-img_5942.jpg" alt="" title="7-img_5942"></a>
+<a href="/images/balkan/8-img_5977.jpg"><img src="/images/balkan/8-img_5977.jpg" alt="" title="8-img_5977"></a>
+<a href="/images/balkan/9-img_5978.jpg"><img src="/images/balkan/9-img_5978.jpg" alt="" title="9-img_5978"></a></p>
+<p>Hvala vam za vse dosedanje komentarje in pohvalno visok obisk bloga. Upamo, da ste zadovoljni z dosedanjim poročanjem, mi smo se že pozanimali o možnostih mobilnega interneta na Hrvaškem, tako da vam lahko obljubimo redno javljanje z Jadrana, kjer ne bomo več odvisni od lokalov z brezplačnih wirelessom. Sporočite, če kaj pogrešate.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/balkan/2012-07-24-iz-dezja-pod-kap/">Iz dežja pod kap</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/balkan/2012-07-26-na-morje/">Na morje</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/balkan/2012-07-25-iz-inata/` was built on 2024-11-10T15:45:02.459Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Prvi dan Bostona</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="prvi-dan-bostona">Prvi dan Bostona</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-18">18. 8. 2011</time></li>
+</ul>
+
+<p>Po včerajšnji prekrokani noči je bilo danes zjutraj kar malce nadležno vstati, a morali smo. okrog poldneva je namreč odpeljal vlak proti Bostonu, ki ga je bilo treba ujeti. Štiri ure vožnje so se izkazale kot zelo prikladne za krajši dremež.</p>
+<p><a href="/images/amerika/img_7325.jpg"><img src="/images/amerika/img_7325.jpg" alt="IMG_7325" title="IMG_7325"></a></p>
+<p><a href="/images/amerika/img_7328.jpg"><img src="/images/amerika/img_7328.jpg" alt="IMG_7328" title="IMG_7328"></a></p>
+<p><a href="/images/amerika/img_7329.jpg"><img src="/images/amerika/img_7329.jpg" alt="IMG_7329" title="IMG_7329"></a></p>
+<p><a href="/images/amerika/img_7330.jpg"><img src="/images/amerika/img_7330.jpg" alt="IMG_7330" title="IMG_7330"></a></p>
+<p><a href="/images/amerika/img_7331.jpg"><img src="/images/amerika/img_7331.jpg" alt="IMG_7331" title="IMG_7331"></a></p>
+<p><a href="/images/amerika/img_7333.jpg"><img src="/images/amerika/img_7333.jpg" alt="IMG_7333" title="IMG_7333"></a></p>
+<p>Že takoj po prihodu nam je postalo jasno, da bo za razliko od napornega New Yorka Boston pravi oddih. Od postaje smo do naše namestitve pešačili le kakih 15 minut in bili navdušeni nad simpatično stanovanjsko hišo v četrti Beacon Hill. Skočili smo v četrti primerno pregrešno drago trgovino in nabavili za par obrokov hrane, nato pa siti in veseli šli na sprehod.</p>
+<p><a href="/images/amerika/img_7367.jpg"><img src="/images/amerika/img_7367.jpg" alt="IMG_7367" title="IMG_7367"></a></p>
+<p><a href="/images/amerika/dsc8080.jpg"><img src="/images/amerika/dsc8080.jpg" alt="_DSC8080" title="_DSC8080"></a></p>
+<p><a href="/images/amerika/dsc8085.jpg"><img src="/images/amerika/dsc8085.jpg" alt="_DSC8085" title="_DSC8085"></a></p>
+<p><a href="/images/amerika/dsc8087.jpg"><img src="/images/amerika/dsc8087.jpg" alt="_DSC8087" title="_DSC8087"></a></p>
+<p><a href="/images/amerika/dsc8092.jpg"><img src="/images/amerika/dsc8092.jpg" alt="_DSC8092" title="_DSC8092"></a></p>
+<p><a href="/images/amerika/img_7341.jpg"><img src="/images/amerika/img_7341.jpg" alt="IMG_7341" title="IMG_7341"></a></p>
+<p><a href="/images/amerika/img_7343.jpg"><img src="/images/amerika/img_7343.jpg" alt="IMG_7343" title="IMG_7343"></a></p>
+<p><a href="/images/amerika/img_7351.jpg"><img src="/images/amerika/img_7351.jpg" alt="IMG_7351" title="IMG_7351"></a></p>
+<p><a href="/images/amerika/img_7354.jpg"><img src="/images/amerika/img_7354.jpg" alt="IMG_7354" title="IMG_7354"></a></p>
+<p><a href="/images/amerika/img_7359.jpg"><img src="/images/amerika/img_7359.jpg" alt="IMG_7359" title="IMG_7359"></a></p>
+<p>Prej omenjeno bolj sproščujoče vzdušje v primerjavi z New Yorkom je videti na vsakem koraku. Avtomobilov je manj, tišine je več, ljudje hodijo počasneje in ulice so bolj prazne. Naš sprehod se je začel v parku, kjer se je ogromna množica zbrala na koncertu <a href="http://www.landmarksorchestra.org/">Boston Landmarks Orchestra</a>. Ob klasični glasbi v ozadju smo se navduševali nad igro svetlobe z vodo med sončnim zahodom.</p>
+<p><a href="/images/amerika/dsc8100.jpg"><img src="/images/amerika/dsc8100.jpg" alt="_DSC8100" title="_DSC8100"></a></p>
+<p><a href="/images/amerika/dsc8114.jpg"><img src="/images/amerika/dsc8114.jpg" alt="_DSC8114" title="_DSC8114"></a></p>
+<p><a href="/images/amerika/img_7392.jpg"><img src="/images/amerika/img_7392.jpg" alt="IMG_7392" title="IMG_7392"></a></p>
+<p><a href="/images/amerika/dsc8118.jpg"><img src="/images/amerika/dsc8118.jpg" alt="_DSC8118" title="_DSC8118"></a></p>
+<p><a href="/images/amerika/dsc8126.jpg"><img src="/images/amerika/dsc8126.jpg" alt="_DSC8126" title="_DSC8126"></a></p>
+<p><a href="/images/amerika/dsc8136.jpg"><img src="/images/amerika/dsc8136.jpg" alt="_DSC8136" title="_DSC8136"></a></p>
+<p>Nato smo krenili proti vzhodu, do pomolov v North Endu. Iskali smo gostilno, kjer bi počili, pa so nas odslovili, češ da lokalna zakonodaja narekuje obvezno kazanje potnega lista za naročilo piva. In ne, osebna izkaznica ali karkoli podobnega s fotografijo in rojstnim datumom pač ne velja.</p>
+<p><a href="/images/amerika/img_7414.jpg"><img src="/images/amerika/img_7414.jpg" alt="IMG_7414" title="IMG_7414"></a></p>
+<p><a href="/images/amerika/dsc8150.jpg"><img src="/images/amerika/dsc8150.jpg" alt="_DSC8150" title="_DSC8150"></a></p>
+<p><a href="/images/amerika/dsc8167.jpg"><img src="/images/amerika/dsc8167.jpg" alt="_DSC8167" title="_DSC8167"></a></p>
+<p><a href="/images/amerika/dsc8174.jpg"><img src="/images/amerika/dsc8174.jpg" alt="_DSC8174" title="_DSC8174"></a></p>
+<p>Tako smo naredili samo še nekaj nočnih fotografij ter se mimo osrednje upravne stavbe zvezne države (<a href="http://en.wikipedia.org/wiki/Massachusetts_State_House">Massachusetts State House</a>) in kultnega lokala iz serije <a href="http://en.wikipedia.org/wiki/Cheers">Cheers</a> vrnili domov. Spat.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-17-koncert-v-cerkvi-svetega-cirila-in-balkanski-vecer/">Koncert v cerkvi svetega Cirila in balkanski večer</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-19-spectacle-in-georges-island-ter-jastog/">Spectacle in Georges Island ter jastog</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-18-prvi-dan-bostona/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

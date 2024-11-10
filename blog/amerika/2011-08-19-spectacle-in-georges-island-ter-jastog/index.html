@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Spectacle in Georges Island ter jastog</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="spectacle-in-georges-island-ter-jastog">Spectacle in Georges Island ter jastog</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-19">19. 8. 2011</time></li>
+</ul>
+
+<p>V zvezni državi Massachusetts kot tujec brez potnega lista ne moreš kupiti piva. To smo vam povedali že včeraj. Zamolčali pa smo vam drugo podrobnost. Bivši minister Keber ima v teh koncih somišljenike. Namreč, pasoš gor ali dol – po enajsti uri se v trgovini ne da več kupiti piva. Tako smo šli spat hitro in v dobrem stanju.</p>
+<p>In posledično vstali sveži in zgodaj. Po zajtrku smo se vnovič sprehodili ob obali, tokrat bolj vzhodno kot včeraj, ter odločili, da se podamo na turistično križarjenje po bližnjih pristaniških otokih oz. <a href="http://en.wikipedia.org/wiki/Boston_Harbor_Islands_National_Recreation_Area">Boston Harbor Islands</a>. Turistična ladjica nas je prijetno hitro odpeljala od pristanišča do prve postaje, <a href="http://en.wikipedia.org/wiki/Spectacle_Island_(Massachusetts)">Spectacle Islanda</a>.</p>
+<p><a href="/images/amerika/dsc8278.jpg"><img src="/images/amerika/dsc8278.jpg" alt="_DSC8278" title="_DSC8278"></a></p>
+<p><a href="/images/amerika/img_7516.jpg"><img src="/images/amerika/img_7516.jpg" alt="IMG_7516" title="IMG_7516"></a></p>
+<p><a href="/images/amerika/img_7525.jpg"><img src="/images/amerika/img_7525.jpg" alt="IMG_7525" title="IMG_7525"></a></p>
+<p><a href="/images/amerika/img_7527.jpg"><img src="/images/amerika/img_7527.jpg" alt="IMG_7527" title="IMG_7527"></a></p>
+<p><a href="/images/amerika/img_7590.jpg"><img src="/images/amerika/img_7590.jpg" alt="IMG_7590" title="IMG_7590"></a></p>
+<p>Čudovit zelen otoček je opremljen s pristaniščem, gostilnico in plažo, slednjo smo napadli najprej. Prvič, odkar smo v ZDA, smo izkusili vodo zmerne temperature (okrog 20 stopinj Celzija) in bili strašansko navdušeni. Osveženi smo se podali na pohod po sprehajalni poti, ob kateri smo se vsake toliko ustavili in sedli na praktično klopco ali v senco še praktičnejšega paviljončka. Fotografije so večinoma samoeksplanatorne, pozorni bodite le na hrvaški raketni silos ter mladiča užitnega floridskega modrasa, ki v poletnih mesecih migrira sem.</p>
+<p><a href="/images/amerika/dsc8298.jpg"><img src="/images/amerika/dsc8298.jpg" alt="_DSC8298" title="_DSC8298"></a></p>
+<p><a href="/images/amerika/img_7535.jpg"><img src="/images/amerika/img_7535.jpg" alt="IMG_7535" title="IMG_7535"></a></p>
+<p><a href="/images/amerika/img_7553.jpg"><img src="/images/amerika/img_7553.jpg" alt="IMG_7553" title="IMG_7553"></a></p>
+<p><a href="/images/amerika/img_7545.jpg"><img src="/images/amerika/img_7545.jpg" alt="IMG_7545" title="IMG_7545"></a></p>
+<p><a href="/images/amerika/img_7547.jpg"><img src="/images/amerika/img_7547.jpg" alt="IMG_7547" title="IMG_7547"></a></p>
+<p><a href="/images/amerika/img_7555.jpg"><img src="/images/amerika/img_7555.jpg" alt="IMG_7555" title="IMG_7555"></a></p>
+<p><a href="/images/amerika/img_7565.jpg"><img src="/images/amerika/img_7565.jpg" alt="IMG_7565" title="IMG_7565"></a></p>
+<p><a href="/images/amerika/img_7569.jpg"><img src="/images/amerika/img_7569.jpg" alt="IMG_7569" title="IMG_7569"></a></p>
+<p><a href="/images/amerika/img_7571.jpg"><img src="/images/amerika/img_7571.jpg" alt="IMG_7571" title="IMG_7571"></a></p>
+<p><a href="/images/amerika/dsc8350.jpg"><img src="/images/amerika/dsc8350.jpg" alt="_DSC8350" title="_DSC8350"></a></p>
+<p>Izčrpljujoč sprehod smo sklenili z ohlajenimi gaziranimi pijačami iz prej omenjene edine gostilne ter se zleknili na grozovito udobne ležalnike.</p>
+<p><a href="/images/amerika/dsc8356.jpg"><img src="/images/amerika/dsc8356.jpg" alt="_DSC8356" title="_DSC8356"></a></p>
+<p><a href="/images/amerika/img_7592.jpg"><img src="/images/amerika/img_7592.jpg" alt="IMG_7592" title="IMG_7592"></a></p>
+<p>Turistična ladjica se je vrnila in nas premaknila na drugi otok, ki je bil danes na jedilniku, <a href="http://en.wikipedia.org/wiki/Georges_Island_(Massachusetts)">Georges Island</a>. Za razliko od naravnih dobrin, videnih na Spectacle Islandu, je bilo tu več človeških kreacij. Na njem se namreč nahaja Fort Warren, obalna utrdba, namenjena obrambi pred napadom z morja. No, tako je vsaj nekdaj bilo, zdaj je vse skupaj že zdavnaj v vojaškem smislu neuporabno, tako da je trdnjava odprta za turiste. Mi smo si jo v miru ogledali, si podajali frizbi in naredili par simpatičnih fotografij.</p>
+<p><a href="/images/amerika/dsc8429.jpg"><img src="/images/amerika/dsc8429.jpg" alt="_DSC8429" title="_DSC8429"></a></p>
+<p><a href="/images/amerika/dsc8470.jpg"><img src="/images/amerika/dsc8470.jpg" alt="_DSC8470" title="_DSC8470"></a></p>
+<p><a href="/images/amerika/img_7620.jpg"><img src="/images/amerika/img_7620.jpg" alt="IMG_7620" title="IMG_7620"></a></p>
+<p>Pred odhodom se je nekaj junakov vnovič odpravilo v vodo, a jih je občinski redar nemudoma opozoril, da je na tem mestu kopanje nevarno in prepovedano, tako da so poklapani in mokri pricapljali nazaj na kopno. Nekaj čakanja in še eno pijačo kasneje je bila ladjica spet tu.</p>
+<p><a href="/images/amerika/img_7654.jpg"><img src="/images/amerika/img_7654.jpg" alt="IMG_7654" title="IMG_7654"></a></p>
+<p><a href="/images/amerika/dsc8481.jpg"><img src="/images/amerika/dsc8481.jpg" alt="_DSC8481" title="_DSC8481"></a></p>
+<p><a href="/images/amerika/dsc8489.jpg"><img src="/images/amerika/dsc8489.jpg" alt="_DSC8489" title="_DSC8489"></a></p>
+<p><a href="/images/amerika/dsc8494.jpg"><img src="/images/amerika/dsc8494.jpg" alt="_DSC8494" title="_DSC8494"></a></p>
+<p>Na kopnem so naši želodci udarili po mizi in rekli, da je tega morskega premetavanja sem in tja brez, da bi pri tem kaj pojedli, dovolj. Njihovemu pritisku se ni bilo možno upreti, zakoračili smo ob obali in poiskali priljubljen lokal po imenu <a href="http://www.barkingcrab.com/">Barking Crab</a>, kjer smo se po zelo ugodnih cenah naužili jastogov in drugih sort rakov. Mljac.</p>
+<p><a href="/images/amerika/dsc8515.jpg"><img src="/images/amerika/dsc8515.jpg" alt="_DSC8515" title="_DSC8515"></a></p>
+<p><a href="/images/amerika/dsc8527.jpg"><img src="/images/amerika/dsc8527.jpg" alt="_DSC8527" title="_DSC8527"></a></p>
+<p><a href="/images/amerika/dsc8539.jpg"><img src="/images/amerika/dsc8539.jpg" alt="_DSC8539" title="_DSC8539"></a></p>
+<p><a href="/images/amerika/img_7677.jpg"><img src="/images/amerika/img_7677.jpg" alt="IMG_7677" title="IMG_7677"></a></p>
+<p><a href="/images/amerika/img_7680.jpg"><img src="/images/amerika/img_7680.jpg" alt="IMG_7680" title="IMG_7680"></a></p>
+<p><a href="/images/amerika/img_7687.jpg"><img src="/images/amerika/img_7687.jpg" alt="IMG_7687" title="IMG_7687"></a></p>
+<p>No, in zdaj smo doma. Včerajšnjo lekcijo smo si še kako dobro zapomnili in danes pravočasno in z vso potrebno dokumentacijo kupili pivo. Sedaj srkamo hladen Budweiser in igramo tarok. Imejte zmerno, odgovorno in lahko noč.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-18-prvi-dan-bostona/">Prvi dan Bostona</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-19-promet/">Promet</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-19-spectacle-in-georges-island-ter-jastog/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

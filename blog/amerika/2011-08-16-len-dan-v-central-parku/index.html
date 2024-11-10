@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Len dan v Central parku</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="len-dan-v-central-parku">Len dan v Central parku</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-16">16. 8. 2011</time></li>
+</ul>
+
+<p>Spali smo absolutno predolgo. Najprej smo k sosedom Kitajcem nesli nekaj vreč perila, da nam ga operejo. Nato smo sedli na avtobus mestnega prometa in se zapeljali proti muzeju sodobne umetnosti, a po logističnih zapletih ugotovili, da bi imeli samo dobro uro časa za ogled, kar ni bilo vredno cene vstopnice.</p>
+<p>Prosto uro smo zato preživeli v bližnji Lego trgovini, kjer smo zdravili (ali pa hranili, odvisno, od perspektive) otroške komplekse. Ugotovili smo, da so od našega otroštva kompleti postali še večji. Najbolj navdušujoča je bila <a href="http://shop.lego.com/en-US/Death-Star-10188">Zvezda smrti</a> z več kot 4.000 kockami in vrtoglavo ceno 400 dolarjev, takoj za njo pa opcija, da za 15 dolarjev dobiš solidno veliko plastično posodico, ki jo lahko v posebni sekciji trgovine do vrha napolniš s poljubnimi kockami. Legice na kile, takoreč.</p>
+<p><a href="/images/amerika/dsc_4296.jpg"><img src="/images/amerika/dsc_4296.jpg" alt="DSC_4296" title="DSC_4296"></a></p>
+<p><a href="/images/amerika/dsc_4320.jpg"><img src="/images/amerika/dsc_4320.jpg" alt="DSC_4320" title="DSC_4320"></a></p>
+<p>Kasneje, v zgodnjih popoldanskih urah, smo se zbrali v večjo skupino in se ustavili v osredni katoliški cerkvi v mestu, <a href="http://en.wikipedia.org/wiki/St._Patrick's_Cathedral_(New_York)">katedrali svetega Patrika</a>. Z repertoarja smo izbrskali pesem krščanske narave in nameravali z njo preizkusiti akustične zmogljivosti objekta, a nas je hitro ustavil varnostnik in povedal, da v objektu zasebne narave svoboda govora ne velja ter da moramo za petje pridobiti dovoljenje.</p>
+<p>Izpolnjevanje obrazcev nam ne diši, tako da smo krenili naprej in obiskali še eno versko poslopje, <a href="http://images.apple.com/retail/fifthavenue/images/amerika/fifthavenue_gallery_image3.jpg">trgovino podjetja Apple</a> na peti aveniji, nakar smo vstopili v zeleno oazo sredi New Yorka – Central park. Tam nas sicer ni zanimalo nič specifičnega, iskali smo zgolj malce oddiha in sprostitve, kar nam je tudi uspelo.</p>
+<p><a href="/images/amerika/dsc7933.jpg"><img src="/images/amerika/dsc7933.jpg" alt="_DSC7933" title="_DSC7933"></a></p>
+<p><a href="/images/amerika/dsc7934.jpg"><img src="/images/amerika/dsc7934.jpg" alt="_DSC7934" title="_DSC7934"></a></p>
+<p><a href="/images/amerika/dsc7970.jpg"><img src="/images/amerika/dsc7970.jpg" alt="_DSC7970" title="_DSC7970"></a></p>
+<p><a href="/images/amerika/dsc7979.jpg"><img src="/images/amerika/dsc7979.jpg" alt="_DSC7979" title="_DSC7979"></a></p>
+<p><a href="/images/amerika/dsc7991.jpg"><img src="/images/amerika/dsc7991.jpg" alt="_DSC7991" title="_DSC7991"></a></p>
+<p><a href="/images/amerika/dsc7998.jpg"><img src="/images/amerika/dsc7998.jpg" alt="_DSC7998" title="_DSC7998"></a></p>
+<p>Dolg sprehod je spodbudil obilno lakoto, danes smo se namenili na eno od gastronomskih področij, ki jih v NYC-ju do sedaj še nismo uspeli preizkusiti – pice. Luigi’s pizzeria, ki smo jo obiskali, sicer ni ponudila strašansko avtentične in izvenzemeljske izkušnje, a za potešitev lakote je bilo dovolj. Vrnili smo se v stanovanje in pred jutrišnjim nastopom tri ure vadili, zdaj pa so nekateri na pivu v Harlemu, drugi pa počivamo in pišemo blog. Pod črto rahlo zdolgočasen deževen dan.</p>
+<p><a href="/images/amerika/dsc8002.jpg"><img src="/images/amerika/dsc8002.jpg" alt="_DSC8002" title="_DSC8002"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-15-broadway-in-harlem/">Broadway in Harlem</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-17-koncert-v-cerkvi-svetega-cirila-in-balkanski-vecer/">Koncert v cerkvi svetega Cirila in balkanski večer</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-16-len-dan-v-central-parku/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

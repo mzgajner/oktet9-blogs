@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sedmi dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="sedmi-dan">Sedmi dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-10">10. 8. 2009</time></li>
+</ul>
+
+<p>Nov teden - nove dogodivščine. Če smo že avgusta, smo rekli, bi se spodobilo, da gremo na morje. Za destinacijo smo si izbrali zanimivo lokacijo: Fraser island. Majhen otoček ob vzhodni obali Avstralije, ki nima nobene zveze z eno najboljših humorističnih nanizank na svetu, gostuje samo dve počitniški naselji s hotelom in nekaj vilami, sicer pa se po njem razpredata neokrnjena flora in favna.</p>
+<p>Kot ponavadi smo bili pokonci kmalu po sončnem vzhodu, saj je bilo treba prevoziti še slabih 300 km do Hervey Baya. Na avstralskih cestah se je to prevedlo v približno 4 ure, do marine smo prispeli v lepem sončnem dopoldnevu. Zaradi ekološke naravnanosti otočka smo avtomobile pustili na celini, se čez vodo odpravili s trajektom in si med vožnjo z 21 vozli čas krajšali kar z uživanjem vetrička na sprednjem delu plovila.</p>
+<p><a href="/images/avstralija/dsc_9098.jpg"><img src="/images/avstralija/dsc_9098.jpg" alt="Opravil sem." title="DSC_9098"></a></p>
+<p><a href="/images/avstralija/dsc_9114.jpg"><img src="/images/avstralija/dsc_9114.jpg" alt="Jaz bi tudi lulal!" title="DSC_9114"></a></p>
+<p><a href="/images/avstralija/dsc_9117.jpg"><img src="/images/avstralija/dsc_9117.jpg" alt="Na sledi so nam." title="DSC_9117"></a></p>
+<p><a href="/images/avstralija/dsc_9144.jpg"><img src="/images/avstralija/dsc_9144.jpg" alt="Iščemo trajekt." title="DSC_9144"></a></p>
+<p><a href="/images/avstralija/dsc_9188.jpg"><img src="/images/avstralija/dsc_9188.jpg" alt="Fraser island, prihajamo!" title="DSC_9188"></a></p>
+<p><a href="/images/avstralija/dsc_9202.jpg"><img src="/images/avstralija/dsc_9202.jpg" alt="Izkrcavanje." title="DSC_9202"></a></p>
+<p>Po pristanku smo razvajeno sedli na turistični vlakec in se zapeljali nekaj sto metrov do središča turističnega naselja. Prevzeli smo ključe, na hitro nakupili osnovna živila ter se podali v bazen, ki nas je premamil že, ko smo ga prvič zagledali. Deklet je žal primanjkovalo, zato smo se zabavali z žogo in petjem - tako intenzivno, da nas je zlobna nadzornica označila za manj odrasle od petletnikov.</p>
+<p><a href="/images/avstralija/dsc_9215.jpg"><img src="/images/avstralija/dsc_9215.jpg" alt="Vožnja do vile." title="DSC_9215"></a></p>
+<p><a href="/images/avstralija/dsc_9216.jpg"><img src="/images/avstralija/dsc_9216.jpg" alt="Miiiind the gap." title="DSC_9216"></a></p>
+<p><a href="/images/avstralija/dsc_9227.jpg"><img src="/images/avstralija/dsc_9227.jpg" alt="Miha je navdušen nad nastanitvijo." title="DSC_9227"></a></p>
+<p><a href="/images/avstralija/dsc_9233.jpg"><img src="/images/avstralija/dsc_9233.jpg" alt="Vhod." title="DSC_9233"></a></p>
+<p><a href="/images/avstralija/dsc_9243.jpg"><img src="/images/avstralija/dsc_9243.jpg" alt="Leon jezi Jana." title="DSC_9243"></a></p>
+<p><a href="/images/avstralija/dsc_9257.jpg"><img src="/images/avstralija/dsc_9257.jpg" alt="Estetsko dovršen hotelski bazen." title="DSC_9257"></a></p>
+<p><a href="/images/avstralija/dsc_9268.jpg"><img src="/images/avstralija/dsc_9268.jpg" alt="Jež se skriva na palmi." title="DSC_9268"></a></p>
+<p><a href="/images/avstralija/dsc_9271.jpg"><img src="/images/avstralija/dsc_9271.jpg" alt="Sladkovodna jezerca deževnice, ki jih je po otoku polno." title="DSC_9271"></a></p>
+<p>Vodne užitke smo nadaljevali na prečudoviti plaži. Radovedno smo tipali prozorne želatinaste spužve, lovili v pesek skrivajoče se rakce in fotografirali dih jemajočo naravo med sončnim zahodom. Na nekaj kilometrih obale smo srečali vsega skupaj deset ljudi, tako da smo si lahko privoščili spodaj objavljene vragolije, vključno z modno pisto in jamskim človekom.</p>
+<p><a href="/images/avstralija/dsc_9280.jpg"><img src="/images/avstralija/dsc_9280.jpg" alt="Prostor za taborni ogenj ob plaži." title="DSC_9280"></a></p>
+<p><a href="/images/avstralija/dsc_9282.jpg"><img src="/images/avstralija/dsc_9282.jpg" alt="Ne glede na vse smo še vedno sredi divjine." title="DSC_9282"></a></p>
+<p><a href="/images/avstralija/dsc_9296.jpg"><img src="/images/avstralija/dsc_9296.jpg" alt="Edini pomol na tej strani otoka." title="DSC_9296"></a></p>
+<p><a href="/images/avstralija/dsc_9297.jpg"><img src="/images/avstralija/dsc_9297.jpg" alt="Strukture v pesku." title="DSC_9297"></a></p>
+<p><a href="/images/avstralija/dsc_9321.jpg"><img src="/images/avstralija/dsc_9321.jpg" alt="Žare maneken." title="DSC_9321"></a></p>
+<p><a href="/images/avstralija/dsc_9326.jpg"><img src="/images/avstralija/dsc_9326.jpg" alt="Klišejska fotografija sončnega zahoda." title="DSC_9326"></a></p>
+<p><a href="/images/avstralija/dsc_9348.jpg"><img src="/images/avstralija/dsc_9348.jpg" alt="Mangrova." title="DSC_9348"></a></p>
+<p><a href="/images/avstralija/dsc_9358.jpg"><img src="/images/avstralija/dsc_9358.jpg" alt="Homo Janezus." title="DSC_9358"></a></p>
+<p><a href="/images/avstralija/dsc_9364.jpg"><img src="/images/avstralija/dsc_9364.jpg" alt="Petje in druženje v lokalu ob plaži." title="DSC_9364"></a></p>
+<p>Pred vrnitvijo v vilo smo na pomolu popili zadnjo pijačo pred zaprtjem in kot ponavadi zapeli nekaj skladb (za kar smo dobili dodatno rundo), pot domov pa izvedli v trdi zimski temi kljub šele polsedmi uri zvečer. Če je današnji prispevek pretirano romantičen, se iskreno opravičujem, ampak sam sem po dolgem času čudno očaran.</p>
+<p><a href="/images/avstralija/dsc_9384.jpg"><img src="/images/avstralija/dsc_9384.jpg" alt="Nočno nebo ob 18:38." title="DSC_9384"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-09-sesti-dan/">Šesti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-11-osmi-dan/">Osmi dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-10-sedmi-dan/` was built on 2024-11-10T15:45:02.467Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

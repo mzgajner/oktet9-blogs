@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pevski dan v Washingtonu D. C.</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="pevski-dan-v-washingtonu-d-c">Pevski dan v Washingtonu D. C.</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-12">12. 8. 2011</time></li>
+</ul>
+
+<p>Iz postelj smo, hočeš nočeš, poskakali okrog osme. Sestali smo se v preddverju hotela in vprašali recepcionistko, ali nam morda posodijo kak hotelski prostor, v katerem bi lahko vadili. Medtem, ko so procesirali našo poizvedbo, smo skočili v bližnjo restavracijo na sendvič in kavo za zajtrk.</p>
+<p><a href="/images/amerika/img_6414.jpg"><img src="/images/amerika/img_6414.jpg" alt="IMG_6414" title="IMG_6414"></a></p>
+<p><a href="/images/amerika/img_6415.jpg"><img src="/images/amerika/img_6415.jpg" alt="IMG_6415" title="IMG_6415"></a></p>
+<p><a href="/images/amerika/img_6417.jpg"><img src="/images/amerika/img_6417.jpg" alt="IMG_6417" title="IMG_6417"></a></p>
+<p><a href="/images/amerika/img_6418.jpg"><img src="/images/amerika/img_6418.jpg" alt="IMG_6418" title="IMG_6418"></a></p>
+<p>Sprva je kazalo na to, da bo treba note nesti kar nekam ven, v mestni park, a se je v zadnjem trenutku našla prijetna soba v pritličju, kjer smo nato dobro uro pilili repertoar za predvideni večerni koncert na slovenski ambasadi. Potem smo se že drugič odpravili v smer Bele hiše, naredili skupinsko fotografijo in izkoristili svojo svobodo govora z nekaj deset minutami petja Obami.</p>
+<p><a href="/images/amerika/img_6423.jpg"><img src="/images/amerika/img_6423.jpg" alt="IMG_6423" title="IMG_6423"></a></p>
+<p><a href="/images/amerika/img_6427.jpg"><img src="/images/amerika/img_6427.jpg" alt="IMG_6427" title="IMG_6427"></a></p>
+<p><a href="/images/amerika/img_6429.jpg"><img src="/images/amerika/img_6429.jpg" alt="IMG_6429" title="IMG_6429"></a></p>
+<p>Pri tem smo srečali nekaj zanimivo čudnih aktivistov z vseh polov političnega spektra. Gospod, ki mu je bila všeč naša izvedba ameriške himne, je prišel pred predsedniško domovanje skupaj z družino. Vsi so nosili transparente, s katerimi so se zahvaljevali Baracku in Michelle, nam pa povedali, da je treba stremeti k rešitvam. Prenehajmo že enkrat z negativizmom, stopimo skupaj in poiščimo rešitve na naše probleme. Ko nam to uspe, ne bo več težav.</p>
+<p>Druga zabavna strica sta s sabo prinesla velik transparent z eksplicitno fotografijo mrtvega fetusa ter množici poskušala z igranjem na rog in nagovorom v agresivnem tonu razložiti, da nedavnih sprememb ameriške kreditne ocene niso izvedle bonitetne hiše, temveč je to božja kazen zaradi dopuščanja splava. Nekateri mimoidoči so jima očitali nepoznavanje delovanja ekonomskega sistema, mi pa smo nadaljevali naš sprehod na drugo stran Bele hiše in še tam zapeli par skladb.</p>
+<p><a href="/images/amerika/img_6437.jpg"><img src="/images/amerika/img_6437.jpg" alt="IMG_6437" title="IMG_6437"></a></p>
+<p>Kasneje smo vsak zase izvajali manjše turistične oglede. V homogeno skupino smo se vnovič strnili šele ob štirih popoldne, ko smo se izpred hotela s podzemno železnico odpravili do slovenske ambasade. Tam so nas zelo prijazno sprejeli, nam povedali nekaj malenkosti o lastnem delu, nato pa nam dali mir, da smo lahko izvedli generalko za večerni koncert.</p>
+<p><a href="/images/amerika/img_6453.jpg"><img src="/images/amerika/img_6453.jpg" alt="IMG_6453" title="IMG_6453"></a></p>
+<p><a href="/images/amerika/img_6455.jpg"><img src="/images/amerika/img_6455.jpg" alt="IMG_6455" title="IMG_6455"></a></p>
+<p><a href="/images/amerika/img_6459.jpg"><img src="/images/amerika/img_6459.jpg" alt="IMG_6459" title="IMG_6459"></a></p>
+<p>Le-ta je potekal dobro. Gostje so bili predvsem predstavniki drugih ambasad, ki so v Washingtonu D. C. večinoma strnjene na veliki, temu namenjeni ulici. Zapolnjen je bil vsak kotiček dvorane, kjer smo z zelo kratkim premorom peli skoraj uro in pol. Povabljeni so po koncertu ostali na pogostitvi ter z nami veselo klepetali o našem delu in o političnem stanju v Sloveniji, znebili smo se še nekaj s sabo prinešenih zgoščenk, nato pa zapustili poslopje ambasade.</p>
+<p>Tam zaposleni so nas povabili, naj skupaj z njimi obiščemo bar, česar seveda nismo mogli zavrniti. Veselo petje in srkanje piva je trajalo nekje do druge ure zjutraj in zdaj smo zelo zelo zaspani.</p>
+<p><a href="/images/amerika/img_6471.jpg"><img src="/images/amerika/img_6471.jpg" alt="IMG_6471" title="IMG_6471"></a></p>
+<p><a href="/images/amerika/img_6478.jpg"><img src="/images/amerika/img_6478.jpg" alt="IMG_6478" title="IMG_6478"></a></p>
+<p><a href="/images/amerika/img_6488.jpg"><img src="/images/amerika/img_6488.jpg" alt="IMG_6488" title="IMG_6488"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-11-washington-d-c/">Washington D. C.</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-13-prihod-v-new-york/">Prihod v New York</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-12-pevski-dan-v-washingtonu-d-c/` was built on 2024-11-10T15:45:02.462Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

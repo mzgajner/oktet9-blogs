@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sled krvi v vodi</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="sled-krvi-v-vodi">Sled krvi v vodi</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2012-07-22">22. 7. 2012</time></li>
+</ul>
+
+<p>Včerajšnji nenavadno discipliniran odhod v posteljo je rezultiral v današnjem domala brezproblematičnem vstajanju pred sedmo. Pot po lokalnih cestah preko Ogulina nas je peljala skozi Gorski kotar, kjer se je navdušenje ob lepotah narave prepletalo z melanholijo ob podobah ostankov balkanskih vojn. Po nekaj urah smo v daljavi zagledali prvi minaret in zajebantski carinik nam je z izjavo <em>&quot;Idete na rafting? Ajde ne seri, znam ja vas, idete na rakiju i čevape!&quot;</em> dal vedeti, da smo definitivno prispeli v Bosno in Hercegovino. Kvaliteta ceste je še malce padla in počasi smo se prebili do končnega cilja za danes - kompleksa <a href="http://www.una-kiro-rafting.com/">Kiro Rafting</a> ob reki Uni. Prijazni lastnik nas je namestil v simpatično vilo Uno, takoj zatem pa smo se zbasali v kombi in se z raftom na strehi ob strugi reke zapeljali nekaj deset kilometrov višje.</p>
+<p><a href="/images/balkan/img_5496.jpg"><img src="/images/balkan/img_5496.jpg" alt="" title="img_5496"></a>
+<a href="/images/balkan/img_5529.jpg"><img src="/images/balkan/img_5529.jpg" alt="" title="img_5529"></a></p>
+<p>V hladnem dežnem vremenu smo si privoščili postanek pri hiši domačina, kjer smo popili nekaj kozarčkov domače <em>rakije</em>, da nas pogreje, potem pa se na štartni točki raftarske etape preoblekli v neoprenske obleke, pozorno poslušali mini predavanje na temo varnostnih ukrepov v vodi in si razdelili vesla. Naš skiper je čoln za začetek spustil po kakih petnajst metrov visokem slapu, s katerega je tudi skočil, medtem ko smo se mi mimo raje spustili peš. A takoj zatem se je pričelo zares - prvi del proge je bil najzahtevnejši in je terjal tudi največ žrtev. V rekordnem času se nam je uspelo večkrat prevrniti, pri čemer je včasih v vodi pristal samo kak posameznik, v najslabšem primeru pa smo se vsi skupaj zvrnili en po drugem, hlastali za zrakom, goltali vodo in skorajda ugledali belo luč na koncu tunela. No, odnesli smo jo z udarjeno ustnico in odrgnjenim prstom, reka pa se je postopoma umirila, tako da do konca plovbe ni bilo večjih težav z izjemo negodovanja nekaterih nad obveznostjo veslanja.</p>
+<p><a href="/images/balkan/img_5543.jpg"><img src="/images/balkan/img_5543.jpg" alt="" title="img_5543"></a>
+<a href="/images/balkan/img_5538.jpg"><img src="/images/balkan/img_5538.jpg" alt="" title="img_5538"></a>
+<a href="/images/balkan/img_5589.jpg"><img src="/images/balkan/img_5589.jpg" alt="" title="img_5589"></a>
+<a href="/images/balkan/img_5593.jpg"><img src="/images/balkan/img_5593.jpg" alt="" title="img_5593"></a></p>
+<p>Prezebli, lačni, predvsem pa navdušeni, smo se vrnili k izhodiščnemu kompleksu, kjer nas je že čakala večerja v obliki mešanega mesa na žaru (na krožniku je bilo sicer moč najti tudi piščančji file, ampak vseeno bomo 80 čevapčičev dodali na čevap števec - revolucionarno novo funkcionalnost našega potovalnega bloga, ki jo najdete na dnu strani). V pripravi na koncert smo izvedli še eno vajo, trenutno se pred televizorjem izobražujemo o ramazanu, a se nam že drema. Jutri pa v Сарајево!</p>
+<p><a href="/images/balkan/img_5620.jpg"><img src="/images/balkan/img_5620.jpg" alt="" title="img_5620"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/balkan/2012-07-21-ti-kompliciras/">Ti kompliciraš</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/balkan/2012-07-23-nasilje/">Nasilje</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/balkan/2012-07-22-sled-krvi-v-vodi/` was built on 2024-11-10T15:45:02.459Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

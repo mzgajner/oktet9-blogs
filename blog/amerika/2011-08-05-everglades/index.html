@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Everglades</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="everglades">Everglades</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-05">5. 8. 2011</time></li>
+</ul>
+
+<p>Ura je bila zgodnja, ker smo šli s kurami spat. Približno osem. Ocvrli smo slanino, naribali sir, vmešali jajca. K sreči smo imeli namesto filter kave in mleka v prahu tokrat polnomastnega kravjega in Nescaffe. Človek ga neizmerno ceni, ko par dni ni videl džezve. Sedli smo v avto, se zapeljali do trgovine z elektroniko in poskusili kupiti dva mobilnika, kar se je izkazalo za časovno potratno. Prodajalka je očitno konzumirala substance, zato je postopek trajal slabo uro.</p>
+<p>Sledila je zelo kratka vožnja do <a href="http://en.wikipedia.org/wiki/Everglades">nacionalnega park Everglades</a>. Po postanku na točki, za katero smo mislili, da je cilj, so nas obvestili, da je stvar večja, kot smo mislili. Potem smo se peljali še uro in pol, da smo našli iskani turistični center. Nanesli smo repelent proti insektom in kremo za sončenje ter si v ušesa vtaknili čepke, nakar so nas s čolni, imenovanimi <a href="http://en.wikipedia.org/wiki/Airboat">airboat</a>, odpeljali na ekskurzijo po tamkajšnjih značilnih močvirjih.</p>
+<p>Srečali smo aligatorje, želve z mehkimi lupinami, nekaj značilnih ptic in predvsem veliko prečudovitega močvirskega zelenja. Menda ima ena od videnih rastlin tako velike čebulaste korenine, da bi lahko od nje človek živel kak mesec ali dva, pri čemer pa smo morali vodiču verjeti na besedo. Po čolnarski ekskurziji so nam pokazali še nekaj prijaznih zdresiranih aligatorjev, manjše smo za tri dolarje smeli tudi prijeti v roke.</p>
+<p>Prevažanje po vročem soncu človeka utrudi in naredi lačnega, kar smo enostavno rešili z obiskom bližnjega gostinskega obrata, kjer imajo žar. Tematika dneva je ostala močvirsko-plazilska, za predjed smo namreč pohamsali nekaj kosov pohanega aligatorja. Potem smo prešli na malo bolj preverjene jedi - pečeno kuro in svinjska rebrca ter <em>baked beans</em> (prebranac s kečapom). Obrok je bil ameriško zaznamovan - gazirane pijače so bile na voljo v ogromnih količinah (pol litra za evro in pol, vsako nadaljnje polnjenje za 50 centov), vse je bilo malenkost sladkasto, pred gostilno pa sta se bohotila ameriška zastava in protiteroristični plakat.</p>
+<p>Nato povratek, hlajenje v bazenu... No, v bistvu je bil tako topel, da je bilo treba najprej obiskati topel jacuzzi in se nato vreči v bazen, da si začutil razliko. Zdaj pa, uganili ste, blogamo v gostilni, medtem ko na naši desni srednješolci igrajo <a href="http://en.wikipedia.org/wiki/Beer_pong">beer pong</a>.</p>
+<p><a href="/images/amerika/dsc6151-1.jpg"><img src="/images/amerika/dsc6151-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6154-1.jpg"><img src="/images/amerika/dsc6154-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6160-1.jpg"><img src="/images/amerika/dsc6160-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6161-1.jpg"><img src="/images/amerika/dsc6161-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6178-1.jpg"><img src="/images/amerika/dsc6178-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6188-1.jpg"><img src="/images/amerika/dsc6188-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6279-1.jpg"><img src="/images/amerika/dsc6279-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6297-1.jpg"><img src="/images/amerika/dsc6297-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/i00004-1.jpg"><img src="/images/amerika/i00004-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/i00075-1.jpg"><img src="/images/amerika/i00075-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/i00078-1.jpg"><img src="/images/amerika/i00078-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/i00039-1.jpg"><img src="/images/amerika/i00039-1.jpg" alt=""></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-04-pristanek-na-floridi-key-largo-in-key-west/">Pristanek na Floridi, Key Largo in Key West</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-05-gumpci-na-bazenu/">Gumpci na bazenu</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-05-everglades/` was built on 2024-11-10T15:45:02.461Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

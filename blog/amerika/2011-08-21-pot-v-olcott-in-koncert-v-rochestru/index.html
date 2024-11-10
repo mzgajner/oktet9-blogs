@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pot v Olcott in koncert v Rochestru</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="pot-v-olcott-in-koncert-v-rochestru">Pot v Olcott in koncert v Rochestru</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-21">21. 8. 2011</time></li>
+</ul>
+
+<p>Današnji dan je bil v veliki meri posvečen potovanju. Zaradi pravočasnega prihoda na ciljno destinacijo smo se v Bostonu pričeli zbujati že med tretjo in četrto uro. Žal je dobro znano, da se ne držimo zastavljenih rokov, kar se je izkazalo tudi tokrat. Odrinili smo šele okrog polšeste, se vmes ustavili, tu na improviziranem zajtrku, tam na stranišču in napitku, pot pa se je vlekla. Prevoziti je bilo namreč treba 470 milj do Olcotta, našega naslednjega bivališča.</p>
+<p><a href="/images/amerika/img_7830.jpg"><img src="/images/amerika/img_7830.jpg" alt="IMG_7830" title="IMG_7830"></a></p>
+<p><a href="/images/amerika/img_7838.jpg"><img src="/images/amerika/img_7838.jpg" alt="IMG_7838" title="IMG_7838"></a></p>
+<p><a href="/images/amerika/img_7840.jpg"><img src="/images/amerika/img_7840.jpg" alt="IMG_7840" title="IMG_7840"></a></p>
+<p><a href="/images/amerika/img_7841.jpg"><img src="/images/amerika/img_7841.jpg" alt="IMG_7841" title="IMG_7841"></a></p>
+<p><a href="/images/amerika/img_7845.jpg"><img src="/images/amerika/img_7845.jpg" alt="IMG_7845" title="IMG_7845"></a></p>
+<p>Pot nas je peljala stran od morja in okolica se je hitro spreminjala, pred nami so se začele kazati drugačne, drznili bi si reči celo… pristnejše podobe severne Amerike.</p>
+<p><a href="/images/amerika/img_7855.jpg"><img src="/images/amerika/img_7855.jpg" alt="IMG_7855" title="IMG_7855"></a></p>
+<p><a href="/images/amerika/img_7873.jpg"><img src="/images/amerika/img_7873.jpg" alt="IMG_7873" title="IMG_7873"></a></p>
+<p><a href="/images/amerika/img_7879.jpg"><img src="/images/amerika/img_7879.jpg" alt="IMG_7879" title="IMG_7879"></a></p>
+<p><a href="/images/amerika/img_7915.jpg"><img src="/images/amerika/img_7915.jpg" alt="IMG_7915" title="IMG_7915"></a></p>
+<p>Na končni postaji smo izstopili utrujeni, a navdušeni. Čakala nas je namreč idilična hišica ob jezeru Ontario, v vasici, kamor turisti redko zaidejo. Veliko dvorišče in dve košati drevesi, romantično kurišče in žar v bližini. Celo obisk bližnje trgovine je kazal na geografske spremembe, saj je bil za denarnice bistveno manj boleč kot nakupi preteklih dni.</p>
+<p><a href="/images/amerika/dsc8631.jpg"><img src="/images/amerika/dsc8631.jpg" alt="_DSC8631" title="_DSC8631"></a></p>
+<p><a href="/images/amerika/dsc8636.jpg"><img src="/images/amerika/dsc8636.jpg" alt="_DSC8636" title="_DSC8636"></a></p>
+<p><a href="/images/amerika/dsc8642.jpg"><img src="/images/amerika/dsc8642.jpg" alt="_DSC8642" title="_DSC8642"></a></p>
+<p><a href="/images/amerika/img_7913.jpg"><img src="/images/amerika/img_7913.jpg" alt="IMG_7913" title="IMG_7913"></a></p>
+<p><a href="/images/amerika/dsc8628.jpg"><img src="/images/amerika/dsc8628.jpg" alt="_DSC8628" title="_DSC8628"></a></p>
+<p><a href="/images/amerika/img_7914.jpg"><img src="/images/amerika/img_7914.jpg" alt="IMG_7914" title="IMG_7914"></a></p>
+<p>A idile nismo uživali prav dolgo, vsaj za danes. Bili smo namreč že pozni na koncert v Rochestru, 70 milj oddaljenem večjem mestu, kjer smo imeli nastopiti kot gostje lokalne vokalne zasedbe Cut Off.</p>
+<p>Še uro in pol vožnje kasneje smo se znašli pred glasbeno šolo Hochstein, kjer je prireditev potekala. Spoznali smo se z gostitelji, s katerimi smo dosedaj komunicirali zgolj preko spleta, opravili tonske vaje in se opeli za večerni nastop. Predstavili smo se z dvema sklopoma – slovenskimi ljudskimi in popularnimi skladbami ter ameriškimi oldieji in pop komadi. Izjemne dvorane obiskovalci resda niso napolnili do zadnjega kotička, a je bil občutek na odru vseeno zelo dober, pa tudi publika ni skrivala navdušenja.</p>
+<p><a href="/images/amerika/dsc8670.jpg"><img src="/images/amerika/dsc8670.jpg" alt="_DSC8670" title="_DSC8670"></a></p>
+<p><a href="/images/amerika/img_7931.jpg"><img src="/images/amerika/img_7931.jpg" alt="IMG_7931" title="IMG_7931"></a></p>
+<p><a href="/images/amerika/dsc8654.jpg"><img src="/images/amerika/dsc8654.jpg" alt="_DSC8654" title="_DSC8654"></a></p>
+<p><a href="/images/amerika/dsc8661.jpg"><img src="/images/amerika/dsc8661.jpg" alt="_DSC8661" title="_DSC8661"></a></p>
+<p>Po nastopu smo kramljali in Rochesterčani so nas povabili v lokal, kjer so se dogovorili za afterparty, a temu vabilu se je lahko odzval samo del okteta. Druga polovica je namreč morala domov, da napiše kaj na blog. Zaradi vas.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-20-koncert-na-harvardu-in-kopica-drugih-bostonskih-znamenitosti/">Koncert na Harvardu in kopica drugih Bostonskih znamenitosti</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-22-sprocanje-v-lunaparku-in-rotiljada/">Sproščanje v (luna)parku in roštiljada</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-21-pot-v-olcott-in-koncert-v-rochestru/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

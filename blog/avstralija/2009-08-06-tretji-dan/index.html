@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tretji dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="tretji-dan">Tretji dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-06">6. 8. 2009</time></li>
+</ul>
+
+<p>Bloganje pozno v noč je terjalo svoj davek in ob polsedmih zjutraj je bilo prav neugodno vstajati. Razlog za bujenje ob tako nemogoči uri je bil načrtovan koncert pri slovenski skupnosti v Sydneyu. Skozi jutranjo prometno konico smo se prebili z malenkostnimi težavami, ki jih je v večji meri povzročila v naši navigacijski napravi živeča Claire in njena zaljubljenost v avtoceste.</p>
+<p><a href="/images/avstralija/dsc_7965.jpg"><img src="/images/avstralija/dsc_7965.jpg" alt="Cjooo, sami turisti pred mano na cesti..." title="DSC_7965"></a></p>
+<p>Na srečo so nam ostali dobri stari zemljevidi in izostren orientacijski čut izkušenega pomorščaka Gregorja. Ob devetih smo prispeli do slovenske cerkve v Merrylandsu v Sydneyu, kjer nas je pričakal pater Darko. Po preverjanju akustike odlično klimatizirane cerkvene zgradbe smo se odločili, da nastop raje opravimo v sosednji večnamenski dvorani.</p>
+<p><a href="/images/avstralija/dsc_7967.jpg"><img src="/images/avstralija/dsc_7967.jpg" alt="Parkirno mesto, rezervirano samo za nas." title="DSC_7967"></a></p>
+<p><a href="/images/avstralija/dsc_7969.jpg"><img src="/images/avstralija/dsc_7969.jpg" alt="Pater Darko - menih iz slovarske definicije." title="DSC_7969"></a></p>
+<p><a href="/images/avstralija/dsc_7976.jpg"><img src="/images/avstralija/dsc_7976.jpg" alt="Prisrčen košček Slovenije v zaprašenem kotičku zakrstije." title="DSC_7976"></a></p>
+<p><a href="/images/avstralija/dsc_8003.jpg"><img src="/images/avstralija/dsc_8003.jpg" alt="V akciji." title="DSC_8003"></a></p>
+<p>Približno petdesetim slovenskim zdomcem, ki so imeli v četrtek zjutraj čas, da obiščejo koncert, smo zapeli predvsem ljudske pesmi, nad katerimi so bili vidno navdušeni. V razgretem pogovoru po glasbenih točkah so nekateri od nas odkrili tudi nekdanje sosede, s svojo prisotnostjo pa nas je presenetil tudi častni slovenski konzul v Avstraliji, Alfred Brežnik - Fredy. Gostitelji so nam nam pripravili domovine vredno malico in dokazali, da tudi po nekaj desetletjih življenja v tujini Slovenci še vedno povsem iz navade tudi čisto naključnega gosta nahranimo in napijemo preko vseh razumnih nutricionističnih meja.</p>
+<p><a href="/images/avstralija/dsc_8005.jpg"><img src="/images/avstralija/dsc_8005.jpg" alt="Vzhičen publikum." title="DSC_8005"></a></p>
+<p><a href="/images/avstralija/dsc_8007.jpg"><img src="/images/avstralija/dsc_8007.jpg" alt="Ena ptička priletela ..." title="DSC_8007"></a></p>
+<p><a href="/images/avstralija/dsc_8013.jpg"><img src="/images/avstralija/dsc_8013.jpg" alt="SDS ... Naključje?" title="DSC_8013"></a></p>
+<p><a href="/images/avstralija/dsc_8015.jpg"><img src="/images/avstralija/dsc_8015.jpg" alt="O, Sydney, srečna, draga vas domača." title="DSC_8015"></a></p>
+<p><a href="/images/avstralija/dsc_8025.jpg"><img src="/images/avstralija/dsc_8025.jpg" alt="Notranjost prostorov društva." title="DSC_8025"></a></p>
+<p><a href="/images/avstralija/dsc_8051.jpg"><img src="/images/avstralija/dsc_8051.jpg" alt="Alfi!" title="DSC_8051"></a></p>
+<p>Okrog enih smo zapustili prijazne rojake in se odpravili še do Slovenskega Društva v Sydneyu. Naš prihod ni bil najavljen, tako da smo zgolj obiskali zgradbo društva in pokramljali z nekaterimi člani in funkcionarji. Navdušila nas je pristna slovenskost lokalnih patronov; entuzijazem nad domačo kulturo, ki se večini prebivalstva v matični državi zdi vsakdanje dolgočasna; navsezadnje pa tudi dejstvo, da lahko na drugi strani planeta popijemo stekleničko Laškega in špricer z Radensko.</p>
+<p>Na poti nazaj smo se vnovič soočali z gostim prometom, a smo za dobro voljo izbrali panoramsko vrnitev brez vožnje po avtocesti ter uživali v razgledu z dober kilometer dolgega Sydney Harbour Bridgea. Za vse, ki so bili med včerajšnjim ogledom operne hiše preveč zaposleni z odganjanjem oboževalk, smo se vrnili na lokacijo, v miru posneli še nekaj fotografij ter nabavili spominke.</p>
+<p><a href="/images/avstralija/dsc_8097.jpg"><img src="/images/avstralija/dsc_8097.jpg" alt="ANZAC Bridge" title="DSC_8097"></a></p>
+<p><a href="/images/avstralija/dsc_8160.jpg"><img src="/images/avstralija/dsc_8160.jpg" alt="Sydney Harbour Bridge, slikan s ploščadi pred operno hišo." title="DSC_8160"></a></p>
+<p><a href="/images/avstralija/dsc_8181.jpg"><img src="/images/avstralija/dsc_8181.jpg" alt="Sydneyska opera v vsej svoji lepoti" title="DSC_8181"></a></p>
+<p>Povratek v hodel z vožnja skozi nabito poln center je bila svojevrstna izkušnja (No left turns here!), a jutri bo transportiranje dosti bolj pestrno. Ob štirih zjutraj se namreč prvič selimo v Brisbane, zato je današnji večer poleg priprave večerje vključeval tudi izdelavo sendvičev. Sydney je bil odličen, a če bi se morali odločiti za eno stvar, ki jo bomo najbolj pogrešali, je to nedvomno mlinček v odtoku. Slava mu.</p>
+<div id="18FwHKxFJnk" class="eleventy-plugin-youtube-embed" style="position:relative;width:100%;padding-top: 56.25%;"><iframe style="position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;" width="100%" height="100%" frameborder="0" title="Embedded YouTube video" src="https://www.youtube-nocookie.com/embed/18FwHKxFJnk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-05-drugi-dan/">Drugi dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-07-cetrti-dan/">Četrti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-06-tretji-dan/` was built on 2024-11-10T15:45:02.466Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

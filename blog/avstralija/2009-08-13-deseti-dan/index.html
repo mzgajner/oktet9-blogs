@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Deseti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="deseti-dan">Deseti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-13">13. 8. 2009</time></li>
+</ul>
+
+<p>Glede na velikost kontinenta, po katerem potujemo, se mi zdi skorajda brezpredmetno vsak dan znova razlagati o naših premikih, saj brez njih enostavno ne gre. Tudi danes smo tako prepotovali več kot 400 kilometrov od Byron Baya do Port Macquarieja.</p>
+<p><a href="/images/avstralija/dsc_9957.jpg"><img src="/images/avstralija/dsc_9957.jpg" alt="Kičasta z jutranjega sprehoda." title="DSC_9957"></a></p>
+<p><a href="/images/avstralija/dsc_9980.jpg"><img src="/images/avstralija/dsc_9980.jpg" alt="Dovolj pogumnih temperature ne skrbijo." title="DSC_9980"></a></p>
+<p>Tisti najbolj pridni so vstali že ob sedmih zjutraj in se podali na sprehod po mestecu, včeraj si ga zaradi poznega prihoda namreč nismo mogli pošteno ogledati. Sam sem z izgovorom, da bom raje pisal blog, doma kinkal, kar pa je bila glede na dejstvo, da sem v vozniški ekipi, po svoje tudi modra poteza. Zgodnji zajtrk smo popestrili z nekaj lokalnimi jedmi, ki jih je ata Gregi izbrskal med nakupovanjem (goveja pita je odlična), sicer pa degustacije kulinaričnih posebnosti niso trajale dolgo, dnevna svetloba je pozimi namreč dragocena.</p>
+<p><a href="/images/avstralija/dsc_0017.jpg"><img src="/images/avstralija/dsc_0017.jpg" alt="Zadnje priprave pred odhodom." title="DSC_0017"></a></p>
+<p><a href="/images/avstralija/dsc_0031.jpg"><img src="/images/avstralija/dsc_0031.jpg" alt="Kot vedno do sedaj, je potovanje naporno." title="DSC_0031"></a></p>
+<p><a href="/images/avstralija/dsc_0032.jpg"><img src="/images/avstralija/dsc_0032.jpg" alt="Ustavi, ustavi!" title="DSC_0032"></a></p>
+<p><a href="/images/avstralija/dsc_0078.jpg"><img src="/images/avstralija/dsc_0078.jpg" alt="Kje nas vozi ta GPS..." title="DSC_0078"></a></p>
+<p><a href="/images/avstralija/dsc_0123.jpg"><img src="/images/avstralija/dsc_0123.jpg" alt="Neznano stoječe drevo." title="DSC_0123"></a></p>
+<p><a href="/images/avstralija/dsc_0251.jpg"><img src="/images/avstralija/dsc_0251.jpg" alt="Zverine preveč popijejo." title="DSC_0251"></a></p>
+<p>Da pot do današnje končne destinacije ne bi bila preveč dolgočasna, smo se približno na polovici ustavili v bližini naselja Coffs Harbour, natančneje na plaži Diggers Beach. Po Lonely planetu sodeč gre za popularno destinacijo, česar se izven turistične sezone ni dalo opaziti, a ne glede na temperature nismo spregledali naravnih lepot, ki jih lokacija nudi. Velika peščena plaža privlači predvsem surferje, katerih tudi danes ni manjkalo. Oblečeni v neopren so se čudili našemu pogumnemu namakanju v hladnem Pacifiku in otroško entuzijastičnemu igranju z valovi.</p>
+<p><a href="/images/avstralija/dsc_0267.jpg"><img src="/images/avstralija/dsc_0267.jpg" alt="Igranje z valovi." title="DSC_0267"></a></p>
+<p><a href="/images/avstralija/dsc_0268.jpg"><img src="/images/avstralija/dsc_0268.jpg" alt="Tri konjske moči." title="DSC_0268"></a></p>
+<p><a href="/images/avstralija/dsc_0284.jpg"><img src="/images/avstralija/dsc_0284.jpg" alt="Velikonočni zajček Hliš." title="DSC_0284"></a></p>
+<p><a href="/images/avstralija/dsc_0342.jpg"><img src="/images/avstralija/dsc_0342.jpg" alt="Ena kičasta." title="DSC_0342"></a></p>
+<p>V tematiko vrtca se je v nadaljevanju uspešno vključilo podajanje z žogico, zakopavanje v pesek in nabiranje kamenčkov. Glede na to, da je vzgojitelj Gregor za nekaj časa odšel na sprehod s svojim fotoaparatom, je bila disciplina vrhunska. Brez fizičnih poškodb in v polnem številu smo se čez dobro uro vrnili na cesto.</p>
+<p><a href="/images/avstralija/dsc_0368.jpg"><img src="/images/avstralija/dsc_0368.jpg" alt="Peremo, ..." title="DSC_0368"></a></p>
+<p><a href="/images/avstralija/dsc_0370.jpg"><img src="/images/avstralija/dsc_0370.jpg" alt="in kuhamo." title="DSC_0370"></a></p>
+<p><a href="/images/avstralija/dsc_0384.jpg"><img src="/images/avstralija/dsc_0384.jpg" alt="Eni kupujejo, drugi se kopajo." title="DSC_0384"></a></p>
+<p><a href="/images/avstralija/dsc_0405.jpg"><img src="/images/avstralija/dsc_0405.jpg" alt="Po nabavi." title="DSC_0405"></a></p>
+<p><a href="/images/avstralija/dsc_0406.jpg"><img src="/images/avstralija/dsc_0406.jpg" alt="Večerja se že kuha." title="DSC_0406"></a></p>
+<p>V Port Macquarie smo se pripeljali ob sedemnajsti uri, razpakirali, se navdušili nad brezplačno internetno povezavo in oddirjali v trgovino. O dolgočasnem nakupovanju špecerije za današnjo večerjo in jutrišnjo ponovitev roštiljanja vam ne bi razlagal, saj se mi mudi. Grem zamenjat žehto v sušilnem stroju.</p>
+<p><a href="/images/avstralija/dsc_04001.jpg"><img src="/images/avstralija/dsc_04001.jpg" alt="Home away from home." title="DSC_0400"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-12-deveti-dan/">Deveti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-14-enajsti-dan/">Enajsti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-13-deseti-dan/` was built on 2024-11-10T15:45:02.467Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

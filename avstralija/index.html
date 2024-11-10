@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Potovalni blogi</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/" aria-current="page">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				
+<h1 id="oktet-9-dol-spodaj">Oktet 9 dol spodaj</h1>
+
+
+<ol class="postlist">
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-07-24-hello-world-2/" class="postlist-link">Še nekaj dni...</a>
+		<time class="postlist-date" datetime="2009-07-24">24. 7. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-01-odhod/" class="postlist-link">Odhod</a>
+		<time class="postlist-date" datetime="2009-08-01">1. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-04-prvi-dan/" class="postlist-link">Prvi dan</a>
+		<time class="postlist-date" datetime="2009-08-04">4. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-05-drugi-dan/" class="postlist-link">Drugi dan</a>
+		<time class="postlist-date" datetime="2009-08-05">5. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-06-tretji-dan/" class="postlist-link">Tretji dan</a>
+		<time class="postlist-date" datetime="2009-08-06">6. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-07-cetrti-dan/" class="postlist-link">Četrti dan</a>
+		<time class="postlist-date" datetime="2009-08-07">7. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-08-peti-dan/" class="postlist-link">Peti dan</a>
+		<time class="postlist-date" datetime="2009-08-08">8. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-09-sesti-dan/" class="postlist-link">Šesti dan</a>
+		<time class="postlist-date" datetime="2009-08-09">9. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-10-sedmi-dan/" class="postlist-link">Sedmi dan</a>
+		<time class="postlist-date" datetime="2009-08-10">10. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-11-osmi-dan/" class="postlist-link">Osmi dan</a>
+		<time class="postlist-date" datetime="2009-08-11">11. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-12-deveti-dan/" class="postlist-link">Deveti dan</a>
+		<time class="postlist-date" datetime="2009-08-12">12. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-13-deseti-dan/" class="postlist-link">Deseti dan</a>
+		<time class="postlist-date" datetime="2009-08-13">13. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-14-enajsti-dan/" class="postlist-link">Enajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-14">14. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-15-dvanajsti-dan/" class="postlist-link">Dvanajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-15">15. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-16-trinajsti-dan/" class="postlist-link">Trinajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-16">16. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-17-stirinajsti-dan/" class="postlist-link">Štirinajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-17">17. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-18-petnajsti-dan/" class="postlist-link">Petnajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-18">18. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-19-sestnajsti-dan/" class="postlist-link">Šestnajsti dan</a>
+		<time class="postlist-date" datetime="2009-08-19">19. 8. 2009</time>
+	</li>
+
+	<li class="postlist-item">
+		<a href="/blog/avstralija/2009-08-20-zadnji-dan-in-povratek/" class="postlist-link">Zadnji dan in povratek</a>
+		<time class="postlist-date" datetime="2009-08-20">20. 8. 2009</time>
+	</li>
+
+</ol>
+
+
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/avstralija/` was built on 2024-11-10T15:45:02.458Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

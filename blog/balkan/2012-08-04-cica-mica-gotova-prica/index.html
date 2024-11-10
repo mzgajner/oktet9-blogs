@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Čiča miča, gotova priča</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="cica-mica-gotova-prica">Čiča miča, gotova priča</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2012-08-04">4. 8. 2012</time></li>
+</ul>
+
+<p>Današnja sobota je bila še zadnji dan naše turneje, a povratek domov ni bil zgolj transportne narave, vključeval je še kar nekaj turističnih aktivnosti in pevskega druženja.</p>
+<p>Dopoldne smo se v peklenski vročini ukvarjali z vračanjem jadrnice in prestavljanjem prtljage, občutljivejši so se po tednu puščanja tudi obrili. Počasi smo se zbasali v kombi in za začetek odpeljali proti Šibeniku, kjer smo odložili člana z najvišjim faktorjem zaščite proti soncu - Žareta. Družini smo ga predali na avtobusni postaji, seveda ne brez tega, da bi se pol urice družili in zapeli par pesmi.</p>
+<p>Potem smo odrinili proti Skradinu v nacionalnem parku Krka, kjer smo se vkrcali na turistično ladjico, ki nas je odpeljala direktno do slapov reke Krke (to k sreči ni tista Krka, v kateri se kopajo obiskovalci Rock Otočca). Dali smo jim slabih sto kun, da so nas spustili naprej, in se pridružili hordi tujih turistov, ki so se kopali pod slapovi.</p>
+<p><a href="/images/balkan/img_6959.jpg"><img src="/images/balkan/img_6959.jpg" alt=""></a>
+<a href="/images/balkan/img_6955.jpg"><img src="/images/balkan/img_6955.jpg" alt=""></a>
+<a href="/images/balkan/img_6954.jpg"><img src="/images/balkan/img_6954.jpg" alt=""></a></p>
+<p>Naredili smo še krožni sprehodek po urejenih poteh, se izobrazili o lokalni flori in favni, potem pa spet nazaj na ladjico. Tu smo bili presenečeni in veseli, ko smo med nami znova ugledali prijatelja Žareta, od katerega smo se že poslovili v Šibeniku, dokler nismo pogruntali, da gre samo za odličnega dvojnika.</p>
+<p><a href="/images/balkan/img_6962.jpg"><img src="/images/balkan/img_6962.jpg" alt=""></a></p>
+<p>Naslednja pikica na zemljevidu ciljev je bil Zadar, našega izjemno potrpežljivega skiperja Tita smo zategnili do trajektne luke, ker je moral v Ugljan na novo barko, potem pa poiskali bližnji kraj po imenu Ražanac, kamor smo bili vabljeni na eno od predrojstnodnevnih zabav strica našega člana Jana. Šilčevi so nas nadvse gostoljubno sprejeli, nas nahranili in napojili, nam napolnili mobilne telefone in laptope, medtem ko smo mi z lokalnim muzikantom tekmovali v tem, kdo bo dalmatinske pesmi zapel bolj emocionalno. Prejeli smo kup pohval in povabilo v Kanado.</p>
+<p>No, zatem pa smo res še zadnjič sedli v kombi in zavili na avtocesto proti domu. Kleli smo nad visokimi cestninami, se velikokrat ustavili, na počivališčih, a nič ni moglo spremeniti dejstva, da je naše turneje konec. V Celje smo prispeli ob dveh zjutraj.</p>
+<p>Na skorajšnji konec je prispel tudi naš blog - jutri vam serviramo še nekaj zanimivih podatkov in statistik o celotni turneji, zabeljenih s kakim naključnim posnetkom.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/balkan/2012-08-03-plava-ali-modra/">Plava ali modra?</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/balkan/2012-08-06-konec-konec/">Konec konec</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/balkan/2012-08-04-cica-mica-gotova-prica/` was built on 2024-11-10T15:45:02.461Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

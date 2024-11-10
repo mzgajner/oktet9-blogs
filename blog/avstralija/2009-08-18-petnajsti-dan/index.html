@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Petnajsti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="petnajsti-dan">Petnajsti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-18">18. 8. 2009</time></li>
+</ul>
+
+<p>S China Airlines je prejšnji večer prispelo obvestilo, da je naš let do Tajvana odpovedan in da moramo zapustiti Avstralijo dan prej ter počakati v Tajpeju, tako da je bil petnajsti dan zadnji v celoti preživet na avstralskem kontinentu. Kljub vsemu se nismo pustili zmesti in smo se držali naših načrtov.</p>
+<p>Sto kilometrov zahodno od Sydneya je Katoomba, simpatičen kraj s slabimi 8 tisoč prebivalci in zelo popularno turistično atrakcijo imenovano <a href="http://en.wikipedia.org/wiki/Katoomba_Scenic_World">Katoomba Scenic World</a>. Gre za skupek vlakcev, gondol in sprehajalnih poti v osrčju pokrajine <a href="http://en.wikipedia.org/wiki/Blue_Mountains_%28Australia%29">Blue Mountains</a> - goratega področja, znanega in imenovanega po sivomodrih meglicah, ki ga pogosto prekrivajo.</p>
+<p>Vožnja po bolj lokalnih cestah, kot smo jih bili vajeni dosedaj, ni povzročala prehudih problemov, tako da smo kmalu prispeli na prvo destinacijo, čudovito razgledno točko na robu doline Jamison. Meteorološki pogoji so bili izvrstni, zato smo škljocali bolj kot japonski turisti ter se po dvajsetih minutah zaradi strahu pred parkirnimi kaznimi vrnili do avtomobilov in odpeljali par kilometrov dlje, do že omenjenega Katoomba Scenic Worlda.</p>
+<p>Najprej smo se preko enega od rokavov doline zapeljali z gondolo s prozornim dnom, ki je ponujalo čudovit razgled na jurski deževni pragozd in slapove 270 metrov pod nami. Naravne lepote so bile za večino potnikov v kabini dih jemajoče, a profesionalcev, kot smo mi, to ni oviralo pri petju. Povratek na trdna tla smo dočakali že čez 10 minut, čas nas je preganjal in oddivjali smo na najstrmejši železniški spust na svetu. Katoomba Scenic Railway, ki je bil prvotno del transportnega sistema za rudarje iz bližnjega premogovnika, zdaj skozi tunel med skalami pod največjim kotom 52 stopinj v dolino vozi samo še turiste.</p>
+<p>Po zabavnem spustu ob glasbi iz serije filmov Indiana Jones smo pot skozi pragozd nadaljevali po lesenih mostičkih sprehajalne poti še nižje v dolino, od koder smo se nazaj na vrh ponovno vrnili v gondoli. Od tukaj so se najbolj lačni člani podali na <em>all-you-can-eat</em> v bližnjo restavracijo, drugi pa smo si na čudoviti terasi privoščili muffine in espresso. Vsi skupaj smo še pobrskali po trgovini s spominki, pred vhodom v turistični kompleks navdušenim mimoidočim zapeli This Love ter pohiteli v parkirno hišo.</p>
+<p>Pred povratkom v hotel smo se odzvali povabilu Kranjčevih, ki so nas na dvorišču za hišo v s filma skopiranem idiličnem Sydneyskem predmestju po avstralsko pogostili z dobrotami z roštilja (verjemite, tega se ne naveličaš kar tako). Do trde teme smo kramljali in prepevali ter se pozno zvečer vrnili v Meriton na Pitt Streetu.</p>
+<p><img src="/images/avstralija/dsc_1507.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1519.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1539.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1566.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1575.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1620.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1624.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1634.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1651.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1652.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1663.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1672.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1681.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1688.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1690.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1693.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1707.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1721.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1724.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1727.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_1735.jpg" alt=""></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-17-stirinajsti-dan/">Štirinajsti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-19-sestnajsti-dan/">Šestnajsti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-18-petnajsti-dan/` was built on 2024-11-10T15:45:02.468Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

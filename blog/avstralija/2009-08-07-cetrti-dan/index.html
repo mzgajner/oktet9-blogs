@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Četrti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="cetrti-dan">Četrti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-07">7. 8. 2009</time></li>
+</ul>
+
+<p>Slovenci smo v veliki meri narod zapečkarjev. Naša državica je majhna, tako majhna, da se da <em>iz Goričkoga f Piran</em> z malo sreče priti v dobrih treh uricah. Posledično se nam zdi marsikatero potovanje hudo dolgo in naporno, Avstralci pa gledajo na vse skupaj ravno nasprotno. Njihova država je obenem tudi kontinent in na zemljevidu minimalne razlike se prevedejo v astronomske razdalje v resničnem svetu. Potovanje iz Sydneya v Brisbane je tako od nas zahtevalo preklop mentalitete.</p>
+<p>Že dan prej smo se z izdelavo sendvičev pripravili na vozniški podvig epskih razsežnosti. Vstali smo okrog štirih zjutraj, uro kasneje smo že vozili po levi. Promet je bil tekoč, saj so kenguruji še spali, in panoramska vožnja po Great Pacific Highway je bila zelo sproščujoča. <a href="/images/avstralija/dsc_8256.jpg"><img src="/images/avstralija/dsc_8256.jpg" alt="Potem pa tukaj levo." title="DSC_8256"></a> <a href="/images/avstralija/dsc_82781.jpg"><img src="/images/avstralija/dsc_82781.jpg" alt="Zabava mimovozečih ljudi." title="DSC_8278"></a> <img src="/images/avstralija/dsc_8284.jpg" alt="No, saj smo praktično že v predmestju Brisbanea." title="DSC_8284"> <a href="/images/avstralija/dsc_83031.jpg"><img src="/images/avstralija/dsc_83031.jpg" alt="Pogost pojav na tukajšnjih cestah." title="DSC_8303"></a> Primerjava avstralskih cest z našimi je povzročila mešana čustva. Kar se tiče omejitev, je Slovenija presenetljivo v prednosti. Čistokrvnih avtocest je tukaj zgolj za vzorec, za nameček je tudi na pet- in šestpasovnicah najvišja dovoljena hitrost 110 km/h. Večino poti pa smo prepotovali po cestah, ki so še za razred počasnejše in ponavadi omejene na 100 km/h. Naključno varirajo med enim in dvema pasovoma, z njih je možno zaviti v obe smeri, na njih izvajati polkrožne obrate in podobne manevre, ponavadi rezervirane za počasnejše ceste. Poleg tega se občasno prelevijo v lokalno pot in pri omejitvi 50 km/h prepotujejo kakšno mestece. <a href="/images/avstralija/dsc_8358.jpg"><img src="/images/avstralija/dsc_8358.jpg" alt="Štirilitrski osemvaljnik zna biti požrešen." title="DSC_8358"></a> <a href="/images/avstralija/dsc_8424.jpg"><img src="/images/avstralija/dsc_8424.jpg" alt="Koale na cesti." title="DSC_8424"></a> Kultura vožnje je po drugi strani dosti višja, trobili in žugali so nam samo ob največjih neumnostih, tudi dolgih luči v zadnjem ogledalu praktično nismo imeli priložnosti ugledati. Veliko presenečenje so tudi določene cestne inovacije. Na povsem običajni enopasovni medkrajevni cesti se vsakih nekaj kilometrov pojavi prehitevalni pas (zdaj v eno, zdaj v drugi smer), že dolgo prej pa nanj opozarjajo prometni znaki (hej, ne bodi živčen, tovornjak pred sabo boš lahko prehitel <em>že</em> čez 4 kilometre). <a href="/images/avstralija/dsc_8441.jpg"><img src="/images/avstralija/dsc_8441.jpg" alt="Team Rocket!" title="DSC_8441"></a> <a href="/images/avstralija/dsc_8460.jpg"><img src="/images/avstralija/dsc_8460.jpg" alt="Siva pooooot, vodi meeee..." title="DSC_8460"></a> Odsotnost gneče, zmogljivi avtomobili in razgibane pokrajine so imele blagodejen učinek na naše počutje med vožnjo. Tu in tam smo se ustavili na počivališču, se čudili povoženim vrečarjem in skočili na resnejši obrok v katero od dobro znanih fast-food restavracij (globalizacija na vrhuncu), tako da je čas hitro minil. <a href="/images/avstralija/dsc_8487.jpg"><img src="/images/avstralija/dsc_8487.jpg" alt="Res kul angatta." title="DSC_8487"></a> Pred prihodom v Brisbane smo se ustavili še v turističnem obalnem mestecu Surfers paradise. Na prečudoviti peščeni plaži, o kateri bi običajno v tem letnem času na Hrvaškem le sanjali, smo, četudi le za minuto, namočili noge v Tihi Ocean ter se navduševali nad ogromno izbiro ras in postav deklet. <a href="/images/avstralija/dsc_8510.jpg"><img src="/images/avstralija/dsc_8510.jpg" alt="Ne pucajte, mi smo sa Balkana, samo smo u prolazu - destinacija nam je Copacabana." title="DSC_8510"></a> <a href="/images/avstralija/dsc_8519.jpg"><img src="/images/avstralija/dsc_8519.jpg" alt="Edini v Avstraliji." title="DSC_8519"></a> Nato smo obiskali uradni Hard Rock Cafe, kjer smo prvič popili stekleničko ponosa Queenslanda - piva XXXX (<em>fourex, mate</em>). Na stopnišču je bilo v običajnem dekorativnem stilu mreže omenjenih rokerskih lokalov veliko zanimivih predmetov in fotografij glasbenikov, seveda so bile na voljo tudi <em>collectible</em> majice. Prodajalka slednjih je opazila naše skupinsko požvižgavanje, <em>beatboxanje</em> in nasploh povišan nivo oddajanja zvoka, zato smo ji morali razložiti naš izvor in pomen ter seveda zapeti nekaj skladb. <a href="/images/avstralija/dsc_8521.jpg"><img src="/images/avstralija/dsc_8521.jpg" alt="Sintetizator klaviaturista skupine The Greatful Dead." title="DSC_8521"></a> <a href="/images/avstralija/dsc_8522.jpg"><img src="/images/avstralija/dsc_8522.jpg" alt="Šlafrok Jamesa Browna." title="DSC_8522"></a> Da bi pritegnili malce več publike, smo pred vhodom v lokal zapeli <em>This Love</em> in <em>Stand By Me</em>, kar je Davidu, solistu, takoj prineslo kup ženskih pogledov. Mlada Libijka prenekaterih oblin se je prilepila na njega, brezkompromisno zahtevala <em>fejsbuk</em> in <em>mesenđer</em> in ga poslikala z vseh kotov. Načrte o poroki bo najverjetneje poslala kasneje, mi za Zupija zahtevamo vsaj sedem kamel in štiri mladoletne device. <a href="/images/avstralija/dsc_8526.jpg"><img src="/images/avstralija/dsc_8526.jpg" alt="Tisto neonsko kitaro še mate, gaspoud?" title="DSC_8526"></a> <a href="/images/avstralija/dsc_8528.jpg"><img src="/images/avstralija/dsc_8528.jpg" alt="David s fanico." title="DSC_8528"></a> V hotel smo se naselili brez večjih problemov, če izvzamemo razačarajoče visoko ceno dostopa do interneta, kot ponavadi zimprovizirali večerjo in poklepetali na balkonu. Nekateri so se odpravili na hitro pijačo (navsezadnje je bil petek), a jih je ustavila starostna omejitev, ki je preprečila vstop nekaterih nepolnoletnih članov v lokale. Zaspanost je zmagala že okrog polnoči, še posebno v bitki proti Žaretu, ki je presegel samega sebe in od 24 ur v dnevu prebedel samo štiri. Baje se zadevi zdravstveno reče <em>hipersomnija</em>. <a href="/images/avstralija/dsc_8546.jpg"><img src="/images/avstralija/dsc_8546.jpg" alt="Razgled z balkone naše nastanitve v Brisbaneu." title="DSC_8546"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-06-tretji-dan/">Tretji dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-08-peti-dan/">Peti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-07-cetrti-dan/` was built on 2024-11-10T15:45:02.466Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

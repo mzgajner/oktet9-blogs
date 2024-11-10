@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Pristanek na Floridi, Key Largo in Key West</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="pristanek-na-floridi-key-largo-in-key-west">Pristanek na Floridi, Key Largo in Key West</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-04">4. 8. 2011</time></li>
+</ul>
+
+<p>Po že opisanih zapletih v Amsterdamu so stvari nekaj časa še izgledale mračno. Let za Chicago smo ujeli v zadnjem trenutku. Tam smo čakali nekaj ur, pojedli paket avtohtonih sirovih in karamelnih kokic, opazovali predsednika Obamo, ki se je v rojstni kraj vrnil ob praznovanju 50. rojstnega dneva, in se nato še sprehajali po terminalih, ko se niso mogli odločiti, kam bodo parkirali naše letalo. Let do Miamija je s svojim triurnim cviljenjem popestril kuža, nenavajen letenja, zagodli pa so nam jo tudi nekooperativni izposojevalci avtomobilov, zaradi česar je bilo treba sredi noči klicariti v Slovenijo.</p>
+<p>Nato pa se nam je odprlo. Z navigacijo večjih problemov nismo imeli in po nekaj urah vožnje smo z letališča prispeli do naše namestitve na otoku Key Largo, enem od <a href="http://en.wikipedia.org/wiki/Florida_Keys">Florida Keysov</a>. Ura je bila štiri zjutraj po lokalnem času, mi pa smo imeli ob devetih zjutraj rezervacijo na še nekaj ur oddaljenem Key Westu, kamor bi se naj šli potapljat in opazovat koralne grebene. Tega že ne bomo zavrgli zaradi nekaj uric spanja, smo si rekli, pojedli zelo zgoden zajtrk, popili neokusno kavo ter se spet posedli v avtomobile.</p>
+<p>Potovalni podvig je uspel in skupaj s petdesetčlansko skupino ameriških turistov nas je katamaran odpeljal 9 milj od obale, kjer smo skozi zarošene maske poskušali videti, kar je še preostalo od podvodnih lepot. Po izletu smo na bližnjem pomolu odpeli krajši koncert in se vrnili v apartma na Key Largu.</p>
+<p>Trenutne vtise je mogoče povzeti precej enostavno. Ob zunanji temperaturi 35 stopinj Celzija so vse klime nastavljene na 16 stopinj, izgled mest je zabavna mešanica nadstandarda in zanikrnosti, avtomobili pa so - preveliki. No, ali pa haluciniramo, ker že 33 ur nismo spali. Kosilo že čaka na mizi, nato pa končno v posteljo, se slišimo jutri.</p>
+<p><a href="/images/amerika/dsc5956-1.jpg"><img src="/images/amerika/dsc5956-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc5961-1.jpg"><img src="/images/amerika/dsc5961-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6058-1.jpg"><img src="/images/amerika/dsc6058-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/dsc6070-1.jpg"><img src="/images/amerika/dsc6070-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5176-1-e1312491144194.jpg"><img src="/images/amerika/img_5176-1-e1312491144194.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5180-1.jpg"><img src="/images/amerika/img_5180-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5181-1.jpg"><img src="/images/amerika/img_5181-1.jpg" alt="naše letalo v Chicagu"></a></p>
+<p><a href="/images/amerika/img_5216-1.jpg"><img src="/images/amerika/img_5216-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5243-1.jpg"><img src="/images/amerika/img_5243-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5271-1.jpg"><img src="/images/amerika/img_5271-1.jpg" alt=""></a></p>
+<p><a href="/images/amerika/img_5280-1.jpg"><img src="/images/amerika/img_5280-1.jpg" alt=""></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-03-ne-letimo/">Ne letimo</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-05-everglades/">Everglades</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-04-pristanek-na-floridi-key-largo-in-key-west/` was built on 2024-11-10T15:45:02.461Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Migracija do Clearwaterja</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="migracija-do-clearwaterja">Migracija do Clearwaterja</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-06">6. 8. 2011</time></li>
+</ul>
+
+<p>Današnji dan smo preživeli v potovalnem duhu, zato priporočamo, da za pristno vzdušje med branjem v ozadju odprete <a href="www.youtube.com/watch?v=1TD_pSeNelU">tole skladbo</a>.</p>
+<p>S Key Larga smo se odpravili med deveto in deseto uro zjutraj, kar pa ne pomeni, da smo uživali v jutranjem hladu. Kot vse dni poprej nam tudi danes ni prizanesla huronska jutranja vročina. Pred vkrcanjem v avto je z nas dobesedno teklo, vlaga je bila visoka, sonce žgoče, temperature pa dobrih 30 stopinj. V GPS-e smo vnesli <a href="http://maps.google.com/maps?q=Clearwater,+FL&amp;hl=en&amp;sll=37.0625,-95.677068&amp;sspn=39.235538,86.572266&amp;z=12">Clearwater</a>.</p>
+<p>Prepotovali smo kos poti, ki nam je bila znana že od včeraj, nato pa nadaljevali po prostranstvih Evergladesov. Cesta, ki se je vila pred nami, je bila dolga, ravna in obdana z mnogoterimi naravnimi čudesi (na tem mestu se nam mudi in prepisujemo iz turistične brošure).</p>
+<p><a href="/images/amerika/dsc6346-797x1200.jpg"><img src="/images/amerika/dsc6346-797x1200.jpg" alt="" title="_DSC6346 (797x1200)"></a><a href="/images/amerika/dsc6387-1200x797.jpg"><img src="/images/amerika/dsc6387-1200x797.jpg" alt="" title="_DSC6387 (1200x797)"></a></p>
+<p><a href="/images/amerika/dsc6405-1200x797.jpg"><img src="/images/amerika/dsc6405-1200x797.jpg" alt="" title="_DSC6405 (1200x797)"></a></p>
+<p>Prvi postanek je bila trgovina z elektroniko, kjer smo malo napasli oči in se čudili neprimerljivo nižjim cenam, kot smo jih vajeni. Ker je od zajtrka preteklo že par ur, smo kmalu zatem tudi obedovali, pri čemer se moramo pred mamicami pohvaliti, da smo se izognili McDonaldsu in obiskali normalnejšo restavracijo, kjer je možno po okusu ločiti kruh, meso in krompir.</p>
+<p><a href="/images/amerika/dsc6447-1200x797.jpg"><img src="/images/amerika/dsc6447-1200x797.jpg" alt="" title="_DSC6447 (1200x797)"></a>Pa spet vožnja in še več vožnje. Tu se je situacija tudi malce zapletla, naši vozili sta se namreč odločili za ločeni poti, pri čemer je ena naveza porabila bistveno več časa za prihod na cilj. Razlog za to je bil najprej obisk trgovine z igračami, ki je prebudila otroke v nas (no, saj niso preveč trdno spali), nato pa še nesmotrna izbira poti preko mostu <a href="http://en.wikipedia.org/wiki/Sunshine_Skyway_Bridge">Sunshine Skyway Bridge</a>. Takoj po vstopu nas je pričakala kolona, v kateri smo se cijazili slabo urico, a je bilo vsaj panoramsko.</p>
+<p><a href="/images/amerika/img_5581-800x1200.jpg"><img src="/images/amerika/img_5581-800x1200.jpg" alt="" title="IMG_5581 (800x1200)"></a><a href="/images/amerika/img_5625-1200x800.jpg"><img src="/images/amerika/img_5625-1200x800.jpg" alt="" title="IMG_5625 (1200x800)"></a><a href="/images/amerika/img_5609-1200x800.jpg"><img src="/images/amerika/img_5609-1200x800.jpg" alt="" title="IMG_5609 (1200x800)"></a></p>
+<p><a href="/images/amerika/img_5658-1200x800.jpg"><img src="/images/amerika/img_5658-1200x800.jpg" alt="" title="IMG_5658 (1200x800)"></a><a href="/images/amerika/img_5668-1200x800.jpg"><img src="/images/amerika/img_5668-1200x800.jpg" alt="" title="IMG_5668 (1200x800)"></a>Ko smo končno prispeli, je bila že tema. Za testiranje nabavljenih vodnih pištol smo pripravili zimprovizirano policijsko zasedo, na hitro pojedli večerjo in opravili polurno nočno kopanje na peščeni plaži v vodi s temperaturo urina. In tudi veter je topel. Samo pivo je mrzlo.</p>
+<p><a href="/images/amerika/img_5719-800x1200.jpg"><img src="/images/amerika/img_5719-800x1200.jpg" alt="" title="IMG_5719 (800x1200)"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-05-gumpci-na-bazenu/">Gumpci na bazenu</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-07-kruzanje-po-clearwaterju/">Kruzanje po Clearwaterju</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-06-migracija-do-clearwaterja/` was built on 2024-11-10T15:45:02.462Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

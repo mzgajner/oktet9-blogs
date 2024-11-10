@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Šestnajsti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="sestnajsti-dan">Šestnajsti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-19">19. 8. 2009</time></li>
+</ul>
+
+<p><a href="/images/avstralija/dsc_1748.jpg"><img src="/images/avstralija/dsc_1748.jpg" alt="Zadnji vzhod v Sydneyu." title="DSC_1748"></a></p>
+<p><a href="/images/avstralija/dsc_1752.jpg"><img src="/images/avstralija/dsc_1752.jpg" alt="Pogrešali te bomo..." title="DSC_1752"></a></p>
+<p>Zgodnje vstajanje nas ni preveč sesulo, ker smo vedeli, da bomo imeli dovolj časa za spanje na letalu. Jutranja prometna konica je bila relativno znosna in na letališče smo prispeli še nekaj minut prehitro, kar nam je prišlo še kako prav, saj smo zaradi rahlo čudnih oznak voznih pasov naredili dva kroga okrog letališča, preden nam je uspelo zapeljati na parkirišče za najete avtomobile (tudi v drugo smo vpričo avstralskega policista naredili blažji prekršek).</p>
+<p><a href="/images/avstralija/dsc_1765.jpg"><img src="/images/avstralija/dsc_1765.jpg" alt="Med vožnjo do letališča." title="DSC_1765"></a></p>
+<p>Kljub zgledni vožnji skozi celoten izlet nas je bilo malenkost strah vrnitve avtomobilov, saj so nam domačini povedali, da te na sprejemnem pultu še prehitro pričaka fotografija s hitrostnih kamer in pripadajoča položnica, a kot bi lahko pričakovali, je bil naš strah povsem neupravičen.</p>
+<p><a href="/images/avstralija/dsc_1772.jpg"><img src="/images/avstralija/dsc_1772.jpg" alt="Statistika našega cestnega podviga, bodite pozorni na kilometrino." title="DSC_1772"></a></p>
+<p><a href="/images/avstralija/dsc_1774.jpg"><img src="/images/avstralija/dsc_1774.jpg" alt="Šmrc, adijo, zvesti avtomobilček..." title="DSC_1774"></a></p>
+<p>Po standardnem varnostnem pregledu in odoženi prtljagi smo se vkrcali na naše letalo in kmalu po vzletu pričeli s standardnimi pevskimi postopki. Svetla točka dneva je bil tokrat vodja strežbe na letalu. Zelo zabaven Tajvanec nam je razložil, da se tudi sam ukvarja z a capella petjem in se nam poskusil v bolj popularnih skladbah tudi pridružiti. Priporočal nam je še nekaj obiska vrednih lokacij v Tajpeju in ponudil svoj email naslov za izmenjavo vokalnih aranžmajev. Siti hrane in petja smo se razporedili po prijetno praznem letalu in udobno zaspali do večera.</p>
+<p><a href="/images/avstralija/dsc_1797.jpg"><img src="/images/avstralija/dsc_1797.jpg" alt="Naš novi azijski prijatelj." title="DSC_1797"></a></p>
+<p><a href="/images/avstralija/dsc_1798.jpg"><img src="/images/avstralija/dsc_1798.jpg" alt="Prepevanje na nekaj tisoč metrih." title="DSC_1798"></a></p>
+<p><a href="/images/avstralija/dsc_1802.jpg"><img src="/images/avstralija/dsc_1802.jpg" alt="Stric v ozadju ni ljubitelj glasbe." title="DSC_1802"></a></p>
+<p><a href="/images/avstralija/dsc_1804.jpg"><img src="/images/avstralija/dsc_1804.jpg" alt="Uf, uf, že kličemo SAZAS!" title="DSC_1804"></a></p>
+<p>Ob prihodu so nas ožigosali s čudaškimi nalepkami s polarnim medvedom in nas posadili v čakalnico pri izhodu iz letališča, kjer smo okrog pol ure čakali na prevoz. Ko je kombi končno prišel in smo stopili iz letališke zgradbe na prosto, nas je zajel val tako vročega in vlažnega zraka, da smo skoraj omedleli (polarni medved je bil samo trik). Med vožnjo je bilo zaradi klime bolj znosno, zato smo se vnovič posvetili petju in radovedno pogledovali naokrog. Urbano mestno okolje je kmalu zamenjalo malce več rastlinja in bližje kot smo bili našemu hotelu, bolj je zunanjost izgledala kot čudno dalmatinsko podeželje.</p>
+<p>Na cilju smo ugotovili, da smo nameščeni v enega bolj znanih resortov za golfiste, a nismo bili ne vem kako ganjeni. Zahtevali smo od China Airlinesa obljubljene posamezne enoposteljne sobe (in dobili vsak svojo ogromno dvoposteljno), popili japonsko pivo iz minibara, odigrali nekaj rund taroka in v pričakovanju jutrišnjega ogleda Tajpeja šli spat.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-18-petnajsti-dan/">Petnajsti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-20-zadnji-dan-in-povratek/">Zadnji dan in povratek</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-19-sestnajsti-dan/` was built on 2024-11-10T15:45:02.468Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

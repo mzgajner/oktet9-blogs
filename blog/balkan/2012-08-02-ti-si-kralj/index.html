@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Ti si kralj!</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="ti-si-kralj">Ti si kralj!</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2012-08-02">2. 8. 2012</time></li>
+</ul>
+
+<p>Navtično usmerjen dan je pomenil, da danes večinoma plujemo. Kolikor je bilo sreče, z vetrom, kolikor je ni bilo, pa na motor. Prehranjevanje se je izvajalo v omejeni količini, saj nam je skiper Tit povedal, da je bil pred tednom dni že na Visu z drugo skupino jadralcev in da ima znance v odlični konobi. Za tamkajšnjo hrano se menda splača držati nazaj, je trdil - in verjeli smo mu. Poklical je v cenjeno gostinsko ustanovo, nas najavil in se dogovoril, da v zameno za popust pripravimo krajši koncert za ostale goste.</p>
+<p><a href="/images/balkan/1-img_6897.jpg"><img src="/images/balkan/1-img_6897.jpg" alt="1-IMG_6897" title="1-IMG_6897"></a></p>
+<p><a href="/images/balkan/2-img_6911.jpg"><img src="/images/balkan/2-img_6911.jpg" alt="2-IMG_6911" title="2-IMG_6911"></a></p>
+<p>Proti večeru smo pripluli v Komižo, se v miru okopali, potem pa veslali do kopnega in se odpravili na vnaprej dogovorjeno zbirno točko, kjer smo čakali kombi. Konoba Roki’s, naša destinacija, se namreč nahaja v vasi Mlisko polje, nekaj kilometrov v notranjost otoka. Lastniki morajo tako z brezplačnim transportom poskrbeti, da odročna lokacija ni problem strank.</p>
+<p><a href="/images/balkan/3-img_6918.jpg"><img src="/images/balkan/3-img_6918.jpg" alt="3-IMG_6918" title="3-IMG_6918"></a></p>
+<p>Ob osmih nas je s starim volkswagnovim kombijem pobral suhljati voznik Goran. Po štetju skupine se je popraskal po zatilju, malce namrdnil in nas brez slabe vesti zbasal v vozilo dosti več, kot dopušča prometno dovoljenje. Na naši desni je z živordečo barvo zahajalo sonce, zapeli smo <em>Ružo moja crvena</em> in pot je hitro minila.</p>
+<p><a href="/images/balkan/4-img_6937.jpg"><img src="/images/balkan/4-img_6937.jpg" alt="4-IMG_6937" title="4-IMG_6937"></a></p>
+<p><em>Gazda</em> nas je ob prihodu lepo pozdravil, pojedli smo predjed, poskusili dve buteljki hišnega vina in pričeli z nastopom. Med publiko je bilo ogromno tujih turistov, ki so veselo ploskali, ko so zaslišali kako skladbo v lastnem jeziku, in njihova radodarnost nam je bistveno znižala račun.</p>
+<p><a href="/images/balkan/5-img_6940.jpg"><img src="/images/balkan/5-img_6940.jpg" alt="5-IMG_6940" title="5-IMG_6940"></a></p>
+<p>Po dobre pol ure, ko je zmanjkalo pripravljenega programa, so prispela na mizo jedila izpod peke. Pošteno smo se napokali rib, hobotnice in jagenjčka, vse skupaj pa splakovali po grlu s (premočnim, jebemu) Plavcem. Tuji turisti so se počasi odpravili proti domu, z nami so ostali le domačini, s katerimi smo prepevali do enih zjutraj.</p>
+<p><a href="/images/balkan/6-img_6942.jpg"><img src="/images/balkan/6-img_6942.jpg" alt="6-IMG_6942" title="6-IMG_6942"></a></p>
+<p>Med tem časom se je zgodilo precej stvari. Gospa za sosednjo mizo je bila iz skladbe v skladbo bolj navdušena, dokler ni imela dovolj in nam je morala priti povedat, da smo najbolj normalni ljudje, kar jih je srečala v 20 letih; da je Mato kralj, ker med petjem čustvuje; da sta se z možem (prisotnim) nameravala ločiti in da je to njun spravni dopust na Visu; da še ni slišala za slovensko klapo; da je v bistvu kralj Gregor, ker je bil edini pri pionirjih; da imamo gotovo svojo koreografijo v sinhronem plavanju in da smo gej. Točke seveda približno ustrezajo naraščajoči opitosti gospe, ki je bila v oštariji po lastnih besedah od pol šeste.</p>
+<p>Poznejša kot je bila ura, več gostilniškega osebja in gostov se je presedalo k naši mizi in debate so se premikale od prvotne prijaznosti preko vmesnega navdušenja nad bivšo Jugoslavijo in obžalovanja povojnega sovraštva pa do latentnega nacionalizma proti koncu (<em>in vino veritas?</em>). A nismo mogli preveč zameriti, ker sta bila hobotnica in jagnje odlična.</p>
+<p><a href="/images/balkan/7-img_6944.jpg"><img src="/images/balkan/7-img_6944.jpg" alt="7-IMG_6944" title="7-IMG_6944"></a></p>
+<p>Ajd, riba je bila razkuhana.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/balkan/2012-08-01-rusi-v-narodnem-parku/">Rusi v narodnem parku</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/balkan/2012-08-03-plava-ali-modra/">Plava ali modra?</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/balkan/2012-08-02-ti-si-kralj/` was built on 2024-11-10T15:45:02.460Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Štirinajsti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="stirinajsti-dan">Štirinajsti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-17">17. 8. 2009</time></li>
+</ul>
+
+<p>Z včerajšnjim koncertom v slovenskem klubu je bila prva točka obiska Canberre opravljena, ostala nam je še druga prijetna dolžnost nastopa na slovenski ambasadi, kamor smo se urno odpravili takoj po zajtrku. Gospodična Božena Forštnarič nas je nadvse prijazno sprejela in povedala, da je trenutno zaradi dopustov ena redkih prisotnih v tamkajšnjih prostorih, zato smo s formalnostmi hitro opravili in se podali v bifejček v pritličju stolpnice, v kateri se nahaja naša ambasada.</p>
+<p><a href="/images/avstralija/dsc_1303.jpg"><img src="/images/avstralija/dsc_1303.jpg" alt="Zasedanje nadzornega sveta se bo pričelo." title="DSC_1303"></a></p>
+<p><a href="/images/avstralija/dsc_1309.jpg"><img src="/images/avstralija/dsc_1309.jpg" alt="Uradna predaja protokolarnih daril." title="DSC_1309"></a></p>
+<p>Ob prigrizku in pijači na račun davkoplačevalcev smo veselo kramljali o prednostih in slabostih življenja v Avstraliji, kulturi vožnje, ogromnih razdaljah, tipično slovenskimi prepiri med klubi v različnih mestih in našem dosedanjem potovanju. Tu in tam smo prekinili pogovor in ostalim prisotnim diplomatom ter poslovnežem, ki so ravno takrat nič hudega sluteči srkali kavo, zapeli košček našega repertoarja.</p>
+<p><a href="/images/avstralija/dsc_1317.jpg"><img src="/images/avstralija/dsc_1317.jpg" alt="Melona brez realnih možnosti." title="DSC_1317"></a></p>
+<p><a href="/images/avstralija/dsc_1316.jpg"><img src="/images/avstralija/dsc_1316.jpg" alt="Kot ponavadi ni prav dosti ostalo." title="DSC_1316"></a></p>
+<p>Nazadnje smo dobili še nekaj neuradnih napotkov za ogled Canberre in Sydneya, presenetili naključni dekleti pred vhodom v kavarno ter šli popoldnevu naproti. V načrtu smo imeli ogled določenih atraktivnih točk v mestu in kljub neodobravanju bolečih fizičnih aktivnosti s strani določenih članov (<em>Khm.</em>) smo za boj z večjimi geografskimi razdaljami za štiri ure najeli kolesa.</p>
+<p><a href="/images/avstralija/dsc_1324.jpg"><img src="/images/avstralija/dsc_1324.jpg" alt="Hihi, kako so srčkani." title="DSC_1324"></a></p>
+<p><a href="/images/avstralija/dsc_1336.jpg"><img src="/images/avstralija/dsc_1336.jpg" alt="Hej, tu smo bili pa že lani!" title="DSC_1336"></a></p>
+<p><a href="/images/avstralija/dsc_1341.jpg"><img src="/images/avstralija/dsc_1341.jpg" alt="Teh nam na veliko žalost vseh niso hoteli posoditi." title="DSC_1341"></a></p>
+<p>Le nekaj minut po pričetku izletka smo se ustavili pri državnem muzeju in se dobro uro zmedeno sprehajali med estetsko privlačnimi, sicer pa ne najbolj koherentno zdizajniranimi razstavami. Po nakupu spominkov smo zaključili prvi intelektualni odsek in pričeli s športnim udejstvovanjem. Prevozili smo simpatično slabih 20 kilometrov dolgo kolesarsko pot okrog jezera ter se pri tem izjemno zabavali, tu in tam je zmotil le sunek hladnega vetra v prsi ali kak neroden turist, ki se je po napačni smeri peljal direktno proti nam, da smo se morali nevarno umikati na levo.</p>
+<p><a href="/images/avstralija/dsc_1347.jpg"><img src="/images/avstralija/dsc_1347.jpg" alt="Vsi prisotni in prisebni, načelnik." title="DSC_1347"></a></p>
+<p><a href="/images/avstralija/dsc_1352.jpg"><img src="/images/avstralija/dsc_1352.jpg" alt="Zdaj se pa že zajebavajo." title="DSC_1352"></a></p>
+<p><a href="/images/avstralija/dsc_1354.jpg"><img src="/images/avstralija/dsc_1354.jpg" alt="Prvi postanek." title="DSC_1354"></a></p>
+<p><a href="/images/avstralija/dsc_1370.jpg"><img src="/images/avstralija/dsc_1370.jpg" alt="Kljunaš, druga najbolj kul žival na svetu, takoj za vombatom." title="DSC_1370"></a></p>
+<p><a href="/images/avstralija/dsc_1372.jpg"><img src="/images/avstralija/dsc_1372.jpg" alt="Noj." title="DSC_1372"></a></p>
+<p><a href="/images/avstralija/dsc_1377.jpg"><img src="/images/avstralija/dsc_1377.jpg" alt="Maska." title="DSC_1377"></a></p>
+<p><a href="/images/avstralija/dsc_1386.jpg"><img src="/images/avstralija/dsc_1386.jpg" alt="Atrij v sredini krofaste muzejske zgradbe." title="DSC_1386"></a></p>
+<p><a href="/images/avstralija/dsc_1387.jpg"><img src="/images/avstralija/dsc_1387.jpg" alt="Naključni avstralski predmeti." title="DSC_1387"></a></p>
+<p><a href="/images/avstralija/dsc_1392.jpg"><img src="/images/avstralija/dsc_1392.jpg" alt="Eden prvih Holdnov." title="DSC_1392"></a></p>
+<p><a href="/images/avstralija/dsc_1409.jpg"><img src="/images/avstralija/dsc_1409.jpg" alt="Vračam se odmah." title="DSC_1409"></a></p>
+<p>Druga postaja je bil tehnični muzej, ki bi nam bil najbrž bistveno bolj všeč ob koncu osnovne šole. Posledica komercialne naravnanosti so že skorajda preveč poljudno-zabavni razstavni eksponati z obilico iz podobnih evropskih ustanov (London, Minhen) znane interaktivnosti. Sedemnajsta ura, ko je bilo treba vrniti kolesa, se je nevarno bližala, in oktetovci smo iz omenjenega lunaparka zdirjali nazaj na naše jeklene osličke ter gonili proti začetni točki ekskurzije. Gospodu Martinu, ki je upravljal s cenjeno izposojevalno ustanovo, smo zapeli dve slovenski ljudski in za nagrado dobili sladoled (pri dobrih desetih stopinjah, večernih oblakih in mrzlem vetru so mimoidoči našim kornetom namenili blago telečje poglede).</p>
+<p><a href="/images/avstralija/dsc_1420.jpg"><img src="/images/avstralija/dsc_1420.jpg" alt="Bančo astronavt." title="DSC_1420"></a></p>
+<p><a href="/images/avstralija/dsc_1445.jpg"><img src="/images/avstralija/dsc_1445.jpg" alt="Vsebina brezdomskega vozička sredi pločnika, lastnika od nikoder." title="DSC_1445"></a></p>
+<p><a href="/images/avstralija/dsc_1450.jpg"><img src="/images/avstralija/dsc_1450.jpg" alt="Lupimo in čistimo, ..." title="DSC_1450"></a></p>
+<p><a href="/images/avstralija/dsc_1451.jpg"><img src="/images/avstralija/dsc_1451.jpg" alt="... ribamo, sekljamo." title="DSC_1451"></a></p>
+<p><a href="/images/avstralija/dsc_1462.jpg"><img src="/images/avstralija/dsc_1462.jpg" alt="Upam, da bo dobro." title="DSC_1462"></a></p>
+<p><a href="/images/avstralija/dsc_1463.jpg"><img src="/images/avstralija/dsc_1463.jpg" alt="Mene tudi skrbi." title="DSC_1463"></a></p>
+<p><a href="/images/avstralija/dsc_1467.jpg"><img src="/images/avstralija/dsc_1467.jpg" alt="Uspelo je!" title="DSC_1467"></a></p>
+<p><a href="/images/avstralija/dsc_1469.jpg"><img src="/images/avstralija/dsc_1469.jpg" alt="Takrat še ni vedel, ampak je naredil." title="DSC_1469"></a></p>
+<p><a href="/images/avstralija/dsc_1486.jpg"><img src="/images/avstralija/dsc_1486.jpg" alt="Čekiranje fejsiča." title="DSC_1486"></a></p>
+<p>Bolj lačni kot premraženi smo nabavili manjkajoče sestavine za kočerjo, se vrnili v apartmaje in uspešno zavihteli kuhalnice. Prenajedanje je imelo za posledico spokojen zaključek večera ob kozarčku avstralskega vina in kartah za tarok, zaradi načrtovanih premikov pa smo zgledno zaspali že okrog polnoči.</p>
+<p><a href="/images/avstralija/dsc_1490.jpg"><img src="/images/avstralija/dsc_1490.jpg" alt="Lahko noč." title="DSC_1490"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-16-trinajsti-dan/">Trinajsti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-18-petnajsti-dan/">Petnajsti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-17-stirinajsti-dan/` was built on 2024-11-10T15:45:02.468Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

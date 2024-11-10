@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Miami</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="miami">Miami</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-10">10. 8. 2011</time></li>
+</ul>
+
+<p><a href="/images/amerika/img_6082.jpg"><img src="/images/amerika/img_6082.jpg" alt="IMG_6082" title="IMG_6082"></a></p>
+<p>Jutri je čas za našo prvo večjo migracijo do Washingtona D. C. Tja gremo z letalom iz Miamija, zato smo današnji dan začeli s panoramsko vožnjo od Cocoa Beacha do 200 milj oddaljenega Miamija. Country glasba na avtoradiu se je počasi prelila v urban R&amp;B in kubanske ritme, ceste pa so dobivale nove in nove pasove.</p>
+<p><a href="/images/amerika/dsc7097.jpg"><img src="/images/amerika/dsc7097.jpg" alt="_DSC7097" title="_DSC7097"></a></p>
+<p><a href="/images/amerika/dsc7122.jpg"><img src="/images/amerika/dsc7122.jpg" alt="_DSC7122" title="_DSC7122"></a></p>
+<p><a href="/images/amerika/dsc7138.jpg"><img src="/images/amerika/dsc7138.jpg" alt="_DSC7138" title="_DSC7138"></a></p>
+<p>V največjem mestu na Floridi je bilo treba počakati, da nam pripravijo sobe, zato smo se najprej zapeljali do “centra” oz. downtowna, na hitro pogledali nebotičnike iz avta in nato parkirali ob obali. Zbiratelji majic so zahtevali skok v Hard Rock Café, nakar smo se razgledali in v manjših skupinah obiskali par različnih restavracij.</p>
+<p><a href="/images/amerika/dsc7158.jpg"><img src="/images/amerika/dsc7158.jpg" alt="_DSC7158" title="_DSC7158"></a></p>
+<p><a href="/images/amerika/dsc7165.jpg"><img src="/images/amerika/dsc7165.jpg" alt="_DSC7165" title="_DSC7165"></a></p>
+<p><a href="/images/amerika/img_6140.jpg"><img src="/images/amerika/img_6140.jpg" alt="IMG_6140" title="IMG_6140"></a></p>
+<p><a href="/images/amerika/img_6149.jpg"><img src="/images/amerika/img_6149.jpg" alt="IMG_6149" title="IMG_6149"></a></p>
+<p><a href="/images/amerika/img_6146.jpg"><img src="/images/amerika/img_6146.jpg" alt="IMG_6146" title="IMG_6146"></a></p>
+<p><a href="/images/amerika/img_6157.jpg"><img src="/images/amerika/img_6157.jpg" alt="IMG_6157" title="IMG_6157"></a></p>
+<p><a href="/images/amerika/img_6160.jpg"><img src="/images/amerika/img_6160.jpg" alt="IMG_6160" title="IMG_6160"></a></p>
+<p>Z zamudo smo Kubance uspeli prepričati v to, da nam natisnejo račun, nato pa smo se med kičastimi turističnimi stojnicami, ki so spominjale na Hrvaško obalo, postavili v polkrog, na tla vrgli klobuk in slabe pol urice mimoidočim krajšali čas s petjem. Še pred uro ali dvema povsem sončen dan je prerezala nevihta tropskih razsežnosti in nas ujela nepripravljene, tako da smo se nazaj do hotela peljali povsem premočeni. K sreči nas je razvedrilo preklinjanje pešcev, ki so jih ob kaotičnem vremenskem stanju na cesti zalivali nespretni vozniki.</p>
+<p><a href="/images/amerika/dsc7206.jpg"><img src="/images/amerika/dsc7206.jpg" alt="_DSC7206" title="_DSC7206"></a></p>
+<p><a href="/images/amerika/dsc7207.jpg"><img src="/images/amerika/dsc7207.jpg" alt="_DSC7207" title="_DSC7207"></a></p>
+<p>Naš hotel se je nahajal neposredno na slavnem Miami Beachu in po razpakiranju smo se večinoma podali na plažo, kakopak. Voda sicer ni bila jadranskih temperatur, a še vedno bistveno hladnejša in čistejša od vseh ostalih, ki smo jih na našem izletu izkusili. Ob nekaj pločevinkah Budweiserja smo v najvišji sobi na vrhu hotela uživali večer in zapeli nekaj pesmi ter se čudili sosedama iz Italije, ki sta komajda razumeli angleško, pa jima je vseeno uspelo priti v Miami. Zblojenci, ki ob prihodu nismo obiskali plaže, smo zamujeno kompenzirali z nočnim kopanjem. In da se bomo imeli s čim hvaliti, smo kopalke pustili v sobah. Drugi so se odpravili izkusit zloglasno nočno življenje. Bilo je tako, kot bi si predstavljal.</p>
+<p><a href="/images/amerika/img_6167.jpg"><img src="/images/amerika/img_6167.jpg" alt="IMG_6167" title="IMG_6167"></a></p>
+<p><a href="/images/amerika/img_6192.jpg"><img src="/images/amerika/img_6192.jpg" alt="IMG_6192" title="IMG_6192"></a></p>
+<p><a href="/images/amerika/img_6200.jpg"><img src="/images/amerika/img_6200.jpg" alt="IMG_6200" title="IMG_6200"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-09-kennedy-space-center-in-cocoa-beach/">Kennedy Space Center in Cocoa Beach</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-11-washington-d-c/">Washington D. C.</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-10-miami/` was built on 2024-11-10T15:45:02.462Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

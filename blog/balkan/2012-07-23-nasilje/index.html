@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Nasilje</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="nasilje">Nasilje</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2012-07-23">23. 7. 2012</time></li>
+</ul>
+
+<p>Deževen dan se je začel z vnovičnim zgodnjim vstajanjem, kar ne zveni kot obetaven začetek, a so šle stvari hitro navzgor, ko so na mize pred nas položili lične domače pite - pa ne jabolčnih, ampak take, ki bi jim pri nas rekli burek. Tisti z manj apetita so zajtrk zavili v folijo, prtljago smo zmetali v avto in se podali na cesto.</p>
+<p>Prvi postanek smo opravili v Jajcu, kjer se nismo nameravali predolgo zadrževati. Od zgoraj smo si ogledali znameniti slap in krenili dalje s trebuhom za kruhom. Pardon, lepinjo.</p>
+<p><a href="/images/balkan/img_56921.jpg"><img src="/images/balkan/img_56921.jpg" alt=""></a>
+<a href="/images/balkan/img_56751.jpg"><img src="/images/balkan/img_56751.jpg" alt=""></a></p>
+<p>Najpozornejši opazovalci so ob včerajšnjih fotografijah morda opazili, da je imel naš skiper pod pasom par dodatnih kilogramov - s tem razlogom smo ga sprejeli kot kredibilno avtoriteto, ko nam je zapovedal, naj se med potjo nujno ustavimo v mestu Travnik, na čevapčičih pri Hariju, ki so bojda kilometre pred ponudbo bolj popularnih sarajevskih čevabđinic. Iskanje lokala nam je sicer spet vzelo par minut, a se je v končni fazi izplačalo. Fotografija pove več kot 1000 besed, čevap števec + 80.</p>
+<p><a href="/images/balkan/img_57121.jpg"><img src="/images/balkan/img_57121.jpg" alt=""></a></p>
+<p>Pred končno destinacijo je bil to zadnji postanek, žal pa so se težave šele dobro začenjale. Najprej smo bili rahlo namrgodeni nad dobrimi štirimi evri cestnine, kolikor je bilo treba odšteti za 25-kilometrsko pot po avtocesti do Sarajeva. Potem smo v centru mesta dvakrat zapored srečali organe pregona, ki so nam najprej zaračunali 50 konvertibilnih mark za precej trivialen prekršek prepozne menjave pasu, zatem pa še očitali, da smo prevozili rdečo. Z moledovanjem in vztrajanjem pri nedolžnosti nam je v drugo uspelo iziti iz situacije brez kazni, a smo bili zaradi dveh prisilnih postankov na relaciji 300 metrov pošteno razdraženi.</p>
+<p><a href="/images/balkan/img_57481.jpg"><img src="/images/balkan/img_57481.jpg" alt=""></a></p>
+<p>Nekajkrat smo vprašali za napotke in zaokrožili po mestnem jedru ter končno našli prenočišče na Baščaršiji. Prijazna recepcionistka nam je skuhala turško kavo, lastnik stanovanja pa je poprosil, naj zaradi ramazana čimmanj motimo njegove muslimanske sosede. Po prstih smo se povpzeli do vhoda v drugem nadstropju in se navduševali nad starinskim dekorjem ter zavesami iz šestdesetih (na spodnji sliki so ene iz drugega obdobja).</p>
+<p><a href="/images/balkan/img_57541.jpg"><img src="/images/balkan/img_57541.jpg" alt=""></a></p>
+<p>Ob slabem stanju bosanskih cest smo bili kljub načrtno pesimističnemu upravljanju s časom malce v zamudi, zato smo se iz stanovanja  nemudoma odpravili proti Novemu Sarajevu, kjer se je imel zgoditi naš koncert v okviru Baščaršijskih noči. Po poti smo ponosno fotografirali svoje ime na velikem panoju s programom popularnega festivala in mimoidočim razlagali: &quot;<em>To smo mi!</em>&quot;.</p>
+<p><a href="/images/balkan/img_57621.jpg"><img src="/images/balkan/img_57621.jpg" alt=""></a></p>
+<p>Ko so nas pred nastopom neki mladci v baru začeli grozeče gledati ob omembi tega, da smo iz Slovenije, smo ugotovili, da sarajevski Željezničar jutri igra z NK Maribor, a se nam situacija ni zdela preveč problematična. Ne bi se mogli bolj zmotiti, a pustimo to - naše misli so bile zaenkrat bolj pri petju. Preden smo šli na oder, smo se srečali še z gospodom Samom, tajnikom slovenskega društva Ivan Cankar, ki je pomagalo pri organizaciji našega koncerta.</p>
+<p>Mešan repertoar smo nato z nekaj manjšimi napakami zadovoljivo izvedli in publika je bila navdušena. Tukajšnji slovenski ambasador nas je po nastopu pozdravil in povabil na kavo, nekaj lokalcev je poklepetalo z nami in kupilo CD-je, tako da je bil izkupiček večera v veliki meri pozitiven - dovoljšen razlog, da smo se mirno in sproščeno odpravili proti domovanju.</p>
+<p><a href="/images/balkan/img_57771.jpg"><img src="/images/balkan/img_57771.jpg" alt=""></a></p>
+<p>Lastnik stanovanja, v katerem bivamo, nam je za varno parkirišče priporočal garažno hišo hotela Evropa, kamor smo se tudi namenili. Med čakanjem v vrsti za vstop pa se je zgodil precej strašljiv prizor - od nikoder se je pojavila skupina navijačev, obkolila naš kombi in se pričela dreti  <em>&quot;Viole, viole!&quot;</em>. Eden od ljubiteljev športa je skozi prtljažna vrata splezal v vozilo, medtem ko so drugi tolkli po bokih in poskušali razbiti šipe. K sreči je vsaj eden od skupine bil pripravljen na pogovor in ko smo jim med kričanjem nekako uspeli pojasniti, da nismo prišli na tekmo, temveč smo tu iz povsem drugih razlogov, so brez besed izginili nazaj v noč.<a href="/images/balkan/img_57651.jpg"><img src="/images/balkan/img_57651.jpg" alt=""></a></p>
+<p>Pomirili smo se šele po hladnem pivu v varnosti domačega stanovanja, kjer smo pozno v noč razglabljali o športnikih čudne sorte. Ne vidimo razloga, da bi nezadovoljstvo z neko vsebino, ki se jo gleda predvsem po televiziji, rezultiralo v nasilju v resničnem življenju. Tudi mi smo bili žalostni, ko je Boromir umrl ob koncu prvega dela LOTR-a, a nalomiti nekoga na račun tega nima smisla. Škoda.</p>
+<p>Po svetli plati - na RTVSLO budno spremljajo našo turnejo. Njihov multimedijski center je <a href="http://www.rtvslo.si/slovencivsosednjihdrzavah/novica/287">objavil tole novico</a>, omenjeni pa smo bili tudi v današnji <a href="http://www.rtvslo.si/modload.php?&amp;c_mod=rtvoddajeradio&amp;op=show&amp;func=read&amp;c_menu=1&amp;c_id=52">oddaji Sotočja</a> (na koncu).</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/balkan/2012-07-22-sled-krvi-v-vodi/">Sled krvi v vodi</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/balkan/2012-07-24-iz-dezja-pod-kap/">Iz dežja pod kap</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/balkan/2012-07-23-nasilje/` was built on 2024-11-10T15:45:02.459Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

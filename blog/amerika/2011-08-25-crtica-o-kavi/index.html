@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Črtica o kavi</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="crtica-o-kavi">Črtica o kavi</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-25">25. 8. 2011</time></li>
+</ul>
+
+<p>Popotovanje po ZDA je, med številnimi drugimi »kulturnimi izzivi«, tudi velika preizkušnja za vse ljubitelje kavne omame, ki prihajamo s sončne strani Alp. Izkušnja vredna Dantejeve trilogije, ki pa se v tem primeru začne odvijati v obratni smeri, nekako v skladu s tem, kako hitro popuščajo kofeinske zaloge iz dobre, četudi šele dvajsetletne domovine, na katero začenjam iz tedna v teden gledati bolj hrepeneče in jo vedno bolj enačim s preddverjem kavopivskega raja, ki leži nedaleč stran, tam za italijanskimi mejami … Če so v tem primeru vice vse ameriške letalske družbe, ki vas z večjimi ali manjšimi zamudami popeljejo preko ocena, potem vedite, da so ZDA kofeinski pekel. In to ne kakršen koli, ampak tisti ameriški »the greatest hell of all« stereotipno strašanski, ki odtehta vse druge mentalne primanjkljaje tega velikega naroda. V roku treh tednov se boste namreč znašli na stopnji, ko vam pomanjkanje geografskega znanja endemitov in trapasta zakonska določila, ki npr. prepovedujejo užitje pločevinke piva na ulici, če le-ta ni odeta v neugleden rjav papir vpijoč »Look here, I am an alchoholic«, ne pomenijo nič več in ko iz kraja v kraj iščete nekaj, kar bi bilo vredno imenovati kava, pa četudi z malim k …</p>
+<p>Po neskončnih računih za 3 dolarje in več (pivo v trgovini stane trikrat manj, le použiti ga morate doma), nastopi faza varjenja lastnih zvarkov iz številnih nadomestkov, ki vam jih ponujajo največji sosedi, kot so Wallmart in podobni. Ure peke rjavih zrnc ter mešanje takšnih in drugačnih koncentratov, vam le odkriva srhljive podrobnosti, ki se lahko postavljajo ob bok največjim zarotam zgodovine. Nescafe niti približno ni takšen kot v Evropi, četudi se na etiketi bohoti švicarski naslov proizvajalca, je pa slajši in drugačnega okusa. Mleta kava najboljših brazilskih mešanic je sumljivo podobna prej omenjenemu koncentratu in se presenetljivo slabo odziva na stik z vrelo vodo, ki agresivno napade vsak okus in ga, tik pred vašimi hlepečimi brbončicami spremeni v nekaj, kar po vonju in okusu bolj spominja na tisto, kar na stari celini sledi uvodnemu použitju in sledečim prebavnim procesom v prostorih, ki v osnovi niso namenjeni pitju kave. Tudi natančno raziskovanje sosesk z obetavnimi imeni kot je »Little Italy«, se je doslej izkazalo za neuspešno in predvsem skrb vzbujajoče, saj osebje italijanske restavracije po vseh teh letih v obljubljeni deželi še vedno ne zna angleško. Ko pa gost naroči espresso, tak kratek in močan kolikor se le da, bo v pričakovanju lične skodelice, s centimetrom črnega zlata na dnu, dobil 3 decilitre veliko kanglo z rjavo vodo prej omenjenega okusa, postreženo s prijaznim »Tri dolars prego and donta forgeta on the tip«.</p>
+<p>Umetnost naročanja kave v verigah kot je Starbucks, kjer seveda strežejo prijazni in nasmejani predstavniki vseh ras in manjšin pod motom »The greatest coffee for the greatest nation of all and much better than any other coffe chain in the States« pa je kompleksen postopek vreden najboljših broadwayskih produkcij. Enostavno nemogoče je namreč naročiti kavo z mlekom. Strežno osebje od vas pričakuje kupe podrobnih napotkov, ki se začnejo z velikostjo; ta ni »small ali large«, ampak je »tall, grande in venti«, sledi tip nekega osladnega zvarka, ki ga cedijo iz netransparentnih plastičnih steklenic, ko se lahko odločate med espressi (2 dcl in več), frapuccini, iced coffeeji (led prevladuje), smoothiji (kje za vraga je tu kaj od kave?) ali chai in še kakšnim lokalnim domislekom (vse je na voljo s kofeinom ali brez), potem med polnomastnim mlekom (ta ima v ZDA tam okrog 2% maščobe) ali low fat (pomislite, da imajo v ZDA tudi olje za, ki vsebuje zdravju varovalnih 0% maščobe), pa sladkorjem, ki je trsni (ko izrečete to željo vas pogledajo, kot da ste kriminalec) ali pa nek čuden prah spet z 0% vseh mogočih primesi in predvsem z 0 kalorijami. Naporno početje, ki pa ga, kot češnjica na vrhu nizkokalorične smetane brez maščobe, okrona še zaužitje naročenega, ki je povsem v nasprotju s tistim, kar ste pričakovali.</p>
+<p>Ob koncu še ideja za vse slovenske literarne teoretike in nadebudne slovenistke; z vnaprejšnjim opravičilom, da je najbrž rojena iz obupne kofeinske deprivacije … Kaj pa, če je mogoče mati našega nacionalnega literarnega heroja Cankarja bila Američanka?</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-25-pot-v-cleveland/">Pot v Cleveland</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-26-zivalski-vrt-in-e-ene-stojece-ovacije/">Živalski vrt in še ene stoječe ovacije</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-25-crtica-o-kavi/` was built on 2024-11-10T15:45:02.464Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

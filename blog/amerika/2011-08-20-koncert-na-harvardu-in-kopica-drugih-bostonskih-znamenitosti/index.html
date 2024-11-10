@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Koncert na Harvardu in kopica drugih Bostonskih znamenitosti</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="koncert-na-harvardu-in-kopica-drugih-bostonskih-znamenitosti">Koncert na Harvardu in kopica drugih Bostonskih znamenitosti</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-20">20. 8. 2011</time></li>
+</ul>
+
+<p>Zjutraj se nam ni nikamor mudilo. Pojedli smo zajtrk in se pobrili na <a href="http://newsoholics.com/wp-content/uploads/2010/08/Paul-Jr-Designs.jpg">Paula Juniorja</a> in <a href="http://www.peoples.ru/sport/alpine_skiing/adam_malysz/malysz_5.jpg">Adama Malysza</a>.</p>
+<p><a href="/images/amerika/dsc8609.jpg"><img src="/images/amerika/dsc8609.jpg" alt="_DSC8609" title="_DSC8609"></a></p>
+<p>Prehodili smo kratko pot do najbližje postaje rdeče linije podzemne železnice, si kupili simpatične <a href="http://www.mbta.com/fares_and_passes/charlie/">Čarli kartice</a> ter sedli na vlak, ki je peljal ven iz mesta.</p>
+<p><a href="/images/amerika/img_7719.jpg"><img src="/images/amerika/img_7719.jpg" alt="IMG_7719" title="IMG_7719"></a></p>
+<p><a href="/images/amerika/dsc8556.jpg"><img src="/images/amerika/dsc8556.jpg" alt="_DSC8556" title="_DSC8556"></a></p>
+<p><a href="/images/amerika/img_7746.jpg"><img src="/images/amerika/img_7746.jpg" alt="IMG_7746" title="IMG_7746"></a></p>
+<p>Izstopili smo na postaji, imenovani Harvard. Ki je v bližini slavne univerze, imenovane Harvard. Tam smo se zadržali kar nekaj časa. Pohajkovali smo po kampusu, opazovali razne bolj in manj aktivne študente med internati in fakultetnimi zgradbami ter fotografirali knjižnice, vodomete in ostale privlačne subjekte. A časa za oglede nam je počasi zmanjkovalo, ob tretji popoldanski uri smo namreč nastopali v eni od tamkajšnjih dvoran. Na Harvard nas je povabila vokalna skupina, ki smo jo lani gostili v Sloveniji, tako da smo jim morali vrniti uslugo. Glede na odziv publike nam je očitno uspelo.</p>
+<p><a href="/images/amerika/dsc8560.jpg"><img src="/images/amerika/dsc8560.jpg" alt="_DSC8560" title="_DSC8560"></a></p>
+<p><a href="/images/amerika/dsc8569.jpg"><img src="/images/amerika/dsc8569.jpg" alt="_DSC8569" title="_DSC8569"></a></p>
+<p><a href="/images/amerika/img_7712.jpg"><img src="/images/amerika/img_7712.jpg" alt="IMG_7712" title="IMG_7712"></a></p>
+<p><a href="/images/amerika/img_7720.jpg"><img src="/images/amerika/img_7720.jpg" alt="IMG_7720" title="IMG_7720"></a></p>
+<p><a href="/images/amerika/img_7713.jpg"><img src="/images/amerika/img_7713.jpg" alt="IMG_7713" title="IMG_7713"></a></p>
+<p><a href="/images/amerika/img_7725.jpg"><img src="/images/amerika/img_7725.jpg" alt="IMG_7725" title="IMG_7725"></a></p>
+<p>Naslednja postaja je bila ena najbolj znanih javnih plaž v teh koncih, <a href="http://en.wikipedia.org/wiki/Revere_Beach">Revere Beach</a> blizu Wonderlanda v Bostonu. Voda je bila še enkrat sveža in hladna in tudi frizbi je prišel prav.</p>
+<p><a href="/images/amerika/img_7762.jpg"><img src="/images/amerika/img_7762.jpg" alt="IMG_7762" title="IMG_7762"></a></p>
+<p><a href="/images/amerika/img_7767.jpg"><img src="/images/amerika/img_7767.jpg" alt="IMG_7767" title="IMG_7767"></a></p>
+<p>Naša četica je še rahlo vlažna korakala strumno in veselo naprej, naravnost proti <a href="http://www.cityofboston.gov/freedomtrail/bunkerhill.asp">Bunker Hill Monumentu</a>. Nekateri junaki celo prehodili vseh 294 stopnic in se povzpeli na vrh 67-metrskega tiča. Drugi so raje čakali spodaj.</p>
+<p><a href="/images/amerika/img_7780.jpg"><img src="/images/amerika/img_7780.jpg" alt="IMG_7780" title="IMG_7780"></a></p>
+<p>Počasi smo se začeli odpravljati domov, a je naš sprehod prekinila grda in poredna nevihta s točo. Prisiljeni smo bili vedriti v najbližjem pubu, kjer smo kulinarično izkoristili naključje in si za malico privoščili izvrstne <a href="http://en.wikipedia.org/wiki/Boston_roll_(sushi)">Bostonske zvitke</a>.</p>
+<p><a href="/images/amerika/img_7814.jpg"><img src="/images/amerika/img_7814.jpg" alt="IMG_7814" title="IMG_7814"></a></p>
+<p><a href="/images/amerika/img_7795.jpg"><img src="/images/amerika/img_7795.jpg" alt="IMG_7795" title="IMG_7795"></a></p>
+<p><a href="/images/amerika/img_7799.jpg"><img src="/images/amerika/img_7799.jpg" alt="IMG_7799" title="IMG_7799"></a></p>
+<p><a href="/images/amerika/img_7811.jpg"><img src="/images/amerika/img_7811.jpg" alt="IMG_7811" title="IMG_7811"></a></p>
+<p>V stanovanju so se nekateri zleknili na kavče in postelje, vozniki pa so si šli izposodit avtomobila. Sitni izposojevalci so z drago najemnino za navigacijske naprave povzročili še manjši obvoz (GPS-e smo kar kupili, je bilo ceneje), potem smo še malo vadili in zdaj gremo spat. Jutri namreč krenemo proti Olcottu na jezeru Ontario.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-19-promet/">Promet</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-21-pot-v-olcott-in-koncert-v-rochestru/">Pot v Olcott in koncert v Rochestru</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-20-koncert-na-harvardu-in-kopica-drugih-bostonskih-znamenitosti/` was built on 2024-11-10T15:45:02.463Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

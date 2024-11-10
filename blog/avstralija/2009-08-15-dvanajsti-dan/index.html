@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Dvanajsti dan</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="dvanajsti-dan">Dvanajsti dan</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-15">15. 8. 2009</time></li>
+</ul>
+
+<p>Drugo soboto, ki smo jo preživeli v Avstraliji, smo obiskali Newcastle, v duhu kolonizacije poimenovan po obstoječem mestu v matični državi (<em><a href="http://www.youtube.com/watch?v=OOns5Vq1Vmo">Is this Plymouth?</a></em>). Rutinski <em>po zajtrku smo šli iz mesta A v mesto B</em> opis bom tokrat izpustil, izdam le, da smo si privoščili zelo panoramsko vožnjo po brezmejnih ravnih planotah, zabavnih 30 kilometrih makadama in vijugastih cestah skozi gozdičke.</p>
+<p>Med prvim postankom v Forsterju smo plezali po valobranih, preganjali pelikane, se v vročem soncu, ki je bilo najvišje na nebu, sprehajali po peščeni plaži ter v gostilnici ob njej pojedli nekaj porcij fish and chipsa. Od dobre volje in lepega vremena smo ostalim obiskovalcem zapeli še nekaj štiklcev, kar je povzročilo, da nas je neka gospa vsa presenečena povabila na vokalni festivalček, ki se je v mestu odvijal zvečer, a smo jo zavrnili, ker se nam je mudilo v smeri naše končne destinacije.</p>
+<p>V od daleč zelo industrijsko izgledajoč Newcastle smo prispeli zgodaj popoldne, se namestili v sobe in se po kratkem počitku šli razgledat. Lonely Planet je obljubljal alternativno izkušnjo, kar se je kmalu izkazalo za resnično. Povsod je bilo videti trgovine s stripi, rabljenimi oblačili in vinilnimi ploščami, med trgovinami se je bohotil pografitiran klošarski separe s staro žimnico, mimoidoči mladostniki so nosili odklonske frizure, še najbolj nepričakovan pa je bil mimohod kupa škotov z dudami in takoj za njimi še avstralskih vojaških veteranov.</p>
+<p>Ob koncu glavne ulice smo zavili na dolg pomol (Google maps <a href="http://maps.google.com.au/?ie=UTF8&amp;ll=-32.920736,151.796551&amp;spn=0.018913,0.038581&amp;t=h&amp;z=15">pravi</a>, da kilometer in pol) s svetilnikom in se sprehodili do konca, kjer smo posneli nekaj umetniških fotografij in na obzorju našteli devetnajst tovornih ladij. Ker še nismo bili v polnem številu in posledično nismo mogli korektno peti, je moral Žarko mimoidoče babice s psi spraviti v dobro voljo z obilnim hvaljenjem njihovih ljubljenčkov v kazahstanski angleščini <em>a la</em> Sacha Baron Cohen, pri čemer smo vsi ostali komajda zadrževali smeh.</p>
+<p>K sreči so bile druge skupinice blizu in ob koncu sprehoda po pomolu nam ni manjkal noben glas več. Na hitro smo se vrnili v hotel, se preoblekli v zimi primerne oprave in se odpravili na prej odkrito točko z veliko pretočnostno ljudi. Zavzeli smo polkrožno bojno formacijo ter pričeli z uličnim koncertom. Med slabo urico trajajočim prepevanjem v nam skorajda najljubši spontani obliki smo pritegnili mnogotere poglede, najbolj so seveda prijali dekliški. Širokogrudno smo sodelovali v vseh možnih gasilskih fotografijah, kar se nam je izplačalo. Kopica lokalnih deklet se je ponudila, da nam razkaže bližnje klube, od tu dalje pa si lahko razplet dogodkov predstavljate sami.</p>
+<p><em>Kot vedno se opravičujemo za blažjo kršitev ustaljenega reda objavljanja prispevkov, tudi tokrat nam jo je zagodla nezmožnost povezave s svetovnim spletom. Bomo nadoknadili.</em></p>
+<p><img src="/images/avstralija/dsc_0635.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0643.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0661.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0687.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0689.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0692.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0693.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0702.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0717.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0725.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0727.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0729.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0736.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0785.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0842.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0853.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0854.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0855.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0858.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0868.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0910.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0913.jpg" alt=""></p>
+<p><img src="/images/avstralija/dsc_0918.jpg" alt=""></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-14-enajsti-dan/">Enajsti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/avstralija/2009-08-16-trinajsti-dan/">Trinajsti dan</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-15-dvanajsti-dan/` was built on 2024-11-10T15:45:02.468Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

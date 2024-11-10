@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Zadnji dan in povratek</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="zadnji-dan-in-povratek">Zadnji dan in povratek</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2009-08-20">20. 8. 2009</time></li>
+</ul>
+
+<p>Lepih stvari je vedno prehitro konec, kar smo ob vrnitvi iz Avstralije začutili tudi sami. Seveda nismo hoteli, da bi bralci našega potovalnega bloga preživljali enake tegobe z njegovim zaprtjem, zato ga nismo dokončali do mrzlih novembrskih dni. Ja, tako dobri smo. Sedaj pa brez nadaljnega odlašanja vsem strpnim bralcem predstavljam zaključen dan našega potovanja, na katerega ste tako dolgo čakali.</p>
+<p><a href="/images/avstralija/dsc_1927.jpg"><img src="/images/avstralija/dsc_1927.jpg" alt="Dobro jutro, Tajpej!" title="DSC_1927"></a></p>
+<p>Po zanimivem zajtrku nas je zgodaj zjutraj pred hotelom pobral voznik kombija in nas zapeljal proti centru Tajpeja. Prometna konica ni bila tako huda, kot smo pričakovali, adrenalin so v našo kri črpali le vozniki majhnih motornih koles, ki so s centimetrsko preciznostjo švigali med ogromnimi vozili povsem brez skrbi.</p>
+<p><a href="/images/avstralija/dsc_1939.jpg"><img src="/images/avstralija/dsc_1939.jpg" alt="Pogled na tipično ulico." title="DSC_1939"></a></p>
+<p>Šofer nas je odložil v samem centru mesta, saj smo čez dan nameravali uporabljati odlično urejen in cenen javni prevoz. Takoj ob izhodu iz klimatiziranega vozila sta nas zajela vroč zrak in nagravžno visoka vlažnost. K sreči smo bili plažno napravljeni, tako da se je dalo preživeti. Gregor nas je zbobnal na kup in predstavil potek ogleda, nakar smo se spustili v globino postaje podzemne železnice in se zbasali na vlak.</p>
+<p><a href="/images/avstralija/dsc_1944.jpg"><img src="/images/avstralija/dsc_1944.jpg" alt="Izkrcanje pri glavni postaji podzemne železnice" title="DSC_1944"></a></p>
+<p><a href="/images/avstralija/dsc_1948.jpg"><img src="/images/avstralija/dsc_1948.jpg" alt="Potovanje proti nebotičniku Taipei 101." title="DSC_1948"></a></p>
+<p>Naše prepevanje med vožnjo je sramežljive Azijce malce zmotilo, zato smo se po pesmi ali dveh raje prilagodili kulturnim razlikam (when in Rome). Kmalu smo prispeli na ciljno postajo in nadaljevali peš. Nismo se zmenili za občasne težave z orientacijo, saj smo se v doglednem času znašli pod nebotičnikom Taipei 101.</p>
+<p>Ogledali smo si nekaj trgovin v pritličju in premraženi od močne klime čakali v vrsti za vstopnice, nato pa vstopili v najhitrejše dvigalo sploh. Dobrih dvajset sekund smo poslušali popolnoma nerazumljivo angleščino simpatične spremljevalke ter se kmalu znašli na razgledni točki pod vrhom. Posneli smo nekaj fotografij, se navduševali nad ogromno utežjo, ki ohranja stabilnost stavbe, in se sprehodili skozi čudaško trgovino z izdelki iz dragih kamnov.</p>
+<p><a href="/images/avstralija/dsc_1962.jpg"><img src="/images/avstralija/dsc_1962.jpg" alt="Najvišja zgradba na svetu od spodaj." title="DSC_1962"></a></p>
+<p><a href="/images/avstralija/dsc_1974.jpg"><img src="/images/avstralija/dsc_1974.jpg" alt="Trgovine, ki si lahko privoščijo tako prestižno lokacijo." title="DSC_1974"></a></p>
+<p><a href="/images/avstralija/dsc_1982.jpg"><img src="/images/avstralija/dsc_1982.jpg" alt="Čakanje na vstopn... ej! Ti dve nas pa že od letališča zasledujeta!" title="DSC_1982"></a></p>
+<p><a href="/images/avstralija/dsc_1988.jpg"><img src="/images/avstralija/dsc_1988.jpg" alt="In še pogled z vrha." title="DSC_1988"></a></p>
+<p><a href="/images/avstralija/dsc_1999.jpg"><img src="/images/avstralija/dsc_1999.jpg" alt="660-tonsko nihalo, vredno 2 milijona dolarjev, ki blaži zibanje zgradbe v vetru." title="DSC_1999"></a></p>
+<p><a href="/images/avstralija/dsc_2006.jpg"><img src="/images/avstralija/dsc_2006.jpg" alt="Naključna Slovenka, ki smo jo srečali v nebotičniku." title="DSC_2006"></a></p>
+<p><a href="/images/avstralija/dsc_2007.jpg"><img src="/images/avstralija/dsc_2007.jpg" alt="Hrvaški lobi na Tajvanu je zelo močan." title="DSC_2007"></a></p>
+<p>Tajvan je eden od azijskih tigrov in v državi se proizvede ogromno visokotehnoloških izdelkov, ki se nato prodajajo v zahodnem svetu. Posledično se da dosti <em>domačih</em> artiklov kupiti po precej nižjih cenah, kot pri nas, kar nas je v nas povzročilo manjšo nakupovalno mrzlico. Kot dekleta dobro vedo, je <em>šoping</em> naporna reč, zato smo dopoldanski del ogleda zaključili z obiskom pristne kitajske restavracije. Maskirani mojster je z za nas netipičnim orodjem na vroči plošči tik pod našimi nosovi pripravljal obrok in prvič v življenju smo lahko videli, kaj so dejansko sestavine kitajske hrane.</p>
+<p><a href="/images/avstralija/dsc_2024.jpg"><img src="/images/avstralija/dsc_2024.jpg" alt="Zaposlene ulice." title="DSC_2024"></a></p>
+<p><a href="/images/avstralija/dsc_2026.jpg"><img src="/images/avstralija/dsc_2026.jpg" alt="TO je kitajska restavracija, ne pa Novi Šangaj." title="DSC_2026"></a></p>
+<p><a href="/images/avstralija/dsc_2037.jpg"><img src="/images/avstralija/dsc_2037.jpg" alt="Siti in veseli." title="DSC_2037"></a></p>
+<p>Privoščili smo si še sladoled in se kmalu vrnili na ulico, od koder smo pot nadaljevali v smeri bližnjega templja, da bi se naučili še kaj malega o lokalni kulturi. Prvi obisk nas je rahlo razočaral, saj so budisti očitno ostali doma, pa tudi sam prostor je bil preveč moderen in sterilen. Hitro smo se obrnili, se s podzemno zapeljali na naslednjo točko, kjer smo bili bistveno bolj navdušeni.</p>
+<p><a href="/images/avstralija/dsc_2047.jpg"><img src="/images/avstralija/dsc_2047.jpg" alt="Dva telička in kravica." title="DSC_2047"></a></p>
+<p><a href="/images/avstralija/dsc_2054.jpg"><img src="/images/avstralija/dsc_2054.jpg" alt="Tudi tajpejska modna scena rabi Žaretove nasvete." title="DSC_2054"></a></p>
+<p><a href="/images/avstralija/dsc_2060.jpg"><img src="/images/avstralija/dsc_2060.jpg" alt="Hej, mali črnčki niso prav nič krivi!" title="DSC_2060"></a></p>
+<p><a href="/images/avstralija/dsc_2070.jpg"><img src="/images/avstralija/dsc_2070.jpg" alt="Budistični tempelj." title="DSC_2070"></a></p>
+<p>Taoistični tempelj je bil nabito poln vernikov. Tipična arhitektura je božala oči, mize so bile polne hrane, ribe pod umetnim slapom pa so plavale v ritmu bobnov, ki je odzvanjal naokrog. Vzdušje je tudi nekatere od nas tako prevzelo, da so se pridružili obredu. A ker se je sonce pričelo spuščati, smo se morali vrniti do hotela, saj nas je zvečer čakal let.</p>
+<p><a href="/images/avstralija/dsc_2103.jpg"><img src="/images/avstralija/dsc_2103.jpg" alt="Taoistični tempelj." title="DSC_2103"></a></p>
+<p><a href="/images/avstralija/dsc_2119.jpg"><img src="/images/avstralija/dsc_2119.jpg" alt="Slovenski verniki." title="DSC_2119"></a></p>
+<p>Naša živahnost je uplahnela od napornega dne, pa tudi letaliških procedur smo bili že naveličani, zato smo se zdolgočaseno vlekli po letališču. Za darilne kupončke, ki smo jih prejeli od letalske družbe, so nam izročili smešne glinene piščali, popili smo še zadnjo tajvansko pijačo in se vkrcali na letalo. Nočni let je bil seveda duhamoren kot vsi ostali, nekaterim nam ga je k sreči uspelo večino prespati.</p>
+<p><a href="/images/avstralija/dsc_2177.jpg"><img src="/images/avstralija/dsc_2177.jpg" alt="Akrobacije na letališču." title="DSC_2177"></a></p>
+<p><a href="/images/avstralija/dsc_2184.jpg"><img src="/images/avstralija/dsc_2184.jpg" alt="Ne glejte nas - mi pijemo samo pivo." title="DSC_2184"></a></p>
+<p><a href="/images/avstralija/dsc_2193.jpg"><img src="/images/avstralija/dsc_2193.jpg" alt="A bomo že enkrat prispeli?" title="DSC_2193"></a></p>
+<p><a href="/images/avstralija/dsc_2202.jpg"><img src="/images/avstralija/dsc_2202.jpg" alt="Samo še 4 urice." title="DSC_2202"></a></p>
+<p>Ob prestopu na Dunaju smo zaradi bližine doma bili bolj vedri. V čakalnici smo reflektirali celotno potovanje in se pogovarjali o nadaljnih načrtih zasedbe, dokler nas ni pobralo Adriino letalo, s katerim smo se vrnili na Brniško letališče. Objemali smo družinske člane, Janez je zaigrali na didžiridu, zapeli smo še Pesem o svobodi, nato pa sedli v avtomobile in se odpeljali domov. Spat.</p>
+<p><a href="/images/avstralija/dsc_2210.jpg"><img src="/images/avstralija/dsc_2210.jpg" alt="Osvežitev na Dunaju." title="DSC_2210"></a></p>
+<p><a href="/images/avstralija/dsc_2214.jpg"><img src="/images/avstralija/dsc_2214.jpg" alt="Še gasilska pred letom v domovino." title="DSC_2214"></a></p>
+<p><a href="/images/avstralija/dsc_2223.jpg"><img src="/images/avstralija/dsc_2223.jpg" alt="Glej Trbovlje!" title="DSC_2223"></a></p>
+<p><a href="/images/avstralija/dsc_2229.jpg"><img src="/images/avstralija/dsc_2229.jpg" alt="Še zadnje skladbe ..." title="DSC_2229"></a></p>
+<p>[caption id=&quot;attachment_450&quot; align=&quot;aligncenter&quot; width=&quot;300&quot; caption=&quot;&quot;Mama, mi smo tu. Boš kmalu?&quot;&quot;]<a href="/images/avstralija/dsc_2233.jpg"><img src="/images/avstralija/dsc_2233.jpg" alt="&quot;Mama, mi smo tu. Boš kmalu?&quot;" title="DSC_2233"></a></p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/avstralija/2009-08-19-sestnajsti-dan/">Šestnajsti dan</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-06-24-hello-world/">Uvodne besede</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/avstralija/2009-08-20-zadnji-dan-in-povratek/` was built on 2024-11-10T15:45:02.469Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

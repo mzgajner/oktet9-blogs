@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Kruzanje po Clearwaterju</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="kruzanje-po-clearwaterju">Kruzanje po Clearwaterju</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-07">7. 8. 2011</time></li>
+</ul>
+
+<p>Po včerajšnji namestitvi in večerni zabavi ob novokupljenih družabnih igrah (nekateri jih pač obožujemo) smo se danes prebudili še kar zgodaj in na hitro zaplavali, dokler sonce še ni začelo maksimalno pripekati. Pogumneži so pretekli kilometrček ali dva po plaži, sledil je kratek zajtrk, nato pa sprehod do izposojevalnice plovil.</p>
+<p><a href="/images/amerika/img_57621.jpg"><img src="/images/amerika/img_57621.jpg" alt="IMG_5762" title="IMG_5762"></a></p>
+<p><a href="/images/amerika/img_57631.jpg"><img src="/images/amerika/img_57631.jpg" alt="IMG_5763" title="IMG_5763"></a></p>
+<p>Pred odhodom smo ciljno lokacijo vnesli v avtomobilsko navigacijo in izvedeli, da je predvideni čas vožnje samo tri minutke. Gremo kar peš, smo rekli, in se zajebali. Po najhujši vročini smo hodili kake pol ure in pri tem spotili nekaj decilitrov vode. Čoln, s katerim smo se nameravali odpraviti na krajšo vožnjo, je bil rezerviran za enajsto dopoldansko uro, ki smo jo ujeli za las.</p>
+<p>No, potem smo ugotovili, da se tako zelo spet ne mudi, saj nam je gospa izposojevalka priredila smešno in zelo dolgo predavanje o delovanju čolna, pravilih plovbe in hiši Hulka Hogana v bližini. Ne vemo, kako nam uspe vedno znova naleteti na ljudi, ki izgledajo kot uporabniki težkih drog. Če nam bo uspelo premostiti tehnične težave, vam gospo dostavimo v video obliki, da se boste smejali z nami.</p>
+<p><a href="/images/amerika/dsc68511.jpg"><img src="/images/amerika/dsc68511.jpg" alt="_DSC6851" title="_DSC6851"></a></p>
+<p>Krajše križarjenje je trajalo dve urici, v katerih smo srečali veliko zelo hitrih plovil in videli nekaj bogatunskih vil, med drugim eno od Toma Cruisea. Na nekaj točkah smo se ustavili in okopali, ampak le napol uspešno, saj je voda povsod topla in ne najbolj čista mlakuža. Povrh vsega je zelo plitva in nudi zavetje morskim ježkom.</p>
+<p><a href="/images/amerika/dsc67341.jpg"><img src="/images/amerika/dsc67341.jpg" alt="_DSC6734" title="_DSC6734"></a></p>
+<p><a href="/images/amerika/dsc67391.jpg"><img src="/images/amerika/dsc67391.jpg" alt="_DSC6739" title="_DSC6739"></a></p>
+<p><a href="/images/amerika/dsc67591.jpg"><img src="/images/amerika/dsc67591.jpg" alt="_DSC6759" title="_DSC6759"></a></p>
+<p><a href="/images/amerika/img_57871.jpg"><img src="/images/amerika/img_57871.jpg" alt="IMG_5787" title="IMG_5787"></a></p>
+<p><a href="/images/amerika/img_58131.jpg"><img src="/images/amerika/img_58131.jpg" alt="IMG_5813" title="IMG_5813"></a></p>
+<p>Pomorsko zbliževanje smo sprva želeli podaljšati, a so našo barkačo že oddali nekomu drugemu in zahtevali, da po dveh rezerviranih urah pristanemo. Tako zdaj počivamo po obroku, vas multimedijsko obveščamo in se pripravljamo na večerni koncert na <a href="http://www.floridastateparks.org/caladesiisland/">Caladesi Islandu</a>.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-06-migracija-do-clearwaterja/">Migracija do Clearwaterja</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-08-radijski-pridigar/">Radijski pridigar</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-07-kruzanje-po-clearwaterju/` was built on 2024-11-10T15:45:02.462Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>

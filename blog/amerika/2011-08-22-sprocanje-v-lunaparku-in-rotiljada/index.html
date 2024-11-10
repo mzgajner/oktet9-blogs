@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="sl">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Sproščanje v (luna)parku in roštiljada</title>
+		<meta name="description" content="Arhiv treh potovalnih blogov s turnej Okteta 9 po Avstraliji, ZDA in Balkanu.">
+		<link rel="alternate" href="feed/feed.xml" type="application/atom+xml" title="Potovalni blogi">
+		<style>/* This is an arbitrary CSS string added to the bundle */
+/* Defaults */
+:root {
+	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
+}
+
+/* Theme colors */
+:root {
+	--color-gray-20: #e0e0e0;
+	--color-gray-50: #C0C0C0;
+	--color-gray-90: #333;
+
+	--background-color: #fff;
+
+	--text-color: var(--color-gray-90);
+	--text-color-link: #082840;
+	--text-color-link-active: #5f2b48;
+	--text-color-link-visited: #17050F;
+
+	--syntax-tab-size: 2;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-gray-20: #e0e0e0;
+		--color-gray-50: #C0C0C0;
+		--color-gray-90: #dad8d8;
+
+		/* --text-color is assigned to --color-gray-_ above */
+		--text-color-link: #1493fb;
+		--text-color-link-active: #6969f7;
+		--text-color-link-visited: #a6a6f8;
+
+		--background-color: #15202b;
+	}
+}
+
+
+/* Global stylesheet */
+* {
+	box-sizing: border-box;
+}
+
+@view-transition {
+	navigation: auto;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0 auto;
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+html {
+	overflow-y: scroll;
+}
+body {
+	max-width: 40em;
+}
+
+/* https://www.a11yproject.com/posts/how-to-hide-content/ */
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+p {
+	line-height: 1.5;
+}
+
+li {
+	line-height: 1.5;
+}
+
+a[href] {
+	color: var(--text-color-link);
+}
+a[href]:visited {
+	color: var(--text-color-link-visited);
+}
+a[href]:hover,
+a[href]:active {
+	color: var(--text-color-link-active);
+}
+
+main,
+footer {
+	padding: 1rem;
+}
+main :first-child {
+	margin-top: 0;
+}
+
+header {
+	border-bottom: 1px dashed var(--color-gray-20);
+}
+header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.links-nextprev {
+	display: flex;
+	justify-content: space-between;
+	gap: .5em 1em;
+	list-style: "";
+	border-top: 1px dashed var(--color-gray-20);
+	padding: 1em 0;
+}
+.links-nextprev > * {
+	flex-grow: 1;
+}
+.links-nextprev-next {
+	text-align: right;
+}
+
+table {
+	margin: 1em 0;
+}
+table td,
+table th {
+	padding-right: 1em;
+}
+
+pre,
+code {
+	font-family: var(--font-family-monospace);
+}
+pre:not([class*="language-"]) {
+	margin: .5em 0;
+	line-height: 1.375; /* 22px /16 */
+	-moz-tab-size: var(--syntax-tab-size);
+	-o-tab-size: var(--syntax-tab-size);
+	tab-size: var(--syntax-tab-size);
+	-webkit-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	overflow-x: auto;
+}
+code {
+	word-break: break-all;
+}
+
+/* Header */
+header {
+	display: flex;
+	gap: 1em .5em;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 1em;
+}
+.home-link {
+	font-size: 1em; /* 16px /16 */
+	font-weight: 700;
+	margin-right: 2em;
+}
+.home-link:link:not(:hover) {
+	text-decoration: none;
+}
+
+/* Nav */
+.nav {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.nav-item {
+	display: inline-block;
+	margin-right: 1em;
+}
+.nav-item a[href]:not(:hover) {
+	text-decoration: none;
+}
+.nav a[href][aria-current="page"] {
+	text-decoration: underline;
+}
+
+/* Posts list */
+.postlist {
+	/* list-style: none; */
+	padding: 0;
+	padding-left: 1.5rem;
+}
+.postlist-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	counter-increment: start-from;
+	margin-bottom: 1em;
+}
+.postlist-item:before {
+	display: inline-block;
+	pointer-events: none;
+	content: "" counter(start-from, decimal-leading-zero) ". ";
+	line-height: 100%;
+	text-align: right;
+	margin-left: -1.5rem;
+}
+.postlist-date,
+.postlist-item:before {
+	font-size: 0.8125em; /* 13px /16 */
+	color: var(--color-gray-90);
+}
+.postlist-date {
+	word-spacing: -0.5px;
+}
+.postlist-link {
+	font-size: 1.1875em; /* 19px /16 */
+	font-weight: 700;
+	flex-basis: calc(100% - 1.5rem);
+	padding-left: .25em;
+	padding-right: .5em;
+	text-underline-position: from-font;
+	text-underline-offset: 0;
+	text-decoration-thickness: 1px;
+}
+.postlist-item-active .postlist-link {
+	font-weight: bold;
+}
+
+/* Tags */
+.post-tag {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: capitalize;
+	font-style: italic;
+}
+.postlist-item > .post-tag {
+	align-self: center;
+}
+
+/* Tags list */
+.post-metadata {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: .5em;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.post-metadata time {
+	margin-right: 1em;
+}
+
+main a:has(img) {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 300px;
+}
+
+main a img {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.intro {
+	font-size: 1.33rem;
+}</style>
+	</head>
+	<body>
+		<a href="#skip" class="visually-hidden">Skip to main content</a>
+
+		<header>
+			<a href="/" class="home-link">Potovalni blogi</a>
+			<nav>
+				<h2 class="visually-hidden" id="top-level-navigation-menu">Top level navigation menu</h2>
+				<ul class="nav">
+					<li class="nav-item"><a href="/avstralija/">Avstralija</a></li>
+					<li class="nav-item"><a href="/amerika/">ZDA</a></li>
+					<li class="nav-item"><a href="/balkan/">Balkan</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<main id="skip">
+			<heading-anchors>
+				<h1 id="sproscanje-v-luna-parku-in-rostiljada">Sproščanje v (luna)parku in roštiljada</h1>
+
+<ul class="post-metadata">
+	<li><time datetime="2011-08-22">22. 8. 2011</time></li>
+</ul>
+
+<p>Mestece Olcott je bilo nekdaj menda turistična meka. Zaznamovali so ga ogromni hoteli, križarjenja po jezeru Ontario in luksuzne restavracije. Danes tukaj večinoma živijo domačini, nekatere hiše so tudi zapuščene. Če se že oglasi kak turist, je gotovo Američan in najbrž tudi ribič. V tem mirnem vzdušju smo danes preživeli izjemen dan.</p>
+<p>Budilke niso niti pisnile, vstali smo povsem po lastni volji. Po zajtrku smo v krajšem neurju nekaj časa poležavali, nato pa se zgodaj popoldne odpravili ob obali proti vzhodu. Manj kot kilometerček od doma smo našli lunapark, ki pa ni bil gardalandovskega stila. Šlo je namreč za restavrirano zabavišče iz prej omenjenih zlatih turističnih časov.</p>
+<p><a href="/images/amerika/img_8016.jpg"><img src="/images/amerika/img_8016.jpg" alt="IMG_8016" title="IMG_8016"></a></p>
+<p><a href="/images/amerika/dsc8706.jpg"><img src="/images/amerika/dsc8706.jpg" alt="_DSC8706" title="_DSC8706"></a></p>
+<p><a href="/images/amerika/dsc8714.jpg"><img src="/images/amerika/dsc8714.jpg" alt="_DSC8714" title="_DSC8714"></a></p>
+<p><a href="/images/amerika/img_8048.jpg"><img src="/images/amerika/img_8048.jpg" alt="IMG_8048" title="IMG_8048"></a></p>
+<p><a href="/images/amerika/img_8050.jpg"><img src="/images/amerika/img_8050.jpg" alt="IMG_8050" title="IMG_8050"></a></p>
+<p>Namesto vlakcev smrti in podobnega sranja so imeli vrtiljak s konjički ter glasbo iz avtomatskih mehanskih orgel. Na avtomatu si lahko za četrt dolarja kupil skokico, preizkusil svojo moč, ali si zmasiral stopala. Naokrog sta se sprehajala zabavljača, oblečena v Popaja in Olivo, v nekakšno Piko Nogavičko maskirana tetica je delala živali iz balonov, na vogalu pa je stal na desko naslikan prizor z luknjami za glave.</p>
+<p><a href="/images/amerika/img_8079.jpg"><img src="/images/amerika/img_8079.jpg" alt="IMG_8079" title="IMG_8079"></a></p>
+<p><a href="/images/amerika/img_8086.jpg"><img src="/images/amerika/img_8086.jpg" alt="IMG_8086" title="IMG_8086"></a></p>
+<p><a href="/images/amerika/dsc8720.jpg"><img src="/images/amerika/dsc8720.jpg" alt="_DSC8720" title="_DSC8720"></a></p>
+<p><a href="/images/amerika/img_8097.jpg"><img src="/images/amerika/img_8097.jpg" alt="IMG_8097" title="IMG_8097"></a></p>
+<p>Največ naše pozornosti je pritegnil kotiček z igro skee ball. Gre za nekakšno miniaturno kegljanje s kroglami v velikosti tistih za balinanje, pri katerem se ne podira kegljev, ampak se poskuša zadeti različno dosegljive luknje, ki prinašajo različno število točk. Cilj je zbrati čimveč slednjih z določenim številom krogel, ki jih dobiš za 25 centov.</p>
+<p><a href="/images/amerika/dsc8722.jpg"><img src="/images/amerika/dsc8722.jpg" alt="_DSC8722" title="_DSC8722"></a></p>
+<p><a href="/images/amerika/dsc8723.jpg"><img src="/images/amerika/dsc8723.jpg" alt="_DSC8723" title="_DSC8723"></a></p>
+<p>Najtekmovalnejši so zadevo vzeli resno. Pri simpatičnem stricu, ki je nadzoroval igralne naprave, so deset dolarjev zamenjali za žetone in po nekaj rundah slavili. Na tablo z dnevnimi rekorderji je bilo vpisano slovensko ime.</p>
+<p><a href="/images/amerika/img_8067.jpg"><img src="/images/amerika/img_8067.jpg" alt="IMG_8067" title="IMG_8067"></a></p>
+<p><a href="/images/amerika/img_8119.jpg"><img src="/images/amerika/img_8119.jpg" alt="IMG_8119" title="IMG_8119"></a></p>
+<p>Malico smo si privoščili v bližnjem kiosku, kjer so očitno tudi cene ostale v starih časih. Hotdog za dolar.</p>
+<p><a href="/images/amerika/img_8135.jpg"><img src="/images/amerika/img_8135.jpg" alt="IMG_8135" title="IMG_8135"></a></p>
+<p><a href="/images/amerika/img_8136.jpg"><img src="/images/amerika/img_8136.jpg" alt="IMG_8136" title="IMG_8136"></a></p>
+<p><a href="/images/amerika/img_8140.jpg"><img src="/images/amerika/img_8140.jpg" alt="IMG_8140" title="IMG_8140"></a></p>
+<p>Sprehod smo nadaljevali do bližnjega Krull Parka, menda nekdaj prav tako strašno popularnega med turisti, danes pa samo še mirnega in polnega lepih starih dreves. Sem in tja smo metali frizbi in fotografirali okoliške lepote, vsaj dokler ni začelo strašljivo zabavno pihati. Nevihta nas je pregnala nazaj domov.</p>
+<p><a href="/images/amerika/dsc8776.jpg"><img src="/images/amerika/dsc8776.jpg" alt="_DSC8776" title="_DSC8776"></a></p>
+<p><a href="/images/amerika/dsc8802.jpg"><img src="/images/amerika/dsc8802.jpg" alt="_DSC8802" title="_DSC8802"></a></p>
+<p><a href="/images/amerika/dsc8816.jpg"><img src="/images/amerika/dsc8816.jpg" alt="_DSC8816" title="_DSC8816"></a></p>
+<p><a href="/images/amerika/img_8152.jpg"><img src="/images/amerika/img_8152.jpg" alt="IMG_8152" title="IMG_8152"></a></p>
+<p><a href="/images/amerika/img_8181.jpg"><img src="/images/amerika/img_8181.jpg" alt="IMG_8181" title="IMG_8181"></a></p>
+<p><a href="/images/amerika/img_8187.jpg"><img src="/images/amerika/img_8187.jpg" alt="IMG_8187" title="IMG_8187"></a></p>
+<p><a href="/images/amerika/img_8222.jpg"><img src="/images/amerika/img_8222.jpg" alt="IMG_8222" title="IMG_8222"></a></p>
+<p>Aja, pozabili smo povedati, da nismo šli vsi v park. Dober prijatelj po imenu Ferdo nas je namreč čakal doma. In to ne kjerkoli doma – v hladilniku, že od jutra narezan na debele zrezke in namazan z gorčico. Ferdo je namreč pokojni prašič, ki smo si ga nocoj pripravili za večerjo.</p>
+<p>V velik ameriški žar na dvorišču smo natrosili oglja, v kuhinji pa smo rezali paradižnik in mozzarelo, pekli krompir, greli pečen fižol ter gnetli maso v čevapčiče. Ko je bilo vse nared, smo Ferdota previdno po kosih naložili na rešetke, nekajkrat obrnili, nato pa se ga spoštljivo lotili.</p>
+<p><a href="/images/amerika/img_8228.jpg"><img src="/images/amerika/img_8228.jpg" alt="IMG_8228" title="IMG_8228"></a></p>
+<p><a href="/images/amerika/img_8232.jpg"><img src="/images/amerika/img_8232.jpg" alt="IMG_8232" title="IMG_8232"></a></p>
+<p><a href="/images/amerika/img_8237.jpg"><img src="/images/amerika/img_8237.jpg" alt="IMG_8237" title="IMG_8237"></a></p>
+<p><a href="/images/amerika/img_8240.jpg"><img src="/images/amerika/img_8240.jpg" alt="IMG_8240" title="IMG_8240"></a></p>
+<p><a href="/images/amerika/img_8242.jpg"><img src="/images/amerika/img_8242.jpg" alt="IMG_8242" title="IMG_8242"></a></p>
+<p><a href="/images/amerika/img_8248.jpg"><img src="/images/amerika/img_8248.jpg" alt="IMG_8248" title="IMG_8248"></a></p>
+<p><a href="/images/amerika/img_8249.jpg"><img src="/images/amerika/img_8249.jpg" alt="IMG_8249" title="IMG_8249"></a></p>
+<p>Čevapčiči so ostali.</p>
+
+<ul class="links-nextprev"><li class="links-nextprev-prev">← Previous<br> <a href="/blog/amerika/2011-08-21-pot-v-olcott-in-koncert-v-rochestru/">Pot v Olcott in koncert v Rochestru</a></li><li class="links-nextprev-next">Next →<br><a href="/blog/amerika/2011-08-22-niagarski-slapovi/">Niagarski slapovi</a></li>
+</ul>
+
+			</heading-anchors>
+		</main>
+
+		<footer>
+		</footer>
+
+		<!-- This page `/blog/amerika/2011-08-22-sprocanje-v-lunaparku-in-rotiljada/` was built on 2024-11-10T15:45:02.464Z -->
+		<script type="module" src="/dist/rJ3_G-2ArF.js"></script>
+	</body>
+</html>
