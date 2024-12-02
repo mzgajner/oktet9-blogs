@@ -1,7 +1,7 @@
 ---
 title: "Radijski pridigar"
 date: "2011-08-08"
-categories: 
+categories:
   - "nakljucni-vtisi"
 ---
 
@@ -15,4 +15,4 @@ Med skladbami se oglasijo tudi špikerji, ki v maniri ameriških televizijskih p
 
 Pred par dnevi nam je uspelo ujeti hecen primerek opisanega radijskega nastopa. Za izkušnjo iz prve roke vam na tem mestu serviramo posnetka dveh odsekov, ki sta naju nasmejala.
 
-[Posnetek ena](http://dl.dropbox.com/u/1176362/preacher1.mp3) in [posnetek dva](http://dl.dropbox.com/u/1176362/preacher2.mp3).
+[Posnetek ena](/preacher1.mp3) in [posnetek dva](/preacher2.mp3).
