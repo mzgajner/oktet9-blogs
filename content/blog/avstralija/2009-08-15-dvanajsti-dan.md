@@ -15,48 +15,48 @@ K sreči so bile druge skupinice blizu in ob koncu sprehoda po pomolu nam ni man
 
 _Kot vedno se opravičujemo za blažjo kršitev ustaljenega reda objavljanja prispevkov, tudi tokrat nam jo je zagodla nezmožnost povezave s svetovnim spletom. Bomo nadoknadili._
 
-![](/images/avstralija/dsc_0635.jpg)
+[![](/images/avstralija/dsc_0635.jpg)](/images/avstralija/dsc_0635.jpg)
 
-![](/images/avstralija/dsc_0643.jpg)
+[![](/images/avstralija/dsc_0643.jpg)](/images/avstralija/dsc_0643.jpg)
 
-![](/images/avstralija/dsc_0661.jpg)
+[![](/images/avstralija/dsc_0661.jpg)](/images/avstralija/dsc_0661.jpg)
 
-![](/images/avstralija/dsc_0687.jpg)
+[![](/images/avstralija/dsc_0687.jpg)](/images/avstralija/dsc_0687.jpg)
 
-![](/images/avstralija/dsc_0689.jpg)
+[![](/images/avstralija/dsc_0689.jpg)](/images/avstralija/dsc_0689.jpg)
 
-![](/images/avstralija/dsc_0692.jpg)
+[![](/images/avstralija/dsc_0692.jpg)](/images/avstralija/dsc_0692.jpg)
 
-![](/images/avstralija/dsc_0693.jpg)
+[![](/images/avstralija/dsc_0693.jpg)](/images/avstralija/dsc_0693.jpg)
 
-![](/images/avstralija/dsc_0702.jpg)
+[![](/images/avstralija/dsc_0702.jpg)](/images/avstralija/dsc_0702.jpg)
 
-![](/images/avstralija/dsc_0717.jpg)
+[![](/images/avstralija/dsc_0717.jpg)](/images/avstralija/dsc_0717.jpg)
 
-![](/images/avstralija/dsc_0725.jpg)
+[![](/images/avstralija/dsc_0725.jpg)](/images/avstralija/dsc_0725.jpg)
 
-![](/images/avstralija/dsc_0727.jpg)
+[![](/images/avstralija/dsc_0727.jpg)](/images/avstralija/dsc_0727.jpg)
 
-![](/images/avstralija/dsc_0729.jpg)
+[![](/images/avstralija/dsc_0729.jpg)](/images/avstralija/dsc_0729.jpg)
 
-![](/images/avstralija/dsc_0736.jpg)
+[![](/images/avstralija/dsc_0736.jpg)](/images/avstralija/dsc_0736.jpg)
 
-![](/images/avstralija/dsc_0785.jpg)
+[![](/images/avstralija/dsc_0785.jpg)](/images/avstralija/dsc_0785.jpg)
 
-![](/images/avstralija/dsc_0842.jpg)
+[![](/images/avstralija/dsc_0842.jpg)](/images/avstralija/dsc_0842.jpg)
 
-![](/images/avstralija/dsc_0853.jpg)
+[![](/images/avstralija/dsc_0853.jpg)](/images/avstralija/dsc_0853.jpg)
 
-![](/images/avstralija/dsc_0854.jpg)
+[![](/images/avstralija/dsc_0854.jpg)](/images/avstralija/dsc_0854.jpg)
 
-![](/images/avstralija/dsc_0855.jpg)
+[![](/images/avstralija/dsc_0855.jpg)](/images/avstralija/dsc_0855.jpg)
 
-![](/images/avstralija/dsc_0858.jpg)
+[![](/images/avstralija/dsc_0858.jpg)](/images/avstralija/dsc_0858.jpg)
 
-![](/images/avstralija/dsc_0868.jpg)
+[![](/images/avstralija/dsc_0868.jpg)](/images/avstralija/dsc_0868.jpg)
 
-![](/images/avstralija/dsc_0910.jpg)
+[![](/images/avstralija/dsc_0910.jpg)](/images/avstralija/dsc_0910.jpg)
 
-![](/images/avstralija/dsc_0913.jpg)
+[![](/images/avstralija/dsc_0913.jpg)](/images/avstralija/dsc_0913.jpg)
 
-![](/images/avstralija/dsc_0918.jpg)
+[![](/images/avstralija/dsc_0918.jpg)](/images/avstralija/dsc_0918.jpg)

@@ -15,44 +15,44 @@ Po zabavnem spustu ob glasbi iz serije filmov Indiana Jones smo pot skozi pragoz
 
 Pred povratkom v hotel smo se odzvali povabilu Kranjčevih, ki so nas na dvorišču za hišo v s filma skopiranem idiličnem Sydneyskem predmestju po avstralsko pogostili z dobrotami z roštilja (verjemite, tega se ne naveličaš kar tako). Do trde teme smo kramljali in prepevali ter se pozno zvečer vrnili v Meriton na Pitt Streetu.
 
-![](/images/avstralija/dsc_1507.jpg)
+[![](/images/avstralija/dsc_1507.jpg)](/images/avstralija/dsc_1507.jpg)
 
-![](/images/avstralija/dsc_1519.jpg)
+[![](/images/avstralija/dsc_1519.jpg)](/images/avstralija/dsc_1519.jpg)
 
-![](/images/avstralija/dsc_1539.jpg)
+[![](/images/avstralija/dsc_1539.jpg)](/images/avstralija/dsc_1539.jpg)
 
-![](/images/avstralija/dsc_1566.jpg)
+[![](/images/avstralija/dsc_1566.jpg)](/images/avstralija/dsc_1566.jpg)
 
-![](/images/avstralija/dsc_1575.jpg)
+[![](/images/avstralija/dsc_1575.jpg)](/images/avstralija/dsc_1575.jpg)
 
-![](/images/avstralija/dsc_1620.jpg)
+[![](/images/avstralija/dsc_1620.jpg)](/images/avstralija/dsc_1620.jpg)
 
-![](/images/avstralija/dsc_1624.jpg)
+[![](/images/avstralija/dsc_1624.jpg)](/images/avstralija/dsc_1624.jpg)
 
-![](/images/avstralija/dsc_1634.jpg)
+[![](/images/avstralija/dsc_1634.jpg)](/images/avstralija/dsc_1634.jpg)
 
-![](/images/avstralija/dsc_1651.jpg)
+[![](/images/avstralija/dsc_1651.jpg)](/images/avstralija/dsc_1651.jpg)
 
-![](/images/avstralija/dsc_1652.jpg)
+[![](/images/avstralija/dsc_1652.jpg)](/images/avstralija/dsc_1652.jpg)
 
-![](/images/avstralija/dsc_1663.jpg)
+[![](/images/avstralija/dsc_1663.jpg)](/images/avstralija/dsc_1663.jpg)
 
-![](/images/avstralija/dsc_1672.jpg)
+[![](/images/avstralija/dsc_1672.jpg)](/images/avstralija/dsc_1672.jpg)
 
-![](/images/avstralija/dsc_1681.jpg)
+[![](/images/avstralija/dsc_1681.jpg)](/images/avstralija/dsc_1681.jpg)
 
-![](/images/avstralija/dsc_1688.jpg)
+[![](/images/avstralija/dsc_1688.jpg)](/images/avstralija/dsc_1688.jpg)
 
-![](/images/avstralija/dsc_1690.jpg)
+[![](/images/avstralija/dsc_1690.jpg)](/images/avstralija/dsc_1690.jpg)
 
-![](/images/avstralija/dsc_1693.jpg)
+[![](/images/avstralija/dsc_1693.jpg)](/images/avstralija/dsc_1693.jpg)
 
-![](/images/avstralija/dsc_1707.jpg)
+[![](/images/avstralija/dsc_1707.jpg)](/images/avstralija/dsc_1707.jpg)
 
-![](/images/avstralija/dsc_1721.jpg)
+[![](/images/avstralija/dsc_1721.jpg)](/images/avstralija/dsc_1721.jpg)
 
-![](/images/avstralija/dsc_1724.jpg)
+[![](/images/avstralija/dsc_1724.jpg)](/images/avstralija/dsc_1724.jpg)
 
-![](/images/avstralija/dsc_1727.jpg)
+[![](/images/avstralija/dsc_1727.jpg)](/images/avstralija/dsc_1727.jpg)
 
-![](/images/avstralija/dsc_1735.jpg)
+[![](/images/avstralija/dsc_1735.jpg)](/images/avstralija/dsc_1735.jpg)
